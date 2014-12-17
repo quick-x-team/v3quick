@@ -44,20 +44,20 @@ LOCAL_EXPORT_CFLAGS := -DCOCOS2D_JAVASCRIPT
 
 LOCAL_C_INCLUDES := $(LOCAL_PATH)/manual \
                     $(LOCAL_PATH)/auto \
-                    $(LOCAL_PATH)/../cocos2d-x/cocos/2d \
-                    $(LOCAL_PATH)/../cocos2d-x/cocos/base \
-                    $(LOCAL_PATH)/../cocos2d-x/cocos/ui \
-                    $(LOCAL_PATH)/../cocos2d-x/cocos/audio/include \
-                    $(LOCAL_PATH)/../cocos2d-x/cocos/storage \
-                    $(LOCAL_PATH)/../cocos2d-x/extensions \
-                    $(LOCAL_PATH)/../cocos2d-x/cocos/editor-support/spine \
-                    $(LOCAL_PATH)/../cocos2d-x/cocos/editor-support/cocosbuilder \
-                    $(LOCAL_PATH)/../cocos2d-x/cocos/editor-support/cocostudio
+                    $(LOCAL_PATH)/../../../cocos/2d \
+                    $(LOCAL_PATH)/../../../cocos/base \
+                    $(LOCAL_PATH)/../../../cocos/ui \
+                    $(LOCAL_PATH)/../../../cocos/audio/include \
+                    $(LOCAL_PATH)/../../../cocos/storage \
+                    $(LOCAL_PATH)/../../../extensions \
+                    $(LOCAL_PATH)/../../../cocos/editor-support/spine \
+                    $(LOCAL_PATH)/../../../cocos/editor-support/cocosbuilder \
+                    $(LOCAL_PATH)/../../../cocos/editor-support/cocostudio
 
 
 LOCAL_EXPORT_C_INCLUDES := $(LOCAL_PATH)/manual \
                            $(LOCAL_PATH)/auto \
-                           $(LOCAL_PATH)/../cocos2d-x/cocos/audio/include 
+                           $(LOCAL_PATH)/../../../cocos/audio/include 
 
 LOCAL_STATIC_LIBRARIES := cocos2dx_static
 LOCAL_STATIC_LIBRARIES += spidermonkey_static

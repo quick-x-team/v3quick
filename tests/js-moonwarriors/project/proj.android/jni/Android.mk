@@ -17,4 +17,4 @@ LOCAL_EXPORT_CFLAGS := -DCOCOS2D_DEBUG=1
 
 include $(BUILD_SHARED_LIBRARY)
 
-$(call import-module,bindings)
+$(call import-module,scripting/js-bindings)

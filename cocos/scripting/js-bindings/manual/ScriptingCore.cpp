@@ -728,12 +728,8 @@ bool ScriptingCore::runScript(const char *path, JSObject* global, JSContext* cx)
 
 void ScriptingCore::reset()
 {
-    Director::getInstance()->restart();
-}
-
-void ScriptingCore::restartVM()
-{
     cleanup();
+    start();
     initRegister();
     CCApplication::getInstance()->applicationDidFinishLaunching();
 }
@@ -1374,13 +1370,6 @@ int ScriptingCore::sendEvent(ScriptEvent* evt)
 {
     if (NULL == evt)
         return 0;
- 
-    // special type, can't use this code after JSAutoCompartment
-    if (evt->type == kRestartGame)
-    {
-        restartVM();
-        return 0;
-    }
 
     JSAutoCompartment ac(_cx, _global);
     
