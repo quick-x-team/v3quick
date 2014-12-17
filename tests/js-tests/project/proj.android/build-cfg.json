@@ -17,50 +17,49 @@
             "to": ""
         }, 
         {
-            "from": "../../../../frameworks/js-bindings/bindings/script", 
+            "from": "../../../../cocos/scripting/js-bindings/script", 
             "to": "script"
         }, 
         {
-            "from": "../../../../frameworks/js-bindings/bindings/manual/platform/android/java/src", 
+            "from": "../../../../cocos/scripting/js-bindings/manual/platform/android/java/src", 
             "to": "../src"
         }, 
         {
-            "from": "../../../../frameworks/js-bindings/cocos2d-x/plugin/jsbindings/script", 
+            "from": "../../../../plugin/jsbindings/script", 
             "to": ""
         }, 
         {
-            "from": "../../../../frameworks/js-bindings/cocos2d-x/plugin/protocols/proj.android/src", 
+            "from": "../../../../plugin/protocols/proj.android/src", 
             "to": "../src"
         }, 
         {
-            "from": "../../../../frameworks/js-bindings/cocos2d-x/plugin/plugins/umeng/proj.android/src", 
+            "from": "../../../../plugin/plugins/umeng/proj.android/src", 
             "to": "../src"
         }, 
         {
-            "from": "../../../../frameworks/js-bindings/cocos2d-x/plugin/plugins/umeng/proj.android/sdk", 
+            "from": "../../../../plugin/plugins/umeng/proj.android/sdk", 
             "to": "../libs"
         }, 
         {
-            "from": "../../../../frameworks/js-bindings/cocos2d-x/plugin/plugins/flurry/proj.android/src", 
+            "from": "../../../../plugin/plugins/flurry/proj.android/src", 
             "to": "../src"
         }, 
         {
-            "from": "../../../../frameworks/js-bindings/cocos2d-x/plugin/plugins/flurry/proj.android/sdk", 
+            "from": "../../../../plugin/plugins/flurry/proj.android/sdk", 
             "to": "../libs"
         },
         {
-            "from": "../../../../frameworks/js-bindings/cocos2d-x/plugin/plugins/facebook/proj.android/src", 
+            "from": "../../../../plugin/plugins/facebook/proj.android/src", 
             "to": "../src"
         }, 
         {
-            "from": "../../../../frameworks/js-bindings/cocos2d-x/plugin/plugins/facebook/proj.android/sdk", 
+            "from": "../../../../plugin/plugins/facebook/proj.android/sdk", 
             "to": "../libs"
         }
     ], 
     "ndk_module_path": [
-        "../../../../frameworks/js-bindings", 
-        "../../../../frameworks/js-bindings/cocos2d-x", 
-        "../../../../frameworks/js-bindings/cocos2d-x/cocos", 
-        "../../../../frameworks/js-bindings/cocos2d-x/external"
+        "../../../..", 
+        "../../../../cocos", 
+        "../../../../external"
     ]
 }
