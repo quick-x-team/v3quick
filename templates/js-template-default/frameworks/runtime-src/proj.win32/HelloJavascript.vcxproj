@@ -38,13 +38,13 @@
   </ImportGroup>
   <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-    <Import Project="..\..\js-bindings\cocos2d-x\cocos\2d\cocos2dx.props" />
-    <Import Project="..\..\js-bindings\cocos2d-x\cocos\2d\cocos2d_headers.props" />
+    <Import Project="..\..\cocos2d-x\cocos\2d\cocos2dx.props" />
+    <Import Project="..\..\cocos2d-x\cocos\2d\cocos2d_headers.props" />
   </ImportGroup>
   <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-    <Import Project="..\..\js-bindings\cocos2d-x\cocos\2d\cocos2dx.props" />
-    <Import Project="..\..\js-bindings\cocos2d-x\cocos\2d\cocos2d_headers.props" />
+    <Import Project="..\..\cocos2d-x\cocos\2d\cocos2dx.props" />
+    <Import Project="..\..\cocos2d-x\cocos\2d\cocos2d_headers.props" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup>
@@ -83,7 +83,7 @@
     </Midl>
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>$(ProjectDir)..\Classes;$(EngineRoot);$(EngineRoot)cocos;$(EngineRoot)cocos\base;$(EngineRoot)cocos\storage;$(EngineRoot)cocos\editor-support;$(EngineRoot)..\bindings\auto;$(EngineRoot)..\bindings\manual;$(EngineRoot)cocos\audio\include;$(EngineRoot)..\external\spidermonkey\include\win32;$(EngineRoot)external\chipmunk\include\chipmunk;$(EngineRoot)extensions;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\Classes;$(EngineRoot);$(EngineRoot)cocos;$(EngineRoot)cocos\base;$(EngineRoot)cocos\storage;$(EngineRoot)cocos\editor-support;$(EngineRoot)cocos\scripting\js-bindings\auto;$(EngineRoot)cocos\scripting\js-bindings\manual;$(EngineRoot)cocos\audio\include;$(EngineRoot)external\spidermonkey\include\win32;$(EngineRoot)external\chipmunk\include\chipmunk;$(EngineRoot)extensions;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;_WINDOWS;STRICT;_DEBUG;XP_WIN;JS_HAVE___INTN;JS_INTPTR_TYPE=int;COCOS2D_DEBUG=1;COCOS2D_JAVASCRIPT=1;CC_ENABLE_CHIPMUNK_INTEGRATION=1;_CRT_SECURE_NO_WARNINGS;_SCL_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>false</MinimalRebuild>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -102,8 +102,8 @@
     </ResourceCompile>
     <PreLinkEvent>
       <Command>if not exist "$(OutDir)" mkdir "$(OutDir)"
-xcopy /Y /Q "$(ProjectDir)..\..\js-bindings\external\spidermonkey\prebuilt\win32\*.*" "$(OutDir)"
-xcopy /Y /Q "$(ProjectDir)..\..\js-bindings\cocos2d-x\external\websockets\prebuilt\win32\*.*" "$(OutDir)"</Command>
+xcopy /Y /Q "$(ProjectDir)..\..\cocos2d-x\external\spidermonkey\prebuilt\win32\*.*" "$(OutDir)"
+xcopy /Y /Q "$(ProjectDir)..\..\cocos2d-x\external\websockets\prebuilt\win32\*.*" "$(OutDir)"</Command>
     </PreLinkEvent>
     <Link>
       <AdditionalDependencies>libcurl_imp.lib;mozjs-28.lib;ws2_32.lib;sqlite3.lib;websockets.lib;%(AdditionalDependencies)</AdditionalDependencies>
@@ -119,7 +119,7 @@ mkdir "$(OutDir)\Resource"
 mkdir "$(OutDir)\Resource\script"
 mkdir "$(OutDir)\Resource\src"
 mkdir "$(OutDir)\Resource\res"
-xcopy "$(ProjectDir)..\..\js-bindings\bindings\script" "$(OutDir)\Resource\script" /e /Y
+xcopy "$(ProjectDir)..\..\cocos2d-x\cocos\scripting\js-bindings\script" "$(OutDir)\Resource\script" /e /Y
 xcopy "$(ProjectDir)..\..\..\src" "$(OutDir)\Resource\src" /e /Y
 copy "$(ProjectDir)..\..\..\main.js" "$(OutDir)\Resource\main.js" /Y
 copy "$(ProjectDir)..\..\..\project.json" "$(OutDir)\Resource\project.json" /Y
@@ -143,7 +143,7 @@ xcopy "$(ProjectDir)..\..\..\res" "$(OutDir)\Resource\res" /e /Y</Command>
       <ProxyFileName>game_p.c</ProxyFileName>
     </Midl>
     <ClCompile>
-      <AdditionalIncludeDirectories>$(ProjectDir)..\Classes;$(EngineRoot);$(EngineRoot)cocos;$(EngineRoot)cocos\base;$(EngineRoot)cocos\storage;$(EngineRoot)cocos\editor-support;$(EngineRoot)..\bindings\auto;$(EngineRoot)..\bindings\manual;$(EngineRoot)cocos\audio\include;$(EngineRoot)..\external\spidermonkey\include\win32;$(EngineRoot)external\chipmunk\include\chipmunk;$(EngineRoot)extensions;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\Classes;$(EngineRoot);$(EngineRoot)cocos;$(EngineRoot)cocos\base;$(EngineRoot)cocos\storage;$(EngineRoot)cocos\editor-support;$(EngineRoot)cocos\scripting\js-bindings\auto;$(EngineRoot)cocos\scripting\js-bindings\manual;$(EngineRoot)cocos\audio\include;$(EngineRoot)external\spidermonkey\include\win32;$(EngineRoot)external\chipmunk\include\chipmunk;$(EngineRoot)extensions;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;_WINDOWS;STRICT;NDEBUG;XP_WIN;JS_HAVE___INTN;JS_INTPTR_TYPE=int;COCOS2D_JAVASCRIPT=1;CC_ENABLE_CHIPMUNK_INTEGRATION=1;_CRT_SECURE_NO_WARNINGS;_SCL_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ExceptionHandling>
       </ExceptionHandling>
@@ -163,8 +163,8 @@ xcopy "$(ProjectDir)..\..\..\res" "$(OutDir)\Resource\res" /e /Y</Command>
     </ResourceCompile>
     <PreLinkEvent>
       <Command>if not exist "$(OutDir)" mkdir "$(OutDir)"
-xcopy /Y /Q "$(ProjectDir)..\..\js-bindings\external\spidermonkey\prebuilt\win32\*.*" "$(OutDir)"
-xcopy /Y /Q "$(ProjectDir)..\..\js-bindings\cocos2d-x\external\websockets\prebuilt\win32\*.*" "$(OutDir)"</Command>
+xcopy /Y /Q "$(ProjectDir)..\..\cocos2d-x\external\spidermonkey\prebuilt\win32\*.*" "$(OutDir)"
+xcopy /Y /Q "$(ProjectDir)..\..\cocos2d-x\external\websockets\prebuilt\win32\*.*" "$(OutDir)"</Command>
     </PreLinkEvent>
     <Link>
       <AdditionalDependencies>libcurl_imp.lib;mozjs-28.lib;ws2_32.lib;sqlite3.lib;websockets.lib;%(AdditionalDependencies)</AdditionalDependencies>
@@ -180,7 +180,7 @@ mkdir "$(OutDir)\Resource"
 mkdir "$(OutDir)\Resource\script"
 mkdir "$(OutDir)\Resource\src"
 mkdir "$(OutDir)\Resource\res"
-xcopy "$(ProjectDir)..\..\js-bindings\bindings\script" "$(OutDir)\Resource\script" /e /Y
+xcopy "$(ProjectDir)..\..\cocos2d-x\cocos\scripting\js-bindings\script" "$(OutDir)\Resource\script" /e /Y
 xcopy "$(ProjectDir)..\..\..\src" "$(OutDir)\Resource\src" /e /Y
 copy "$(ProjectDir)..\..\..\main.js" "$(OutDir)\Resource\main.js" /Y
 copy "$(ProjectDir)..\..\..\project.json" "$(OutDir)\Resource\project.json" /Y
@@ -204,7 +204,7 @@ xcopy "$(ProjectDir)..\..\..\res" "$(OutDir)\Resource\res" /e /Y</Command>
     <Image Include="res\game.ico" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\js-bindings\bindings\proj.win32\libJSBinding.vcxproj">
+    <ProjectReference Include="..\..\cocos2d-x\cocos\scripting\js-bindings\proj.win32\libJSBinding.vcxproj">
       <Project>{39379840-825a-45a0-b363-c09ffef864bd}</Project>
     </ProjectReference>
   </ItemGroup>
