@@ -12,11 +12,6 @@
             },
          "append_dir":[
             {
-               "from":"cocos/scripting/js-bindings/script",
-               "to":"cocos/scripting/js-bindings/script",
-               "exclude":[]
-            },
-            {
                "from":"plugin/plugins/facebook/proj.android/DependProject/src",
                "to":"frameworks/cocos2d-x/plugin/plugins/facebook/proj.android/DependProject/src"
             },
@@ -135,15 +130,18 @@
             ]
          },
          "append_dir":[
+            {
+               "from":"tools/bindings-generator",
+               "to":"tools/bindings-generator",
+               "exclude":[
+                  ".git"
+               ]
+             },
              {
                 "from":"tools",
                 "to":"tools",
-                "exclude":[
-                   "cocos2d-console",
-                   "make-package",
-                   "travis-scripts",
-                   "bindings-generator/.git",
-                   "bindings-generator/.gitignore"
+                "include":[
+                   "tojs"
                 ]
              }
          ],

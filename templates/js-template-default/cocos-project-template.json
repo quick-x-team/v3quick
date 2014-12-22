@@ -20,17 +20,20 @@
             ]
          },
          "append_dir":[
-             {
-                "from":"tools",
-                "to":"tools",
-                "exclude":[
-                   "cocos2d-console",
-                   "make-package",
-                   "travis-scripts",
-                   "bindings-generator/.git",
-                   "bindings-generator/.gitignore"
-                ]
-             }
+            {
+              "from":"tools/bindings-generator",
+              "to":"tools/bindings-generator",
+              "exclude":[
+                ".git"
+              ]
+            },
+            {
+              "from":"tools",
+              "to":"tools",
+              "include":[
+                "tojs"
+              ]
+            }
          ],
          "append_x_engine":{
             "from": ".",
