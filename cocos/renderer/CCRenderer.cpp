@@ -321,10 +321,8 @@ void Renderer::addCommand(RenderCommand* command, int renderQueue)
     CCASSERT(!_isRendering, "Cannot add command while rendering");
     CCASSERT(renderQueue >=0, "Invalid render queue");
     CCASSERT(command->getType() != RenderCommand::Type::UNKNOWN_COMMAND, "Invalid Command Type");
-    if (command->isTransparent())
-        _transparentRenderGroups.push_back(command);
-    else
-        _renderGroups[renderQueue].push_back(command);
+    
+    _renderGroups[renderQueue].push_back(command);
 }
 
 void Renderer::pushGroup(int renderQueueID)
@@ -589,14 +587,12 @@ void Renderer::fillVerticesAndIndices(const TrianglesCommand* cmd)
 
 void Renderer::fillQuads(const QuadCommand *cmd)
 {
-    memcpy(_quadVerts + _numberQuads * 4, cmd->getQuads(), sizeof(V3F_C4B_T2F_Quad) * cmd->getQuadCount());
-    
     const Mat4& modelView = cmd->getModelView();
-    
+    const V3F_C4B_T2F* quads =  (V3F_C4B_T2F*)cmd->getQuads();
     for(ssize_t i=0; i< cmd->getQuadCount() * 4; ++i)
     {
-        Vec3 *vec1 = (Vec3*)&(_quadVerts[i + _numberQuads * 4].vertices);
-        modelView.transformPoint(vec1);
+        _quadVerts[i + _numberQuads * 4] = quads[i];
+        modelView.transformPoint(quads[i].vertices,&(_quadVerts[i + _numberQuads * 4].vertices));
     }
     
     _numberQuads += cmd->getQuadCount();
@@ -823,10 +819,23 @@ void Renderer::flush()
 
 void Renderer::flush2D()
 {
+    //Check depth write
+    GLboolean depthWirte;
+    glGetBooleanv(GL_DEPTH_WRITEMASK, &depthWirte);
+    //Turn depth write off if necessary
+    if(depthWirte)
+    {
+        glDepthMask(false);
+    }
     drawBatchedQuads();
     _lastMaterialID = 0;
     drawBatchedTriangles();
     _lastMaterialID = 0;
+    //Turn depth write on if necessary
+    if(depthWirte)
+    {
+        glDepthMask(true);
+    }
 }
 
 void Renderer::flush3D()

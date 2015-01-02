@@ -783,22 +783,23 @@ Node* CSLoader::nodeWithFlatBuffersFile(const std::string &fileName)
     Data buf = FileUtils::getInstance()->getDataFromFile(fullPath);
     
     auto csparsebinary = GetCSParseBinary(buf.getBytes());
-
+    
+    
     auto csBuildId = csparsebinary->version();
     if (csBuildId)
     {
         CCASSERT(strcmp(_csBuildID.c_str(), csBuildId->c_str()) == 0,
             String::createWithFormat("%s%s%s%s%s%s%s%s",
-            "The build id of your CocosStudio exported file(",
+            "The reader build id of your CocosStudio exported file(",
             csBuildId->c_str(),
-            ") and the build id of your cocos reader(",
+            ") and the reader build id of your Cocos2d-x(",
             _csBuildID.c_str(),
             ") are not match.\n",
-            "Please get the correct cocos reader from ",
+            "Please get the correct Cocos2d-x from ",
             "https://github.com/chukong/cocos-reader",
-            " and replace the reader in your Cocos2d-x")->getCString());
+            " and replace your Cocos2d-x")->getCString());
     }
-    
+
     // decode plist
     auto textures = csparsebinary->textures();
     int textureSize = csparsebinary->textures()->size();

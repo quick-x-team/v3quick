@@ -1,8 +1,7 @@
-/****************************************************************************
-Copyright (c) 2010-2013 cocos2d-x.org
-Copyright (c) Microsoft Open Technologies, Inc.
 
-http://www.cocos2d-x.org
+--[[
+
+Copyright (c) 2011-2014 chukong-inc.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -21,36 +20,21 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
-****************************************************************************/
-#ifndef __CCPLATFORMDEFINE_H__
-#define __CCPLATFORMDEFINE_H__
 
-#include "platform/CCPlatformConfig.h"
-#if CC_TARGET_PLATFORM == CC_PLATFORM_WINRT || CC_TARGET_PLATFORM == CC_PLATFORM_WP8
+]]
 
-#if 0
-#if defined(_USRDLL)
-#define CC_DLL     __declspec(dllexport)
-#else         /* use a DLL library */
-#define CC_DLL		__declspec(dllimport)
-#endif  
-#endif // 0
+local CheckBox = ccui.CheckBox
 
-
-#define CC_DLL
-
-#include <assert.h>
-
-#if CC_DISABLE_ASSERT > 0
-#define CC_ASSERT(cond)
-#else
-#define CC_ASSERT(cond)    assert(cond)
-#endif
-#define CC_UNUSED_PARAM(unusedparam) (void)unusedparam
-
-
-
-#endif // CC_TARGET_PLATFORM == CC_PLATFORM_WINRT || CC_TARGET_PLATFORM == CC_PLATFORM_WP8
-
-
-#endif /* __CCPLATFORMDEFINE_H__*/
+function CheckBox:onEvent(callback)
+    self:addEventListener(function(sender, eventType)
+        local event = {}
+        if eventType == 0 then
+            event.name = "selected"
+        else
+            event.name = "unselected"
+        end
+        event.target = sender
+        callback(event)
+    end)
+    return self
+end
