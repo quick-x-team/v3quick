@@ -293,7 +293,7 @@ void StartupCall::trackEvent(const char *eventName)
                                                      "http://www.google-analytics.com/collect",
                                                      kCCHTTPRequestMethodPOST);
     request->addPOSTValue("v", "1");
-    request->addPOSTValue("tid", "UA-55061270-1");
+    request->addPOSTValue("tid", "UA-58200293-1");
     request->addPOSTValue("cid", player::DeviceEx::getInstance()->getUserGUID().c_str());
     request->addPOSTValue("t", "event");
     
