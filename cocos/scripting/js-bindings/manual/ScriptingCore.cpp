@@ -600,12 +600,12 @@ JSScript* ScriptingCore::getScript(const char *path)
 {
     // a) check jsc file first
     std::string byteCodePath = RemoveFileExt(std::string(path)) + BYTE_CODE_FILE_EXT;
-    if (filename_script[byteCodePath])
+    if (filename_script.find(byteCodePath) != filename_script.end())
         return filename_script[byteCodePath];
     
     // b) no jsc file, check js file
     std::string fullPath = cocos2d::FileUtils::getInstance()->fullPathForFilename(path);
-    if (filename_script[fullPath])
+    if (filename_script.find(fullPath) != filename_script.end())
         return filename_script[fullPath];
     
     return NULL;
@@ -728,8 +728,12 @@ bool ScriptingCore::runScript(const char *path, JSObject* global, JSContext* cx)
 
 void ScriptingCore::reset()
 {
+    Director::getInstance()->restart();
+}
+
+void ScriptingCore::restartVM()
+{
     cleanup();
-    start();
     initRegister();
     CCApplication::getInstance()->applicationDidFinishLaunching();
 }
@@ -1370,6 +1374,13 @@ int ScriptingCore::sendEvent(ScriptEvent* evt)
 {
     if (NULL == evt)
         return 0;
+ 
+    // special type, can't use this code after JSAutoCompartment
+    if (evt->type == kRestartGame)
+    {
+        restartVM();
+        return 0;
+    }
 
     JSAutoCompartment ac(_cx, _global);
     

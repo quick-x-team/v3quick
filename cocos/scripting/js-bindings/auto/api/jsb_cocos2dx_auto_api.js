@@ -1407,7 +1407,7 @@ getAnchorPoint : function (
 
 /**
  * @method getNumberOfRunningActions
- * @return {int}
+ * @return {long}
  */
 getNumberOfRunningActions : function (
 )
@@ -1435,7 +1435,7 @@ isVisible : function (
 
 /**
  * @method getChildrenCount
- * @return {int}
+ * @return {long}
  */
 getChildrenCount : function (
 )
@@ -1480,6 +1480,20 @@ action
 },
 
 /**
+ * @method visit
+* @param {cc.Renderer} renderer
+* @param {mat4_object} mat4
+* @param {unsigned int} int
+*/
+visit : function(
+renderer,
+mat4,
+int 
+)
+{
+},
+
+/**
  * @method setGLProgram
  * @param {cc.GLProgram} arg0
  */
@@ -1507,20 +1521,6 @@ getAnchorPointInPoints : function (
 )
 {
     return cc.Vec2;
-},
-
-/**
- * @method visit
-* @param {cc.Renderer} renderer
-* @param {mat4_object} mat4
-* @param {unsigned int} int
-*/
-visit : function(
-renderer,
-mat4,
-int 
-)
-{
 },
 
 /**
@@ -2940,6 +2940,18 @@ scheduler
 },
 
 /**
+ * @method getMatrix
+ * @param {cc.MATRIX_STACK_TYPE} arg0
+ * @return {mat4_object}
+ */
+getMatrix : function (
+matrix_stack_type 
+)
+{
+    return cc.Mat4;
+},
+
+/**
  * @method startAnimation
  */
 startAnimation : function (
@@ -3012,6 +3024,16 @@ isNextDeltaTimeZero : function (
 },
 
 /**
+ * @method setClearColor
+ * @param {color4f_object} arg0
+ */
+setClearColor : function (
+color4f 
+)
+{
+},
+
+/**
  * @method setOpenGLView
  * @param {cc.GLView} arg0
  */
@@ -3080,15 +3102,11 @@ drawScene : function (
 },
 
 /**
- * @method getMatrix
- * @param {cc.MATRIX_STACK_TYPE} arg0
- * @return {mat4_object}
+ * @method restart
  */
-getMatrix : function (
-matrix_stack_type 
+restart : function (
 )
 {
-    return cc.Mat4;
 },
 
 /**
@@ -3583,6 +3601,16 @@ str
 },
 
 /**
+ * @method setWritablePath
+ * @param {String} arg0
+ */
+setWritablePath : function (
+str 
+)
+{
+},
+
+/**
  * @method setPopupNotify
  * @param {bool} arg0
  */
@@ -3602,6 +3630,16 @@ str
 )
 {
     return false;
+},
+
+/**
+ * @method setDefaultResourceRootPath
+ * @param {String} arg0
+ */
+setDefaultResourceRootPath : function (
+str 
+)
+{
 },
 
 /**
@@ -3634,6 +3672,16 @@ getWritablePath : function (
 )
 {
     return ;
+},
+
+/**
+ * @method setDelegate
+ * @param {cc.FileUtils} arg0
+ */
+setDelegate : function (
+fileutils 
+)
+{
 },
 
 /**
@@ -5585,12 +5633,12 @@ cc.MoveBy = {
 
 /**
  * @method initWithDuration
- * @param {float} arg0
- * @param {vec2_object} arg1
- * @return {bool}
- */
-initWithDuration : function (
-float, 
+* @param {float|float} float
+* @param {vec3_object|vec2_object} vec3
+* @return {bool|bool}
+*/
+initWithDuration : function(
+float,
 vec2 
 )
 {
@@ -5599,12 +5647,12 @@ vec2
 
 /**
  * @method create
- * @param {float} arg0
- * @param {vec2_object} arg1
- * @return {cc.MoveBy}
- */
-create : function (
-float, 
+* @param {float|float} float
+* @param {vec3_object|vec2_object} vec3
+* @return {cc.MoveBy|cc.MoveBy}
+*/
+create : function(
+float,
 vec2 
 )
 {
@@ -5629,12 +5677,12 @@ cc.MoveTo = {
 
 /**
  * @method initWithDuration
- * @param {float} arg0
- * @param {vec2_object} arg1
- * @return {bool}
- */
-initWithDuration : function (
-float, 
+* @param {float|float} float
+* @param {vec3_object|vec2_object} vec3
+* @return {bool|bool}
+*/
+initWithDuration : function(
+float,
 vec2 
 )
 {
@@ -5643,12 +5691,12 @@ vec2
 
 /**
  * @method create
- * @param {float} arg0
- * @param {vec2_object} arg1
- * @return {cc.MoveTo}
- */
-create : function (
-float, 
+* @param {float|float} float
+* @param {vec3_object|vec2_object} vec3
+* @return {cc.MoveTo|cc.MoveTo}
+*/
+create : function(
+float,
 vec2 
 )
 {
@@ -6670,7 +6718,7 @@ node
 /**
  * @method getNumberOfRunningActionsInTarget
  * @param {cc.Node} arg0
- * @return {int}
+ * @return {long}
  */
 getNumberOfRunningActionsInTarget : function (
 node 
@@ -10151,7 +10199,7 @@ mat4
 
 /**
  * @method getUniformCount
- * @return {int}
+ * @return {long}
  */
 getUniformCount : function (
 )
@@ -10205,7 +10253,7 @@ int
 
 /**
  * @method getVertexAttribCount
- * @return {int}
+ * @return {long}
  */
 getVertexAttribCount : function (
 )
@@ -10418,7 +10466,7 @@ getBlendFunc : function (
 
 /**
  * @method getQuadsToDraw
- * @return {int}
+ * @return {long}
  */
 getQuadsToDraw : function (
 )
@@ -10456,10 +10504,10 @@ int
 
 /**
  * @method setQuadsToDraw
- * @param {int} arg0
+ * @param {long} arg0
  */
 setQuadsToDraw : function (
-int 
+long 
 )
 {
 },
@@ -11314,11 +11362,11 @@ texture2d
 
 /**
  * @method removeChildAtIndex
- * @param {int} arg0
+ * @param {long} arg0
  * @param {bool} arg1
  */
 removeChildAtIndex : function (
-int, 
+long, 
 bool 
 )
 {
@@ -11354,7 +11402,7 @@ int
  * @method atlasIndexForChild
  * @param {cc.Sprite} arg0
  * @param {int} arg1
- * @return {int}
+ * @return {long}
  */
 atlasIndexForChild : function (
 sprite, 
@@ -11385,7 +11433,7 @@ init : function (
 /**
  * @method lowestAtlasIndexInChild
  * @param {cc.Sprite} arg0
- * @return {int}
+ * @return {long}
  */
 lowestAtlasIndexInChild : function (
 sprite 
@@ -11407,12 +11455,12 @@ getBlendFunc : function (
 /**
  * @method initWithTexture
  * @param {cc.Texture2D} arg0
- * @param {int} arg1
+ * @param {long} arg1
  * @return {bool}
  */
 initWithTexture : function (
 texture2d, 
-int 
+long 
 )
 {
     return false;
@@ -11431,11 +11479,11 @@ textureatlas
 /**
  * @method insertQuadFromSprite
  * @param {cc.Sprite} arg0
- * @param {int} arg1
+ * @param {long} arg1
  */
 insertQuadFromSprite : function (
 sprite, 
-int 
+long 
 )
 {
 },
@@ -11443,12 +11491,12 @@ int
 /**
  * @method initWithFile
  * @param {String} arg0
- * @param {int} arg1
+ * @param {long} arg1
  * @return {bool}
  */
 initWithFile : function (
 str, 
-int 
+long 
 )
 {
     return false;
@@ -11467,12 +11515,12 @@ blendfunc
 /**
  * @method rebuildIndexInOrder
  * @param {cc.Sprite} arg0
- * @param {int} arg1
- * @return {int}
+ * @param {long} arg1
+ * @return {long}
  */
 rebuildIndexInOrder : function (
 sprite, 
-int 
+long 
 )
 {
     return 0;
@@ -11491,7 +11539,7 @@ getTextureAtlas : function (
 /**
  * @method highestAtlasIndexInChild
  * @param {cc.Sprite} arg0
- * @return {int}
+ * @return {long}
  */
 highestAtlasIndexInChild : function (
 sprite 
@@ -11503,12 +11551,12 @@ sprite
 /**
  * @method create
  * @param {String} arg0
- * @param {int} arg1
+ * @param {long} arg1
  * @return {cc.SpriteBatchNode}
  */
 create : function (
 str, 
-int 
+long 
 )
 {
     return cc.SpriteBatchNode;
@@ -11517,12 +11565,12 @@ int
 /**
  * @method createWithTexture
  * @param {cc.Texture2D} arg0
- * @param {int} arg1
+ * @param {long} arg1
  * @return {cc.SpriteBatchNode}
  */
 createWithTexture : function (
 texture2d, 
-int 
+long 
 )
 {
     return cc.SpriteBatchNode;
@@ -15275,7 +15323,7 @@ spriteframe
 
 /**
  * @method getAtlasIndex
- * @return {int}
+ * @return {long}
  */
 getAtlasIndex : function (
 )
@@ -15306,11 +15354,11 @@ getBlendFunc : function (
 /**
  * @method setDisplayFrameWithAnimationName
  * @param {String} arg0
- * @param {int} arg1
+ * @param {long} arg1
  */
 setDisplayFrameWithAnimationName : function (
 str, 
-int 
+long 
 )
 {
 },
@@ -15347,10 +15395,10 @@ isDirty : function (
 
 /**
  * @method setAtlasIndex
- * @param {int} arg0
+ * @param {long} arg0
  */
 setAtlasIndex : function (
-int 
+long 
 )
 {
 },
@@ -18211,6 +18259,18 @@ getType : function (
 },
 
 /**
+ * @method enableFrustumCulling
+ * @param {bool} arg0
+ * @param {bool} arg1
+ */
+enableFrustumCulling : function (
+bool, 
+bool 
+)
+{
+},
+
+/**
  * @method lookAt
  * @param {vec3_object} arg0
  * @param {vec3_object} arg1
@@ -18220,6 +18280,18 @@ vec3,
 vec3 
 )
 {
+},
+
+/**
+ * @method isVisibleInFrustum
+ * @param {cc.AABB} arg0
+ * @return {bool}
+ */
+isVisibleInFrustum : function (
+aabb 
+)
+{
+    return false;
 },
 
 /**
