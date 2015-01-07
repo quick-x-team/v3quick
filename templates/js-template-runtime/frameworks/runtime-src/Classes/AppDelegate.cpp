@@ -29,36 +29,55 @@
 #include "Runtime.h"
 #include "ConfigParser.h"
 
+#if ((CC_TARGET_PLATFORM == CC_PLATFORM_WIN32) || (CC_TARGET_PLATFORM == CC_PLATFORM_MAC))
+#include "service/DeviceEx.h"
+#include "network/CCHTTPRequest.h"
+#endif
+
+using namespace CocosDenshion;
+
 USING_NS_CC;
 using namespace CocosDenshion;
 
 AppDelegate::AppDelegate()
 {
+#if (CC_TARGET_PLATFORM != CC_PLATFORM_WIN32) && (CC_TARGET_PLATFORM != CC_PLATFORM_MAC)
+    auto config = ConfigParser::getInstance();
+    _project.setScriptFile(config->getEntryFile());
+#endif
 }
 
 AppDelegate::~AppDelegate()
 {
+	SimpleAudioEngine::end();
     ScriptEngineManager::destroyInstance();
-#if (COCOS2D_DEBUG > 0 && CC_CODE_IDE_DEBUG_SUPPORT > 0)
-	// NOTE:Please don't remove this call if you want to debug with Cocos Code IDE
-	endRuntime();
-#endif
+    
+    if (_project.getDebuggerType() != kCCRuntimeDebuggerNone)
+    {
+        // NOTE:Please don't remove this call if you want to debug with Cocos Code IDE
+        endRuntime();
+    }
 
 	ConfigParser::purge();
 }
 
+//if you want a different context,just modify the value of glContextAttrs
+//it will takes effect on all platforms
 void AppDelegate::initGLContextAttrs()
 {
+    //set OpenGL context attributions,now can only set six attributions:
+    //red,green,blue,alpha,depth,stencil
     GLContextAttrs glContextAttrs = {8, 8, 8, 8, 24, 8};
-    
+
     GLView::setGLContextAttrs(glContextAttrs);
 }
 
 bool AppDelegate::applicationDidFinishLaunching()
 {
-#if (COCOS2D_DEBUG > 0 && CC_CODE_IDE_DEBUG_SUPPORT > 0)
-    // NOTE:Please don't remove this call if you want to debug with Cocos Code IDE
-    initRuntime();
+    //
+#if ((CC_TARGET_PLATFORM != CC_PLATFORM_WIN32) && (CC_TARGET_PLATFORM != CC_PLATFORM_MAC) && (CC_CODE_IDE_DEBUG_SUPPORT > 0))
+    _project.setDebuggerType(kCCRuntimeDebuggerCodeIDE);
+    
 #endif
     // initialize director
     auto director = Director::getInstance();
@@ -66,10 +85,7 @@ bool AppDelegate::applicationDidFinishLaunching()
     if(!glview) {
         Size viewSize = ConfigParser::getInstance()->getInitViewSize();
         string title = ConfigParser::getInstance()->getInitViewName();
-#if (CC_TARGET_PLATFORM == CC_PLATFORM_WIN32 || CC_TARGET_PLATFORM == CC_PLATFORM_MAC) && (COCOS2D_DEBUG > 0 && CC_CODE_IDE_DEBUG_SUPPORT > 0)
-        extern void createSimulator(const char* viewName, float width, float height,bool isLandscape = true, float frameZoomFactor = 1.0f);
-        bool isLanscape = ConfigParser::getInstance()->isLanscape();
-        createSimulator(title.c_str(), viewSize.width,viewSize.height, isLanscape);
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_WIN32 || CC_TARGET_PLATFORM == CC_PLATFORM_MAC) && (CC_CODE_IDE_DEBUG_SUPPORT > 0)
 #else
         glview = cocos2d::GLViewImpl::createWithRect(title.c_str(), Rect(0, 0, viewSize.width, viewSize.height));
         director->setOpenGLView(glview);
@@ -123,17 +139,10 @@ bool AppDelegate::applicationDidFinishLaunching()
     sc->addRegisterCallback(JavaScriptObjCBridge::_js_register);
 #endif
     
-#if (COCOS2D_DEBUG > 0 && CC_CODE_IDE_DEBUG_SUPPORT > 0)
-    // NOTE:Please don't remove this call if you want to debug with Cocos Code IDE
-    startRuntime();
-#else
-    sc->start();
-    sc->runScript("script/jsb_boot.js");
-    auto engine = ScriptingCore::getInstance();
-    ScriptEngineManager::getInstance()->setScriptEngine(engine);
-    ScriptingCore::getInstance()->runScript(ConfigParser::getInstance()->getEntryFile().c_str());
-#endif
+    StartupCall *call = StartupCall::create(this);
+    call->startup();
     
+    cocos2d::log("iShow!");
     return true;
 }
 
@@ -156,3 +165,203 @@ void AppDelegate::applicationWillEnterForeground()
     SimpleAudioEngine::getInstance()->resumeBackgroundMusic();
     SimpleAudioEngine::getInstance()->resumeAllEffects();
 }
+
+void AppDelegate::setProjectConfig(const ProjectConfig& project)
+{
+    _project = project;
+}
+
+void AppDelegate::reopenProject()
+{
+    auto fileUtils = FileUtils::getInstance();
+    
+    //
+    // set root path
+    // set search root **MUST** before set search paths
+    //
+    fileUtils->setDefaultResourceRootPath(_project.getProjectDir());
+    
+    // clean
+    Director::getInstance()->getTextureCache()->removeAllTextures();
+    Director::getInstance()->purgeCachedData();
+    SimpleAudioEngine::getInstance()->stopAllEffects();
+    SimpleAudioEngine::getInstance()->stopBackgroundMusic(true);
+    vector<string> searchPaths;
+    fileUtils->setSearchPaths(searchPaths);
+    
+    const string writablePath = _project.getWritableRealPath();
+    if (writablePath.length())
+    {
+        FileUtils::getInstance()->setWritablePath(writablePath.c_str());
+    }
+    
+    resetDesignResolution();
+    
+    StartupCall *call = StartupCall::create(this);
+    call->startup();
+}
+
+// ----------------------------------------
+
+StartupCall *StartupCall::create(AppDelegate *app)
+{
+    StartupCall *call = new StartupCall();
+    call->_app = app;
+    call->autorelease();
+    return call;
+}
+
+StartupCall::StartupCall()
+: _launchEvent("empty")
+{
+}
+
+static bool endWithString(const std::string &buf, const std::string &suffix)
+{
+    return ((buf.find(suffix) + suffix.length()) == buf.length());
+}
+
+void StartupCall::startup()
+{
+    const ProjectConfig &project = _app->_project;
+    
+    // set search path
+    string path = FileUtils::getInstance()->fullPathForFilename(project.getScriptFileRealPath().c_str());
+    size_t pos;
+    while ((pos = path.find_first_of("\\")) != std::string::npos)
+    {
+        path.replace(pos, 1, "/");
+    }
+    size_t p = path.find_last_of("/");
+    string workdir;
+    if (p != path.npos)
+    {
+        workdir = path.substr(0, p);
+        FileUtils::getInstance()->addSearchPath(workdir);
+    }
+    
+    // update search pathes
+    FileUtils::getInstance()->addSearchPath(project.getProjectDir());
+    auto &customizedPathes = project.getSearchPath();
+    for (auto &path : customizedPathes)
+    {
+        FileUtils::getInstance()->addSearchPath(path);
+    }
+    
+    updateConfigParser(project);
+    if (FileUtils::getInstance()->isFileExist(path))
+    {
+        updatePreviewFuncForPath(path);
+        
+        // launch
+        if (project.getDebuggerType() == kCCRuntimeDebuggerNone)
+        {
+            _previewFunc(path);
+        }
+        else
+        {
+            // NOTE:Please don't remove this call if you want to debug with Cocos Code IDE
+            initRuntime(project.getProjectDir());
+            startRuntime();
+        }
+    }
+    else
+    {
+        CCLOG("[ERROR]: %s is not exist.", path.c_str());
+    }
+    
+    // track start event
+    trackLaunchEvent();
+}
+
+// *NOTE*
+// track event on windows / mac platform
+//
+void StartupCall::trackEvent(const char *eventName)
+{
+#if ((CC_TARGET_PLATFORM == CC_PLATFORM_WIN32) || (CC_TARGET_PLATFORM == CC_PLATFORM_MAC))
+    
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_WIN32)
+    const char *platform = "win";
+#elif (CC_TARGET_PLATFORM == CC_PLATFORM_MAC)
+    const char *platform = "mac";
+#else
+    const char *platform = "UNKNOWN";
+#endif
+    
+    auto request = extra::HTTPRequest::createWithUrl(NULL,
+                                                     "http://www.google-analytics.com/collect",
+                                                     kCCHTTPRequestMethodPOST);
+    request->addPOSTValue("v", "1");
+    request->addPOSTValue("tid", "UA-58200293-1");
+    request->addPOSTValue("cid", player::DeviceEx::getInstance()->getUserGUID().c_str());
+    request->addPOSTValue("t", "event");
+    
+    request->addPOSTValue("an", "simulator");
+    request->addPOSTValue("av", cocos2dVersion());
+    
+    request->addPOSTValue("ec", platform);
+    request->addPOSTValue("ea", eventName);
+    
+    request->start();
+    
+#endif // ((CC_TARGET_PLATFORM == CC_PLATFORM_WIN32) || (CC_TARGET_PLATFORM == CC_PLATFORM_MAC))
+}
+
+void StartupCall::trackLaunchEvent()
+{
+    trackEvent(_launchEvent.c_str());
+}
+
+void StartupCall::onPreviewJs(const std::string &path)
+{
+    std::string filepath = path;
+    if (filepath.empty())
+    {
+        filepath = ConfigParser::getInstance()->getEntryFile();
+    }
+    CCLOG("------------------------------------------------");
+    CCLOG("LOAD Js FILE: %s", filepath.c_str());
+    CCLOG("------------------------------------------------");
+    
+    ScriptingCore* sc = ScriptingCore::getInstance();
+    sc->start();
+    sc->runScript("script/jsb_boot.js");
+    auto engine = ScriptingCore::getInstance();
+    ScriptEngineManager::getInstance()->setScriptEngine(engine);
+    ScriptingCore::getInstance()->runScript(filepath.c_str());
+}
+
+void StartupCall::updateConfigParser(const ProjectConfig& project)
+{
+    // set entry file
+    auto parser = ConfigParser::getInstance();
+    string entryFile(project.getScriptFileRealPath());
+    if (entryFile.find(project.getProjectDir()) != string::npos)
+    {
+        entryFile.erase(0, project.getProjectDir().length());
+    }
+    entryFile = replaceAll(entryFile, "\\", "/");
+    parser->setEntryFile(entryFile);
+    
+    parser->setBindAddress(project.getBindAddress());
+}
+
+void StartupCall::updatePreviewFuncForPath(const std::string &path)
+{
+    // set loader
+    _previewFunc = [](const std::string &path) { CCLOG("[WARNING]: unsupport %s", path.c_str()); };
+
+    if (!FileUtils::getInstance()->isFileExist(path))
+    {
+        CCLOG("[ERROR]: %s is not exist.", path.c_str());
+        return ;
+    }
+    
+    if (endWithString(path, ".js"))
+    {
+        _launchEvent = "js";
+        _previewFunc = std::bind(&StartupCall::onPreviewJs, this, std::placeholders::_1);
+    }
+}
+
