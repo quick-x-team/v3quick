@@ -2078,7 +2078,7 @@ size
 
 /**
  * @method getStringLength
- * @return {long}
+ * @return {int}
  */
 getStringLength : function (
 )
@@ -2222,7 +2222,7 @@ ccui.TextAtlas = {
 
 /**
  * @method getStringLength
- * @return {long}
+ * @return {int}
  */
 getStringLength : function (
 )
@@ -2817,7 +2817,7 @@ ccui.ListView = {
 /**
  * @method getIndex
  * @param {ccui.Widget} arg0
- * @return {long}
+ * @return {int}
  */
 getIndex : function (
 widget 
@@ -2866,17 +2866,17 @@ getItems : function (
 
 /**
  * @method removeItem
- * @param {long} arg0
+ * @param {int} arg0
  */
 removeItem : function (
-long 
+int 
 )
 {
 },
 
 /**
  * @method getCurSelectedIndex
- * @return {long}
+ * @return {int}
  */
 getCurSelectedIndex : function (
 )
@@ -2886,10 +2886,10 @@ getCurSelectedIndex : function (
 
 /**
  * @method insertDefaultItem
- * @param {long} arg0
+ * @param {int} arg0
  */
 insertDefaultItem : function (
-long 
+int 
 )
 {
 },
@@ -2940,11 +2940,11 @@ getItemsMargin : function (
 
 /**
  * @method getItem
- * @param {long} arg0
+ * @param {int} arg0
  * @return {ccui.Widget}
  */
 getItem : function (
-long 
+int 
 )
 {
     return ccui.Widget;
@@ -2979,11 +2979,11 @@ pushBackDefaultItem : function (
 /**
  * @method insertCustomItem
  * @param {ccui.Widget} arg0
- * @param {long} arg1
+ * @param {int} arg1
  */
 insertCustomItem : function (
 widget, 
-long 
+int 
 )
 {
 },
@@ -3674,7 +3674,7 @@ str
 
 /**
  * @method getStringLength
- * @return {long}
+ * @return {int}
  */
 getStringLength : function (
 )
@@ -3754,7 +3754,7 @@ getCustomScrollThreshold : function (
 
 /**
  * @method getCurPageIndex
- * @return {long}
+ * @return {int}
  */
 getCurPageIndex : function (
 )
@@ -3765,12 +3765,12 @@ getCurPageIndex : function (
 /**
  * @method addWidgetToPage
  * @param {ccui.Widget} arg0
- * @param {long} arg1
+ * @param {int} arg1
  * @param {bool} arg2
  */
 addWidgetToPage : function (
 widget, 
-long, 
+int, 
 bool 
 )
 {
@@ -3788,11 +3788,11 @@ isUsingCustomScrollThreshold : function (
 
 /**
  * @method getPage
- * @param {long} arg0
+ * @param {int} arg0
  * @return {ccui.Layout}
  */
 getPage : function (
-long 
+int 
 )
 {
     return ccui.Layout;
@@ -3842,20 +3842,20 @@ int
 
 /**
  * @method scrollToPage
- * @param {long} arg0
+ * @param {int} arg0
  */
 scrollToPage : function (
-long 
+int 
 )
 {
 },
 
 /**
  * @method removePageAtIndex
- * @param {long} arg0
+ * @param {int} arg0
  */
 removePageAtIndex : function (
-long 
+int 
 )
 {
 },

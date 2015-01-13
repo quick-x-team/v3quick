@@ -834,6 +834,18 @@ getGLProgram : function (
 },
 
 /**
+ * @method updateTransformFromPhysics
+ * @param {mat4_object} arg0
+ * @param {unsigned int} arg1
+ */
+updateTransformFromPhysics : function (
+mat4, 
+int 
+)
+{
+},
+
+/**
  * @method getDescription
  * @return {String}
  */
@@ -1407,7 +1419,7 @@ getAnchorPoint : function (
 
 /**
  * @method getNumberOfRunningActions
- * @return {long}
+ * @return {int}
  */
 getNumberOfRunningActions : function (
 )
@@ -1435,7 +1447,7 @@ isVisible : function (
 
 /**
  * @method getChildrenCount
- * @return {long}
+ * @return {int}
  */
 getChildrenCount : function (
 )
@@ -1663,6 +1675,24 @@ str
 */
 setAdditionalTransform : function(
 mat4 
+)
+{
+},
+
+/**
+ * @method updatePhysicsBodyTransform
+ * @param {cc.Scene} arg0
+ * @param {mat4_object} arg1
+ * @param {unsigned int} arg2
+ * @param {float} arg3
+ * @param {float} arg4
+ */
+updatePhysicsBodyTransform : function (
+scene, 
+mat4, 
+int, 
+float, 
+float 
 )
 {
 },
@@ -5868,6 +5898,24 @@ JumpBy : function (
 cc.JumpTo = {
 
 /**
+ * @method initWithDuration
+ * @param {float} arg0
+ * @param {vec2_object} arg1
+ * @param {float} arg2
+ * @param {int} arg3
+ * @return {bool}
+ */
+initWithDuration : function (
+float, 
+vec2, 
+float, 
+int 
+)
+{
+    return false;
+},
+
+/**
  * @method create
  * @param {float} arg0
  * @param {vec2_object} arg1
@@ -6718,7 +6766,7 @@ node
 /**
  * @method getNumberOfRunningActionsInTarget
  * @param {cc.Node} arg0
- * @return {long}
+ * @return {int}
  */
 getNumberOfRunningActionsInTarget : function (
 node 
@@ -10199,7 +10247,7 @@ mat4
 
 /**
  * @method getUniformCount
- * @return {long}
+ * @return {int}
  */
 getUniformCount : function (
 )
@@ -10253,7 +10301,7 @@ int
 
 /**
  * @method getVertexAttribCount
- * @return {long}
+ * @return {int}
  */
 getVertexAttribCount : function (
 )
@@ -10466,7 +10514,7 @@ getBlendFunc : function (
 
 /**
  * @method getQuadsToDraw
- * @return {long}
+ * @return {int}
  */
 getQuadsToDraw : function (
 )
@@ -10504,10 +10552,10 @@ int
 
 /**
  * @method setQuadsToDraw
- * @param {long} arg0
+ * @param {int} arg0
  */
 setQuadsToDraw : function (
-long 
+int 
 )
 {
 },
@@ -10562,13 +10610,15 @@ color4f
 
 /**
  * @method drawPoints
- * @param {vec2_object} arg0
- * @param {unsigned int} arg1
- * @param {color4f_object} arg2
- */
-drawPoints : function (
-vec2, 
-int, 
+* @param {vec2_object|vec2_object} vec2
+* @param {unsigned int|unsigned int} int
+* @param {float|color4f_object} float
+* @param {color4f_object} color4f
+*/
+drawPoints : function(
+vec2,
+int,
+float,
 color4f 
 )
 {
@@ -11362,11 +11412,11 @@ texture2d
 
 /**
  * @method removeChildAtIndex
- * @param {long} arg0
+ * @param {int} arg0
  * @param {bool} arg1
  */
 removeChildAtIndex : function (
-long, 
+int, 
 bool 
 )
 {
@@ -11402,7 +11452,7 @@ int
  * @method atlasIndexForChild
  * @param {cc.Sprite} arg0
  * @param {int} arg1
- * @return {long}
+ * @return {int}
  */
 atlasIndexForChild : function (
 sprite, 
@@ -11433,7 +11483,7 @@ init : function (
 /**
  * @method lowestAtlasIndexInChild
  * @param {cc.Sprite} arg0
- * @return {long}
+ * @return {int}
  */
 lowestAtlasIndexInChild : function (
 sprite 
@@ -11455,12 +11505,12 @@ getBlendFunc : function (
 /**
  * @method initWithTexture
  * @param {cc.Texture2D} arg0
- * @param {long} arg1
+ * @param {int} arg1
  * @return {bool}
  */
 initWithTexture : function (
 texture2d, 
-long 
+int 
 )
 {
     return false;
@@ -11479,11 +11529,11 @@ textureatlas
 /**
  * @method insertQuadFromSprite
  * @param {cc.Sprite} arg0
- * @param {long} arg1
+ * @param {int} arg1
  */
 insertQuadFromSprite : function (
 sprite, 
-long 
+int 
 )
 {
 },
@@ -11491,12 +11541,12 @@ long
 /**
  * @method initWithFile
  * @param {String} arg0
- * @param {long} arg1
+ * @param {int} arg1
  * @return {bool}
  */
 initWithFile : function (
 str, 
-long 
+int 
 )
 {
     return false;
@@ -11515,12 +11565,12 @@ blendfunc
 /**
  * @method rebuildIndexInOrder
  * @param {cc.Sprite} arg0
- * @param {long} arg1
- * @return {long}
+ * @param {int} arg1
+ * @return {int}
  */
 rebuildIndexInOrder : function (
 sprite, 
-long 
+int 
 )
 {
     return 0;
@@ -11539,7 +11589,7 @@ getTextureAtlas : function (
 /**
  * @method highestAtlasIndexInChild
  * @param {cc.Sprite} arg0
- * @return {long}
+ * @return {int}
  */
 highestAtlasIndexInChild : function (
 sprite 
@@ -11551,12 +11601,12 @@ sprite
 /**
  * @method create
  * @param {String} arg0
- * @param {long} arg1
+ * @param {int} arg1
  * @return {cc.SpriteBatchNode}
  */
 create : function (
 str, 
-long 
+int 
 )
 {
     return cc.SpriteBatchNode;
@@ -11565,12 +11615,12 @@ long
 /**
  * @method createWithTexture
  * @param {cc.Texture2D} arg0
- * @param {long} arg1
+ * @param {int} arg1
  * @return {cc.SpriteBatchNode}
  */
 createWithTexture : function (
 texture2d, 
-long 
+int 
 )
 {
     return cc.SpriteBatchNode;
@@ -15323,7 +15373,7 @@ spriteframe
 
 /**
  * @method getAtlasIndex
- * @return {long}
+ * @return {int}
  */
 getAtlasIndex : function (
 )
@@ -15354,11 +15404,11 @@ getBlendFunc : function (
 /**
  * @method setDisplayFrameWithAnimationName
  * @param {String} arg0
- * @param {long} arg1
+ * @param {int} arg1
  */
 setDisplayFrameWithAnimationName : function (
 str, 
-long 
+int 
 )
 {
 },
@@ -15395,10 +15445,10 @@ isDirty : function (
 
 /**
  * @method setAtlasIndex
- * @param {long} arg0
+ * @param {int} arg0
  */
 setAtlasIndex : function (
-long 
+int 
 )
 {
 },
