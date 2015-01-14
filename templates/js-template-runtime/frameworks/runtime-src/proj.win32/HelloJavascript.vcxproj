@@ -302,7 +302,7 @@ xcopy "$(ProjectDir)..\..\..\res" "$(OutDir)\Resource\res" /e /Y</Command>
     <ResourceCompile Include="game.rc" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\cocos2d-x\cocos\scripting\js-bindings\proj.win32\libJSBinding.vcxproj">
+    <ProjectReference Include="..\..\cocos2d-x\cocos\scripting\js-bindings\proj.win32\libjscocos2d.vcxproj">
       <Project>{39379840-825a-45a0-b363-c09ffef864bd}</Project>
     </ProjectReference>
   </ItemGroup>
