@@ -19,11 +19,7 @@
         {
             "from": "../../../../cocos/scripting/js-bindings/script", 
             "to": "script"
-        }, 
-        {
-            "from": "../../../../cocos/scripting/js-bindings/manual/platform/android/java/src", 
-            "to": "../src"
-        }, 
+        },
         {
             "from": "../../../../plugin/jsbindings/script", 
             "to": ""

@@ -204,7 +204,7 @@ copy "$(ProjectDir)..\..\project.json" "$(OutDir)\js-tests-res"</Command>
     <ResourceCompile Include="js-tests.rc" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\..\cocos\scripting\js-bindings\proj.win32\libJSBinding.vcxproj">
+    <ProjectReference Include="..\..\..\..\cocos\scripting\js-bindings\proj.win32\libjscocos2d.vcxproj">
       <Project>{39379840-825a-45a0-b363-c09ffef864bd}</Project>
     </ProjectReference>
   </ItemGroup>

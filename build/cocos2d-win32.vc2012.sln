@@ -23,7 +23,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libbox2d", "..\external\Box
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "js-moonwarriors", "..\tests\js-moonwarriors\project\proj.win32\js-moonwarriors.vcxproj", "{1DB7C0FC-46FF-4A1B-82E0-C6244EEEC4C2}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libjsbindings", "..\cocos\scripting\js-bindings\proj.win32\libJSBinding.vcxproj", "{39379840-825A-45A0-B363-C09FFEF864BD}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libjscocos2d", "..\cocos\scripting\js-bindings\proj.win32\libjscocos2d.vcxproj", "{39379840-825A-45A0-B363-C09FFEF864BD}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "js-tests", "..\tests\js-tests\project\proj.win32\js-tests.vcxproj", "{D0F06A44-A245-4D13-A498-0120C203B539}"
 EndProject
