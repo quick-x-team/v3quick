@@ -606,9 +606,9 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		A03F31E81781479B006731B9 /* libjscoco2d Mac */ = {
+		A03F31E81781479B006731B9 /* libjscocos2d Mac */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = A03F31FA1781479B006731B9 /* Build configuration list for PBXNativeTarget "libjscoco2d Mac" */;
+			buildConfigurationList = A03F31FA1781479B006731B9 /* Build configuration list for PBXNativeTarget "libjscocos2d Mac" */;
 			buildPhases = (
 				A03F31E91781479B006731B9 /* Sources */,
 				A03F31F01781479B006731B9 /* Frameworks */,
@@ -618,14 +618,14 @@
 			);
 			dependencies = (
 			);
-			name = "libjscoco2d Mac";
+			name = "libjscocos2d Mac";
 			productName = cocos2dx;
 			productReference = 1A5410A418B785A10016A3AF /* libjscocos2d Mac.a */;
 			productType = "com.apple.product-type.library.static";
 		};
-		A07A4FB5178387750073F6A7 /* libjscoco2d iOS */ = {
+		A07A4FB5178387750073F6A7 /* libjscocos2d iOS */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = A07A502D178387750073F6A7 /* Build configuration list for PBXNativeTarget "libjscoco2d iOS" */;
+			buildConfigurationList = A07A502D178387750073F6A7 /* Build configuration list for PBXNativeTarget "libjscocos2d iOS" */;
 			buildPhases = (
 				A07A4FB6178387750073F6A7 /* Sources */,
 				A07A4FCC178387750073F6A7 /* Frameworks */,
@@ -635,7 +635,7 @@
 			);
 			dependencies = (
 			);
-			name = "libjscoco2d iOS";
+			name = "libjscocos2d iOS";
 			productName = cocos2dx;
 			productReference = 1A5410A518B785A10016A3AF /* libjscocos2d iOS.a */;
 			productType = "com.apple.product-type.library.static";
@@ -661,8 +661,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				A03F31E81781479B006731B9 /* libjscoco2d Mac */,
-				A07A4FB5178387750073F6A7 /* libjscoco2d iOS */,
+				A03F31E81781479B006731B9 /* libjscocos2d Mac */,
+				A07A4FB5178387750073F6A7 /* libjscocos2d iOS */,
 			);
 		};
 /* End PBXProject section */
@@ -920,7 +920,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		A03F31FA1781479B006731B9 /* Build configuration list for PBXNativeTarget "libjscoco2d Mac" */ = {
+		A03F31FA1781479B006731B9 /* Build configuration list for PBXNativeTarget "libjscocos2d Mac" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				A03F31FB1781479B006731B9 /* Debug */,
@@ -929,7 +929,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		A07A502D178387750073F6A7 /* Build configuration list for PBXNativeTarget "libjscoco2d iOS" */ = {
+		A07A502D178387750073F6A7 /* Build configuration list for PBXNativeTarget "libjscocos2d iOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				A07A502E178387750073F6A7 /* Debug */,

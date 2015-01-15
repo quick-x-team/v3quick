@@ -1050,7 +1050,7 @@
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			name = "libjscocos2d Mac.a";
-			path = "liblibjscoco2d Mac.a";
+			path = "libjscocos2d Mac.a";
 			remoteRef = 1A604F2A18BF1D2000CC9A93 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
@@ -1058,7 +1058,7 @@
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			name = "libjscocos2d iOS.a";
-			path = "liblibjscoco2d iOS.a";
+			path = "libjscocos2d iOS.a";
 			remoteRef = 1A604F2C18BF1D2000CC9A93 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
