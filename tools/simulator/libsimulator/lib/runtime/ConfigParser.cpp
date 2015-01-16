@@ -93,7 +93,7 @@ void ConfigParser::readConfig(const string &filepath)
             if (objectInitView.HasMember("debugPort"))
             {
                 _debugPort = objectInitView["debugPort"].GetUint();
-                if(_debugPort<=0)
+                if(_debugPort <= 0)
                     _debugPort = kProjectConfigDebugPort;
             }
             if (objectInitView.HasMember("uploadPort"))

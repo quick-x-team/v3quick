@@ -2,17 +2,16 @@
 #include "CCLuaEngine.h"
 #include "SimpleAudioEngine.h"
 #include "cocos2d.h"
-#include "CodeIDESupport.h"
-
+#include "ide-support/CodeIDESupport.h"
 
 #include "runtime/Runtime.h"
 
 // Lua
 #include "lua_module_register.h"
-#include "RuntimeLuaImpl.h"
+#include "ide-support/RuntimeLuaImpl.h"
 
 // Js
-#include "RuntimeJsImpl.h"
+#include "ide-support/RuntimeJsImpl.h"
 
 
 using namespace CocosDenshion;
@@ -64,12 +63,24 @@ bool AppDelegate::applicationDidFinishLaunching()
     //LuaStack* stack = engine->getLuaStack();
     //register_custom_function(stack->getLuaState());
     
+    //
     // NOTE:Please don't remove this call if you want to debug with Cocos Code IDE
+    // Runtime
+    //
     auto runtimeEngine = RuntimeEngine::getInstance();
     runtimeEngine->setEventTrackingEnable(true);
     runtimeEngine->addRuntime(RuntimeLuaImpl::create(), kRuntimeEngineLua);
-    runtimeEngine->addRuntime(RuntimeJsImpl::create(), kRuntimeEngineJs);
+    auto jsRuntime = RuntimeJsImpl::create();
+    runtimeEngine->addRuntime(jsRuntime, kRuntimeEngineJs);
     runtimeEngine->start();
+    
+    // js need special debug port
+    if (runtimeEngine->getProjectConfig().getDebuggerType() != kCCRuntimeDebuggerNone)
+    {
+        jsRuntime->startWithDebugger();
+    }
+    
+    // Runtime end
     
 	cocos2d::log("iShow!");
     return true;

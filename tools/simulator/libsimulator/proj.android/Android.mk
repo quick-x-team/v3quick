@@ -22,14 +22,12 @@ LOCAL_SRC_FILES := \
 ../lib/runtime/ConsoleCommand.cpp \
 ../lib/runtime/FileServer.cpp \
 ../lib/runtime/Landscape_png.cpp \
-../lib/runtime/lua_debugger.c \
 ../lib/runtime/PlayDisable_png.cpp \
 ../lib/runtime/PlayEnable_png.cpp \
 ../lib/runtime/Portrait_png.cpp \
 ../lib/runtime/Protos.pb.cc \
 ../lib/runtime/Runtime.cpp \
 ../lib/runtime/RuntimeProtocol.cpp \
-../lib/runtime/RuntimeLuaImpl.cpp \
 ../lib/runtime/RuntimeCCSImpl.cpp \
 ../lib/runtime/Shine_png.cpp \
 ../lib/runtime/ConfigParser.cpp \

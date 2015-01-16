@@ -25,9 +25,11 @@ public:
     void onReload(const rapidjson::Document& dArgParse, rapidjson::Document& dReplyParse);
     void end();
     
+    bool startWithDebugger();
 private:
     RuntimeJsImpl();
-    bool start();
+    bool initJsEnv();
+    bool loadScriptFile(const std::string& file);
     bool _hasStarted;
 };
 

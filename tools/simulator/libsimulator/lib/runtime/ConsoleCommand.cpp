@@ -256,7 +256,7 @@ void ConsoleCommand::onSendCommand(int fd, const std::string &args)
             dReplyParse.Accept(writer);
             string msgContent = buffer.GetString();
             char msgLength[64] = {0x1, 0};
-            sprintf(msgLength + 1, "%d:", msgContent.size());
+            sprintf(msgLength + 1, "%ld:", msgContent.size());
             
             string msg(msgLength + msgContent);
             

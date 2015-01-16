@@ -159,56 +159,52 @@ RuntimeJsImpl* RuntimeJsImpl::create()
     return instance;
 }
 
-bool RuntimeJsImpl::start()
+bool RuntimeJsImpl::initJsEnv()
 {
+    if (_hasStarted)
+    {
+        return true;
+    }
+    
     js_module_register();
     ScriptingCore::getInstance()->addRegisterCallback(register_FileUtils);
     ScriptingCore::getInstance()->start();
     _hasStarted = true;
 
-    int debugPort = 5086;
-#if(CC_PLATFORM_MAC == CC_TARGET_PLATFORM || CC_PLATFORM_WIN32 == CC_TARGET_PLATFORM)
-    debugPort = ConfigParser::getInstance()->getDebugPort();
-#endif
-    ScriptingCore::getInstance()->enableDebugger(debugPort);
     ScriptEngineProtocol *engine = ScriptingCore::getInstance();
     ScriptEngineManager::getInstance()->setScriptEngine(engine);
     
     return true;
 }
 
+bool RuntimeJsImpl::startWithDebugger()
+{
+    initJsEnv();
+    
+    int debugPort = 5086;
+#if(CC_PLATFORM_MAC == CC_TARGET_PLATFORM || CC_PLATFORM_WIN32 == CC_TARGET_PLATFORM)
+    debugPort = ConfigParser::getInstance()->getDebugPort();
+#endif
+    ScriptingCore::getInstance()->enableDebugger(debugPort);
+    
+    return true;
+}
+
 void RuntimeJsImpl::startScript(const std::string& path)
 {
-    std::string filepath = path;
-    if (filepath.empty())
-    {
-        filepath = ConfigParser::getInstance()->getEntryFile();
-    }
-    CCLOG("------------------------------------------------");
-    CCLOG("LOAD Js FILE: %s", path.c_str());
-    CCLOG("------------------------------------------------");
-    
-    auto engine = ScriptingCore::getInstance();
-    if (!_hasStarted)
-    {
-        start();
-    }
-    engine->runScript(RUNTIME_JS_BOOT_SCRIPT);
-    ScriptEngineManager::getInstance()->setScriptEngine(engine);
-    ScriptingCore::getInstance()->runScript(filepath.c_str());
+    loadScriptFile(path);
 }
 
 void RuntimeJsImpl::onStartDebuger(const rapidjson::Document& dArgParse, rapidjson::Document& dReplyParse)
 {
-//    startScript("");
-//    if ()
-//    {
-//        dReplyParse.AddMember("code",0,dReplyParse.GetAllocator());
-//    }
-//    else
-//    {
-//        dReplyParse.AddMember("code",1,dReplyParse.GetAllocator());
-//    }
+    if (loadScriptFile(ConfigParser::getInstance()->getEntryFile()))
+    {
+        dReplyParse.AddMember("code",0,dReplyParse.GetAllocator());
+    }
+    else
+    {
+        dReplyParse.AddMember("code",1,dReplyParse.GetAllocator());
+    }
 }
 
 void RuntimeJsImpl::onClearCompile(const rapidjson::Document& dArgParse, rapidjson::Document& dReplyParse)
@@ -275,6 +271,24 @@ void RuntimeJsImpl::end()
 RuntimeJsImpl::RuntimeJsImpl()
 : _hasStarted(false)
 {
+}
+
+bool RuntimeJsImpl::loadScriptFile(const std::string& path)
+{
+    std::string filepath = path;
+    if (filepath.empty())
+    {
+        filepath = ConfigParser::getInstance()->getEntryFile();
+    }
+    CCLOG("------------------------------------------------");
+    CCLOG("LOAD Js FILE: %s", filepath.c_str());
+    CCLOG("------------------------------------------------");
+    
+    initJsEnv();
+    auto engine = ScriptingCore::getInstance();
+    engine->runScript(RUNTIME_JS_BOOT_SCRIPT);
+    ScriptEngineManager::getInstance()->setScriptEngine(engine);
+    return ScriptingCore::getInstance()->runScript(filepath.c_str());
 }
 
 
