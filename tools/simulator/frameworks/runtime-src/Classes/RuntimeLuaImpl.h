@@ -7,7 +7,12 @@
 #ifndef __Simulator__RuntimeLuaImpl__
 #define __Simulator__RuntimeLuaImpl__
 
-#include "RuntimeProtocol.h"
+#include "CodeIDESupport.h"
+#include "cocos2d.h"
+
+#if (COCOS2D_DEBUG > 0) && (CC_CODE_IDE_DEBUG_SUPPORT > 0)
+
+#include "runtime/RuntimeProtocol.h"
 
 class RuntimeLuaImpl : public RuntimeProtocol
 {
@@ -21,5 +26,7 @@ public:
 private:
     void init();
 };
+
+#endif // (COCOS2D_DEBUG > 0) && (CC_CODE_IDE_DEBUG_SUPPORT > 0)
 
 #endif /* defined(__Simulator__RuntimeLua__) */

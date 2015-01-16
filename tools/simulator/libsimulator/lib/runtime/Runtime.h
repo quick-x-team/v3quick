@@ -27,6 +27,7 @@ THE SOFTWARE.
 
 #include <string>
 #include <functional>
+#include <unordered_map>
 
 void recvBuf(int fd, char *pbuf, unsigned long bufsize);
 
@@ -46,6 +47,10 @@ const char* getRuntimeVersion();
 // RuntimeEngine
 //
 #include "ProjectConfig/ProjectConfig.h"
+
+#define kRuntimeEngineLua 1
+#define kRuntimeEngineJs  2
+
 class RuntimeProtocol;
 class RuntimeEngine
 {
@@ -62,6 +67,7 @@ public:
     void end();
     void setEventTrackingEnable(bool enable);
     
+    void addRuntime(RuntimeProtocol *runtime, int type);
     RuntimeProtocol *getRuntime();
 private:
     RuntimeEngine();
@@ -73,10 +79,11 @@ private:
     void trackEvent(const std::string &eventName);
     void trackLaunchEvent();
     
-    RuntimeProtocol *_runtime;
+    RuntimeProtocol *_runtime;  // weak ref
     ProjectConfig _project;
     bool _eventTrackingEnable;  // false default
     std::string _launchEvent;
+    std::unordered_map<int,RuntimeProtocol*> _runtimes;
 };
 
 #endif // _RUNTIME__H_

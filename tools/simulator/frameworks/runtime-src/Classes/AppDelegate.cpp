@@ -3,9 +3,16 @@
 #include "SimpleAudioEngine.h"
 #include "cocos2d.h"
 #include "CodeIDESupport.h"
-#include "lua_module_register.h"
+
 
 #include "runtime/Runtime.h"
+
+// Lua
+#include "lua_module_register.h"
+#include "RuntimeLuaImpl.h"
+
+// Js
+#include "RuntimeJsImpl.h"
 
 
 using namespace CocosDenshion;
@@ -58,8 +65,11 @@ bool AppDelegate::applicationDidFinishLaunching()
     //register_custom_function(stack->getLuaState());
     
     // NOTE:Please don't remove this call if you want to debug with Cocos Code IDE
-    RuntimeEngine::getInstance()->setEventTrackingEnable(true);
-    RuntimeEngine::getInstance()->start();
+    auto runtimeEngine = RuntimeEngine::getInstance();
+    runtimeEngine->setEventTrackingEnable(true);
+    runtimeEngine->addRuntime(RuntimeLuaImpl::create(), kRuntimeEngineLua);
+    runtimeEngine->addRuntime(RuntimeJsImpl::create(), kRuntimeEngineJs);
+    runtimeEngine->start();
     
 	cocos2d::log("iShow!");
     return true;

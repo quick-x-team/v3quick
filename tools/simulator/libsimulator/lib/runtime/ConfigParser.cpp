@@ -90,6 +90,12 @@ void ConfigParser::readConfig(const string &filepath)
                 if(_consolePort <= 0)
                     _consolePort = kProjectConfigConsolePort;
             }
+            if (objectInitView.HasMember("debugPort"))
+            {
+                _debugPort = objectInitView["debugPort"].GetUint();
+                if(_debugPort<=0)
+                    _debugPort = kProjectConfigDebugPort;
+            }
             if (objectInitView.HasMember("uploadPort"))
             {
                 _uploadPort = objectInitView["uploadPort"].GetUint();
@@ -124,6 +130,7 @@ _isLandscape(true),
 _isWindowTop(false),
 _consolePort(kProjectConfigConsolePort),
 _uploadPort(kProjectConfigUploadPort),
+_debugPort(kProjectConfigDebugger),
 _viewName("simulator"),
 _entryfile("src/main.lua"),
 _initViewSize(ProjectConfig::DEFAULT_HEIGHT, ProjectConfig::DEFAULT_WIDTH),
@@ -175,6 +182,10 @@ int ConfigParser::getConsolePort()
 int ConfigParser::getUploadPort()
 {
     return _uploadPort;
+}
+int ConfigParser::getDebugPort()
+{
+    return _debugPort;
 }
 int ConfigParser::getScreenSizeCount(void)
 {

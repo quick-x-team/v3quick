@@ -6,6 +6,8 @@
 
 #include "RuntimeLuaImpl.h"
 
+#if (COCOS2D_DEBUG > 0) && (CC_CODE_IDE_DEBUG_SUPPORT > 0)
+
 #include <cstdio>
 #include <string>
 
@@ -13,9 +15,9 @@
 #include "CCLuaEngine.h"
 #include "LuaBasicConversions.h"
 
-#include "Runtime.h"
-#include "ConfigParser.h"
-#include "FileServer.h"
+#include "runtime/Runtime.h"
+#include "runtime/ConfigParser.h"
+#include "runtime/FileServer.h"
 
 extern std::string g_projectPath; // Runtime.cpp
 
@@ -332,3 +334,5 @@ void RuntimeLuaImpl::init()
     ScriptEngineManager::getInstance()->setScriptEngine(engine);
     register_runtime_override_function(engine->getLuaStack()->getLuaState());
 }
+
+#endif // (COCOS2D_DEBUG > 0) && (CC_CODE_IDE_DEBUG_SUPPORT > 0)

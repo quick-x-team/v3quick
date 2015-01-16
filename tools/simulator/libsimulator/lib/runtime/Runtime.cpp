@@ -28,11 +28,7 @@ THE SOFTWARE.
 #include "ConsoleCommand.h"
 #include "cocos2d.h"
 #include "ConfigParser.h"
-#include "lua_debugger.h"
-#include "CCLuaEngine.h"
-#include "LuaBasicConversions.h"
 
-#include "RuntimeLuaImpl.h"
 #include "RuntimeCCSImpl.h"
 
 #if ((CC_TARGET_PLATFORM == CC_PLATFORM_WIN32) || (CC_TARGET_PLATFORM == CC_PLATFORM_MAC))
@@ -40,8 +36,6 @@ THE SOFTWARE.
 #include "network/CCHTTPRequest.h"
 #include "xxhash/xxhash.h"
 #endif
-
-#include <vector>
 
 std::string g_projectPath;
 
@@ -131,7 +125,6 @@ RuntimeEngine* RuntimeEngine::getInstance()
 
 void RuntimeEngine::setupRuntime()
 {
-    CC_SAFE_DELETE(_runtime);
     //
     // 1. get project type fron config.json
     // 2. init Lua / Js runtime
@@ -149,13 +142,14 @@ void RuntimeEngine::setupRuntime()
         (entryFile.rfind(".luac") != std::string::npos))
     {
         _launchEvent = "lua";
-        _runtime = RuntimeLuaImpl::create();
+        _runtime = _runtimes[kRuntimeEngineLua];
     }
     // Js
     else if ((entryFile.rfind(".js") != std::string::npos) ||
              (entryFile.rfind(".jsc") != std::string::npos))
     {
         _launchEvent = "js";
+        _runtime = _runtimes[kRuntimeEngineJs];
     }
     // csb
     else if ((entryFile.rfind(".csb") != std::string::npos))
@@ -271,6 +265,8 @@ void RuntimeEngine::end()
     {
         _runtime->end();
     }
+    // delete all runtimes
+    
     ConsoleCommand::purge();
     FileServer::getShareInstance()->stop();
     ConfigParser::purge();
@@ -280,6 +276,18 @@ void RuntimeEngine::end()
 void RuntimeEngine::setEventTrackingEnable(bool enable)
 {
     _eventTrackingEnable = enable;
+}
+
+void RuntimeEngine::addRuntime(RuntimeProtocol *runtime, int type)
+{
+    if (_runtimes.find(type) == _runtimes.end())
+    {
+        _runtimes.insert(std::make_pair(type, runtime));
+    }
+    else
+    {
+        CCLOG("RuntimeEngine already has Runtime type %d.", type);
+    }
 }
 
 RuntimeProtocol* RuntimeEngine::getRuntime()
