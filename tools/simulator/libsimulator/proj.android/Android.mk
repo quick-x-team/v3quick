@@ -42,6 +42,6 @@ LOCAL_EXPORT_C_INCLUDES := $(LOCAL_PATH)/../lib
 
 LOCAL_C_INCLUDES := $(LOCAL_PATH)/../lib $(LOCAL_PATH)/../lib/protobuf-lite
 
-LOCAL_STATIC_LIBRARIES := cocos2d_lua_static
+LOCAL_STATIC_LIBRARIES := cocos2dx_static
 
 include $(BUILD_STATIC_LIBRARY)

@@ -26,7 +26,7 @@
 #import "RootViewController.h"
 #import "cocos2d.h"
 #import "platform/ios/CCEAGLView-ios.h"
-#include "ConfigParser.h"
+#include "ide-support/SimpleConfigParser.h"
 
 @implementation RootViewController
 
@@ -57,7 +57,7 @@
 // This method is deprecated on ios6
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
     
-    if (ConfigParser::getInstance()->isLanscape()) {
+    if (SimpleConfigParser::getInstance()->isLanscape()) {
         return UIInterfaceOrientationIsLandscape( interfaceOrientation );
     }else{
         return UIInterfaceOrientationIsPortrait( interfaceOrientation );
@@ -68,7 +68,7 @@
 // For ios6, use supportedInterfaceOrientations & shouldAutorotate instead
 - (NSUInteger) supportedInterfaceOrientations{
 #ifdef __IPHONE_6_0
-    if (ConfigParser::getInstance()->isLanscape()) {
+    if (SimpleConfigParser::getInstance()->isLanscape()) {
         return UIInterfaceOrientationMaskLandscape;
     }else{
         return UIInterfaceOrientationMaskPortraitUpsideDown;
@@ -77,7 +77,7 @@
 }
 
 - (BOOL) shouldAutorotate {
-    if (ConfigParser::getInstance()->isLanscape()) {
+    if (SimpleConfigParser::getInstance()->isLanscape()) {
         return YES;
     }else{
         return NO;

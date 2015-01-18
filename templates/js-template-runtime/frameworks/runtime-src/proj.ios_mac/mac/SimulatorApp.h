@@ -26,7 +26,7 @@
 #include <string>
 #import <Cocoa/Cocoa.h>
 
-#import "service/ConsoleWindowController.h"
+#import "ConsoleWindowController.h"
 #include "ProjectConfig/ProjectConfig.h"
 #include "ProjectConfig/SimulatorConfig.h"
 #include "AppDelegate.h"

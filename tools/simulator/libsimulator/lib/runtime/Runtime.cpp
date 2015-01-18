@@ -29,7 +29,7 @@ THE SOFTWARE.
 #include "cocos2d.h"
 #include "ConfigParser.h"
 
-#include "RuntimeCCSImpl.h"
+#include "RuntimeCCSImpl.h" // TODO: move to ide-support
 
 #if ((CC_TARGET_PLATFORM == CC_PLATFORM_WIN32) || (CC_TARGET_PLATFORM == CC_PLATFORM_MAC))
 #include "DeviceEx.h"
@@ -119,6 +119,7 @@ RuntimeEngine* RuntimeEngine::getInstance()
     if (!instance)
     {
         instance = new RuntimeEngine();
+        instance->addRuntime(RuntimeCCSImpl::create(), kRuntimeEngineCCS);
     }
     return instance;
 }
@@ -155,13 +156,13 @@ void RuntimeEngine::setupRuntime()
     else if ((entryFile.rfind(".csb") != std::string::npos))
     {
         _launchEvent = "ccs";
-        _runtime = RuntimeCCSImpl::create();
+        _runtime = _runtimes[kRuntimeEngineCCS];
     }
     // csd
     else if ((entryFile.rfind(".csd") != std::string::npos))
     {
         _launchEvent = "ccs";
-        _runtime = RuntimeCCSImpl::create();
+        _runtime = _runtimes[kRuntimeEngineCCS];
     }
 }
 
@@ -266,7 +267,10 @@ void RuntimeEngine::end()
         _runtime->end();
     }
     // delete all runtimes
-    
+    for (auto it = _runtimes.begin(); it != _runtimes.end(); it++)
+    {
+        CC_SAFE_DELETE(it->second);
+    }
     ConsoleCommand::purge();
     FileServer::getShareInstance()->stop();
     ConfigParser::purge();

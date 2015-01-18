@@ -65,18 +65,10 @@ void ConsoleCommand::init()
 
     // set bind address
     _console->setBindAddress(ConfigParser::getInstance()->getBindAddress());
-#if(CC_PLATFORM_MAC == CC_TARGET_PLATFORM || CC_PLATFORM_WIN32 == CC_TARGET_PLATFORM)
-    _console->listenOnTCP(ConfigParser::getInstance()->getConsolePort());
-#else
-    _console->listenOnTCP(6010);
-#endif
+    _console->listenOnTCP(ConfigParser::getInstance()->getConsolePort()); // 6010,6050
 
     _fileserver = FileServer::getShareInstance();
-#if(CC_PLATFORM_MAC == CC_TARGET_PLATFORM || CC_PLATFORM_WIN32 == CC_TARGET_PLATFORM)
-    _fileserver->listenOnTCP(ConfigParser::getInstance()->getUploadPort());
-#else
-    _fileserver->listenOnTCP(6020);
-#endif
+    _fileserver->listenOnTCP(ConfigParser::getInstance()->getUploadPort()); // 6020,6060
     _fileserver->readResFileFinfo();
 }
 
@@ -96,8 +88,6 @@ void ConsoleCommand::onSendCommand(int fd, const std::string &args)
             {
                 dReplyParse.AddMember("seq",dArgParse["seq"],dReplyParse.GetAllocator());
             }
-            
-            CCLOG("cmd: %s",strcmd.data());
             
             auto runtime = RuntimeEngine::getInstance()->getRuntime();
             if (!runtime)

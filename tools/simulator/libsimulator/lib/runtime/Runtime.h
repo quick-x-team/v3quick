@@ -50,6 +50,7 @@ const char* getRuntimeVersion();
 
 #define kRuntimeEngineLua 1
 #define kRuntimeEngineJs  2
+#define kRuntimeEngineCCS 4
 
 class RuntimeProtocol;
 class RuntimeEngine
