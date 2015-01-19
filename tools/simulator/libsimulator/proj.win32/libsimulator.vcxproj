@@ -156,12 +156,10 @@
     <ClInclude Include="..\lib\runtime\ConnectWaitLayer.h" />
     <ClInclude Include="..\lib\runtime\ConsoleCommand.h" />
     <ClInclude Include="..\lib\runtime\FileServer.h" />
-    <ClInclude Include="..\lib\runtime\lua_debugger.h" />
     <ClInclude Include="..\lib\runtime\Protos.pb.h" />
     <ClInclude Include="..\lib\runtime\ResData.h" />
     <ClInclude Include="..\lib\runtime\Runtime.h" />
     <ClInclude Include="..\lib\runtime\RuntimeCCSImpl.h" />
-    <ClInclude Include="..\lib\runtime\RuntimeLuaImpl.h" />
     <ClInclude Include="..\lib\runtime\RuntimeProtocol.h" />
     <ClInclude Include="..\lib\runtime\VisibleRect.h" />
     <ClInclude Include="stdafx.h" />
@@ -204,14 +202,12 @@
     <ClCompile Include="..\lib\runtime\ConsoleCommand.cpp" />
     <ClCompile Include="..\lib\runtime\FileServer.cpp" />
     <ClCompile Include="..\lib\runtime\Landscape_png.cpp" />
-    <ClCompile Include="..\lib\runtime\lua_debugger.c" />
     <ClCompile Include="..\lib\runtime\PlayDisable_png.cpp" />
     <ClCompile Include="..\lib\runtime\PlayEnable_png.cpp" />
     <ClCompile Include="..\lib\runtime\Portrait_png.cpp" />
     <ClCompile Include="..\lib\runtime\Protos.pb.cc" />
     <ClCompile Include="..\lib\runtime\Runtime.cpp" />
     <ClCompile Include="..\lib\runtime\RuntimeCCSImpl.cpp" />
-    <ClCompile Include="..\lib\runtime\RuntimeLuaImpl.cpp" />
     <ClCompile Include="..\lib\runtime\RuntimeProtocol.cpp" />
     <ClCompile Include="..\lib\runtime\Shine_png.cpp" />
     <ClCompile Include="..\lib\runtime\VisibleRect.cpp" />
