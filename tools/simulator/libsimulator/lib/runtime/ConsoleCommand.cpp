@@ -135,7 +135,8 @@ void ConsoleCommand::onSendCommand(int fd, const std::string &args)
             {
                 rapidjson::Value bodyvalue(rapidjson::kObjectType);
                 rapidjson::Value IPValue(rapidjson::kStringType);
-                IPValue.SetString(getIPAddress().c_str(), dReplyParse.GetAllocator());
+                int runtimeType = RuntimeEngine::getInstance()->getRunTimeType();
+                IPValue.SetString(getIPAddress(runtimeType).c_str(), dReplyParse.GetAllocator());
                 bodyvalue.AddMember("IP", IPValue,dReplyParse.GetAllocator());
                 dReplyParse.AddMember("body", bodyvalue,dReplyParse.GetAllocator());
                 dReplyParse.AddMember("code", 0, dReplyParse.GetAllocator());
