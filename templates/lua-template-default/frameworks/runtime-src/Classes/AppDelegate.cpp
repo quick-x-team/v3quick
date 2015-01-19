@@ -10,6 +10,7 @@
 
 #if (COCOS2D_DEBUG > 0) && (CC_CODE_IDE_DEBUG_SUPPORT > 0)
 #include "runtime/Runtime.h"
+#include "ide-support/RuntimeLuaImpl.h"
 #endif
 
 
@@ -66,6 +67,7 @@ bool AppDelegate::applicationDidFinishLaunching()
     
 #if (COCOS2D_DEBUG > 0) && (CC_CODE_IDE_DEBUG_SUPPORT > 0)
     // NOTE:Please don't remove this call if you want to debug with Cocos Code IDE
+    RuntimeEngine::getInstance()->addRuntime(RuntimeLuaImpl::create(), kRuntimeEngineLua);
     RuntimeEngine::getInstance()->start();
     cocos2d::log("iShow!");
 #else

@@ -1049,7 +1049,6 @@
 		1A604F2B18BF1D2000CC9A93 /* libjscocos2d Mac.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			name = "libjscocos2d Mac.a";
 			path = "libjscocos2d Mac.a";
 			remoteRef = 1A604F2A18BF1D2000CC9A93 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -1057,7 +1056,6 @@
 		1A604F2D18BF1D2000CC9A93 /* libjscocos2d iOS.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			name = "libjscocos2d iOS.a";
 			path = "libjscocos2d iOS.a";
 			remoteRef = 1A604F2C18BF1D2000CC9A93 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
