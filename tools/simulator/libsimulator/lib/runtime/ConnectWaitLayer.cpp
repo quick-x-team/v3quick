@@ -78,7 +78,27 @@ ConnectWaitLayer::ConnectWaitLayer()
     shineSprite->runAction(RepeatForever::create(Sequence::create(arrayOfActions)));
     addChild(shineSprite, 9998);
 
-    std::string strip = getIPAddress();
+    std::string strip;
+    int runtimeType = RuntimeEngine::getInstance()->getRunTimeType();
+    switch (runtimeType) {
+        case 1: {
+            strip = getIPAddress(runtimeType);
+            break;
+        }
+        case 2: {
+            strip = getIPAddress(runtimeType);
+            break;
+        }
+        case 3: {
+            strip = getIPAddress(runtimeType);
+            break;
+        }
+        default: {
+            strip = "0.0.0.0";
+            break;
+        }
+    }
+
     char szIPAddress[64] = {0};
     sprintf(szIPAddress, "IP: %s", strip.c_str());
     auto IPlabel = Label::createWithSystemFont(szIPAddress, "", 72);
