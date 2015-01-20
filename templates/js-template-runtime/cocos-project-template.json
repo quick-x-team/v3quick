@@ -128,6 +128,10 @@
                "to":"runtime/win32/project.json"
             },
             {
+               "from":"templates/js-template-runtime/config.json",
+               "to":"runtime/win32/config.json"
+            },
+            {
                "from":"templates/js-template-runtime/main.js",
                "to":"runtime/win32/main.js"
             }
