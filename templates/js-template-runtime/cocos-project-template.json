@@ -31,6 +31,16 @@
                "exclude":[]
             },
             {
+               "from":"templates/js-template-runtime/src",
+               "to":"runtime/win32/src",
+               "exclude":[]
+            },
+            {
+               "from":"templates/js-template-runtime/res",
+               "to":"runtime/win32/res",
+               "exclude":[]
+            },
+            {
                "from":"external/win32-specific/gles/prebuilt",
                "to":"runtime/win32",
                "include": [
@@ -112,6 +122,18 @@
             {
                "from":"templates/js-template-runtime/project.json",
                "to":"runtime/ios/PrebuiltRuntimeJs.app/project.json"
+            },
+            {
+               "from":"templates/js-template-runtime/project.json",
+               "to":"runtime/win32/project.json"
+            },
+            {
+               "from":"templates/js-template-runtime/config.json",
+               "to":"runtime/win32/config.json"
+            },
+            {
+               "from":"templates/js-template-runtime/main.js",
+               "to":"runtime/win32/main.js"
             }
          ]
       },
