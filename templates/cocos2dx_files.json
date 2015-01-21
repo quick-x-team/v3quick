@@ -4787,8 +4787,6 @@
         "tools/simulator/libsimulator/lib/platform/win32/PlayerTaskServiceWin.h", 
         "tools/simulator/libsimulator/lib/platform/win32/PlayerWin.cpp", 
         "tools/simulator/libsimulator/lib/platform/win32/PlayerWin.h", 
-        "tools/simulator/libsimulator/lib/platform/win32/SimulatorWin.cpp", 
-        "tools/simulator/libsimulator/lib/platform/win32/SimulatorWin.h", 
         "tools/simulator/libsimulator/lib/protobuf-lite/config.h", 
         "tools/simulator/libsimulator/lib/protobuf-lite/google/protobuf/extension_set.cc", 
         "tools/simulator/libsimulator/lib/protobuf-lite/google/protobuf/extension_set.h", 
