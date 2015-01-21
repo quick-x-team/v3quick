@@ -1,5 +1,5 @@
 /****************************************************************************
- Copyright (c) 2013-2014 Chukong Technologies Inc.
+ Copyright (c) 2013-2015 Chukong Technologies Inc.
  
  http://www.cocos2d-x.org
  
@@ -21,41 +21,27 @@
  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  THE SOFTWARE.
  ****************************************************************************/
-#ifndef __LUA_WEB_SOCKET_H__
-#define __LUA_WEB_SOCKET_H__
+#ifndef __COCOS_SCRIPTING_LUA_BINDING_MANUAL_COCOSTUDIO_LUA_STUDIO_CONVERSIONS_H__
+#define __COCOS_SCRIPTING_LUA_BINDING_MANUAL_COCOSTUDIO_LUA_STUDIO_CONVERSIONS_H__
 
-#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS || CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID || CC_TARGET_PLATFORM == CC_PLATFORM_WIN32 || CC_TARGET_PLATFORM == CC_PLATFORM_MAC)
-
-#ifdef __cplusplus
 extern "C" {
-#endif
+#include "lua.h"
 #include "tolua++.h"
-#ifdef __cplusplus
 }
-#endif
 
-#include "network/WebSocket.h"
-class LuaWebSocket: public cocos2d::network::WebSocket,public cocos2d::network::WebSocket::Delegate
+#include "tolua_fix.h"
+
+namespace cocostudio
 {
-public:
-    virtual ~LuaWebSocket();
-    virtual void onOpen(WebSocket* ws) override;
-    virtual void onMessage(WebSocket* ws, const WebSocket::Data& data) override;
-    virtual void onClose(WebSocket* ws) override;
-    virtual void onError(WebSocket* ws, const WebSocket::ErrorCode& error) override;
-    
-    enum WebSocketScriptHandlerType
+    namespace timeline
     {
-        kWebSocketScriptHandlerOpen,
-        kWebSocketScriptHandlerMessage,
-        kWebSocketScriptHandlerClose,
-        kWebSocketScriptHandlerError,
-    };
-};
+        struct AnimationInfo;
+    }
+}
 
-TOLUA_API int tolua_web_socket_open(lua_State* tolua_S);
-TOLUA_API int register_web_socket_manual(lua_State* tolua_S);
+extern bool luaval_to_animationInfo(lua_State* L, int lo, cocostudio::timeline::AnimationInfo* outValue , const char* funcName = "");
 
-#endif //(CC_TARGET_PLATFORM == CC_PLATFORM_IOS ...
+extern void animationInfo_to_luaval(lua_State* L,const cocostudio::timeline::AnimationInfo& inValue);
 
-#endif //__LUA_WEB_SOCKET_H__
+
+#endif //__COCOS_SCRIPTING_LUA_BINDING_MANUAL_COCOSTUDIO_LUA_STUDIO_CONVERSIONS_H__

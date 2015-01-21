@@ -24,11 +24,11 @@ THE SOFTWARE.
 
 #include "ui/UIButton.h"
 #include "ui/UIScale9Sprite.h"
-#include "ui/UIHelper.h"
 #include "2d/CCLabel.h"
 #include "2d/CCSprite.h"
 #include "2d/CCActionInterval.h"
 #include "platform/CCFileUtils.h"
+#include "ui/UIHelper.h"
 
 NS_CC_BEGIN
 
@@ -187,6 +187,10 @@ void Button::setScale9Enabled(bool able)
     
     _brightStyle = BrightStyle::NONE;
     setBright(_bright);
+
+    _normalTextureAdaptDirty = true;
+    _pressedTextureAdaptDirty = true;
+    _disabledTextureAdaptDirty = true;
 }
 
 bool Button::isScale9Enabled()const
@@ -842,7 +846,6 @@ Size Button::getNormalSize() const
     {
         titleSize = _titleRenderer->getContentSize();
     }
-    
     Size imageSize;
     if (_buttonNormalRenderer != nullptr)
     {
@@ -854,6 +857,10 @@ Size Button::getNormalSize() const
     return Size(width,height);
 }
 
+Size Button::getNormalTextureSize() const
+{
+    return _normalTextureSize;
+}
 }
 
 NS_CC_END
