@@ -4908,6 +4908,8 @@
         "cocos/scripting/js-bindings/manual/cocosbuilder/cocosbuilder_specifics.hpp", 
         "cocos/scripting/js-bindings/manual/cocosbuilder/js_bindings_ccbreader.cpp", 
         "cocos/scripting/js-bindings/manual/cocosbuilder/js_bindings_ccbreader.h", 
+        "cocos/scripting/js-bindings/manual/cocostudio/jsb_cocos2dx_studio_conversions.cpp", 
+        "cocos/scripting/js-bindings/manual/cocostudio/jsb_cocos2dx_studio_conversions.h", 
         "cocos/scripting/js-bindings/manual/cocostudio/jsb_cocos2dx_studio_manual.cpp", 
         "cocos/scripting/js-bindings/manual/cocostudio/jsb_cocos2dx_studio_manual.h", 
         "cocos/scripting/js-bindings/manual/extension/jsb_cocos2dx_extension_manual.cpp", 
