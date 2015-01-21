@@ -147,7 +147,6 @@ xcopy /Y /Q "$(ProjectDir)..\Classes\ide-support\lang" "$(ProjectDir)..\..\..\ru
       <AdditionalLibraryDirectories>$(OutDir);%(AdditionalLibraryDirectories);$(_COCOS_LIB_PATH_WIN32_BEGIN);$(_COCOS_LIB_PATH_WIN32_END)</AdditionalLibraryDirectories>
       <AdditionalDependencies>libcurl_imp.lib;lua51.lib;websockets.lib;%(AdditionalDependencies);$(_COCOS_LIB_WIN32_BEGIN);$(_COCOS_LIB_WIN32_END)</AdditionalDependencies>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <OutputFile>$(ProjectDir)../../../runtime/win32/$(TargetName)$(TargetExt)</OutputFile>
       <IgnoreSpecificDefaultLibraries>LIBCMT.lib;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
     </Link>
     <ResourceCompile>
@@ -168,17 +167,20 @@ xcopy /Y /Q "$(ProjectDir)..\Classes\ide-support\lang" "$(ProjectDir)..\..\..\ru
       </DllDataFileName>
     </Midl>
     <PreBuildEvent>
-      <Command>if not exist "$(LocalDebuggerWorkingDirectory)" mkdir "$(LocalDebuggerWorkingDirectory)"</Command>
+      <Command>if exist "$(LocalDebuggerWorkingDirectory)" rd /s /q "$(LocalDebuggerWorkingDirectory)"
+mkdir "$(LocalDebuggerWorkingDirectory)"
+mkdir "$(LocalDebuggerWorkingDirectory)\src"
+mkdir "$(LocalDebuggerWorkingDirectory)\res"
+xcopy "$(ProjectDir)..\..\..\src" "$(LocalDebuggerWorkingDirectory)\src" /e /Y
+xcopy "$(ProjectDir)..\..\..\res" "$(LocalDebuggerWorkingDirectory)\res" /e /Y
+copy "$(ProjectDir)..\..\..\config.json" "$(LocalDebuggerWorkingDirectory)\config.json" /Y
+</Command>
       <Message>copy files</Message>
     </PreBuildEvent>
     <PreLinkEvent>
       <Command>
       </Command>
     </PreLinkEvent>
-    <PostBuildEvent>
-      <Command>xcopy /Y /Q "$(OutDir)*.dll" "$(ProjectDir)..\..\..\runtime\win32\"
-xcopy /Y /Q "$(ProjectDir)..\Classes\ide-support\lang" "$(ProjectDir)..\..\..\runtime\win32\"</Command>
-    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="..\Classes\AppDelegate.h" />
