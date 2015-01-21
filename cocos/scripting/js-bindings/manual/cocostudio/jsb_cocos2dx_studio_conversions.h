@@ -1,5 +1,6 @@
 /*
- * Copyright (c) 2014 Chukong Technologies Inc.
+ * Created by Huabin LING on 21/1/15.
+ * Copyright (c) 2015 Chukong Technologies Inc.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -20,16 +21,21 @@
  * THE SOFTWARE.
  */
 
-#ifndef __cocos2d_js_bindings__jsb_event_dispatcher__
-#define __cocos2d_js_bindings__jsb_event_dispatcher__
+#ifndef __cocos2d_js_bindings__jsb_cocos2dx_studio_conversions__
+#define __cocos2d_js_bindings__jsb_cocos2dx_studio_conversions__
 
-#include "jsapi.h"
-#include "jsfriendapi.h"
+#include "js/Value.h"
+#include "js/TypeDecls.h"
 
-bool js_EventListenerTouchOneByOne_create(JSContext *cx, uint32_t argc, jsval *vp);
-bool js_EventListenerTouchAllAtOnce_create(JSContext *cx, uint32_t argc, jsval *vp);
-bool js_EventListenerKeyboard_create(JSContext *cx, uint32_t argc, jsval *vp);
-bool js_EventListenerMouse_create(JSContext *cx, uint32_t argc, jsval *vp);
-bool js_EventListenerFocus_create(JSContext *cx, uint32_t argc, jsval *vp);
+namespace cocostudio
+{
+    namespace timeline
+    {
+        struct AnimationInfo;
+    }
+}
 
-#endif /* defined(__cocos2d_js_bindings__jsb_event_dispatcher__) */
+extern jsval animationInfo_to_jsval(JSContext* cx, const cocostudio::timeline::AnimationInfo& v);
+extern bool jsval_to_animationInfo(JSContext* cx, jsval vp, cocostudio::timeline::AnimationInfo* ret);
+
+#endif /* defined(__cocos2d_js_bindings__jsb_cocos2dx_studio_conversions__) */
