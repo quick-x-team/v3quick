@@ -59,7 +59,8 @@ LOCAL_SRC_FILES := ../auto/jsb_cocos2dx_auto.cpp \
                    ../manual/network/jsb_websocket.cpp \
                    ../manual/network/XMLHTTPRequest.cpp \
                    ../manual/spine/jsb_cocos2dx_spine_manual.cpp \
-                   ../manual/ui/jsb_cocos2dx_ui_manual.cpp
+                   ../manual/ui/jsb_cocos2dx_ui_manual.cpp \
+                   ../manual/cocostudio/jsb_cocos2dx_studio_conversions.cpp
                    
 
 LOCAL_CFLAGS := -DCOCOS2D_JAVASCRIPT
@@ -67,6 +68,7 @@ LOCAL_CFLAGS := -DCOCOS2D_JAVASCRIPT
 LOCAL_EXPORT_CFLAGS := -DCOCOS2D_JAVASCRIPT
 
 LOCAL_C_INCLUDES := $(LOCAL_PATH)/../manual \
+                    $(LOCAL_PATH)/../manual/cocostudio \
                     $(LOCAL_PATH)/../auto \
                     $(LOCAL_PATH)/../../../2d \
                     $(LOCAL_PATH)/../../../base \

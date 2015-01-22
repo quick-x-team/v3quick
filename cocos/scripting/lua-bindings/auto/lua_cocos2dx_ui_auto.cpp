@@ -9586,6 +9586,53 @@ int lua_cocos2dx_ui_Text_getStringLength(lua_State* tolua_S)
 
     return 0;
 }
+int lua_cocos2dx_ui_Text_getAutoRenderSize(lua_State* tolua_S)
+{
+    int argc = 0;
+    cocos2d::ui::Text* cobj = nullptr;
+    bool ok  = true;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_Error tolua_err;
+#endif
+
+
+#if COCOS2D_DEBUG >= 1
+    if (!tolua_isusertype(tolua_S,1,"ccui.Text",0,&tolua_err)) goto tolua_lerror;
+#endif
+
+    cobj = (cocos2d::ui::Text*)tolua_tousertype(tolua_S,1,0);
+
+#if COCOS2D_DEBUG >= 1
+    if (!cobj) 
+    {
+        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_cocos2dx_ui_Text_getAutoRenderSize'", nullptr);
+        return 0;
+    }
+#endif
+
+    argc = lua_gettop(tolua_S)-1;
+    if (argc == 0) 
+    {
+        if(!ok)
+        {
+            tolua_error(tolua_S,"invalid arguments in function 'lua_cocos2dx_ui_Text_getAutoRenderSize'", nullptr);
+            return 0;
+        }
+        cocos2d::Size ret = cobj->getAutoRenderSize();
+        size_to_luaval(tolua_S, ret);
+        return 1;
+    }
+    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "ccui.Text:getAutoRenderSize",argc, 0);
+    return 0;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_lerror:
+    tolua_error(tolua_S,"#ferror in function 'lua_cocos2dx_ui_Text_getAutoRenderSize'.",&tolua_err);
+#endif
+
+    return 0;
+}
 int lua_cocos2dx_ui_Text_enableOutline(lua_State* tolua_S)
 {
     int argc = 0;
@@ -10189,6 +10236,7 @@ int lua_register_cocos2dx_ui_Text(lua_State* tolua_S)
         tolua_function(tolua_S,"getFontName",lua_cocos2dx_ui_Text_getFontName);
         tolua_function(tolua_S,"setTextAreaSize",lua_cocos2dx_ui_Text_setTextAreaSize);
         tolua_function(tolua_S,"getStringLength",lua_cocos2dx_ui_Text_getStringLength);
+        tolua_function(tolua_S,"getAutoRenderSize",lua_cocos2dx_ui_Text_getAutoRenderSize);
         tolua_function(tolua_S,"enableOutline",lua_cocos2dx_ui_Text_enableOutline);
         tolua_function(tolua_S,"getType",lua_cocos2dx_ui_Text_getType);
         tolua_function(tolua_S,"getTextHorizontalAlignment",lua_cocos2dx_ui_Text_getTextHorizontalAlignment);
@@ -16243,6 +16291,53 @@ int lua_cocos2dx_ui_TextField_getStringLength(lua_State* tolua_S)
 
     return 0;
 }
+int lua_cocos2dx_ui_TextField_getAutoRenderSize(lua_State* tolua_S)
+{
+    int argc = 0;
+    cocos2d::ui::TextField* cobj = nullptr;
+    bool ok  = true;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_Error tolua_err;
+#endif
+
+
+#if COCOS2D_DEBUG >= 1
+    if (!tolua_isusertype(tolua_S,1,"ccui.TextField",0,&tolua_err)) goto tolua_lerror;
+#endif
+
+    cobj = (cocos2d::ui::TextField*)tolua_tousertype(tolua_S,1,0);
+
+#if COCOS2D_DEBUG >= 1
+    if (!cobj) 
+    {
+        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_cocos2dx_ui_TextField_getAutoRenderSize'", nullptr);
+        return 0;
+    }
+#endif
+
+    argc = lua_gettop(tolua_S)-1;
+    if (argc == 0) 
+    {
+        if(!ok)
+        {
+            tolua_error(tolua_S,"invalid arguments in function 'lua_cocos2dx_ui_TextField_getAutoRenderSize'", nullptr);
+            return 0;
+        }
+        cocos2d::Size ret = cobj->getAutoRenderSize();
+        size_to_luaval(tolua_S, ret);
+        return 1;
+    }
+    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "ccui.TextField:getAutoRenderSize",argc, 0);
+    return 0;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_lerror:
+    tolua_error(tolua_S,"#ferror in function 'lua_cocos2dx_ui_TextField_getAutoRenderSize'.",&tolua_err);
+#endif
+
+    return 0;
+}
 int lua_cocos2dx_ui_TextField_setPasswordEnabled(lua_State* tolua_S)
 {
     int argc = 0;
@@ -17334,6 +17429,7 @@ int lua_register_cocos2dx_ui_TextField(lua_State* tolua_S)
         tolua_function(tolua_S,"setTextAreaSize",lua_cocos2dx_ui_TextField_setTextAreaSize);
         tolua_function(tolua_S,"attachWithIME",lua_cocos2dx_ui_TextField_attachWithIME);
         tolua_function(tolua_S,"getStringLength",lua_cocos2dx_ui_TextField_getStringLength);
+        tolua_function(tolua_S,"getAutoRenderSize",lua_cocos2dx_ui_TextField_getAutoRenderSize);
         tolua_function(tolua_S,"setPasswordEnabled",lua_cocos2dx_ui_TextField_setPasswordEnabled);
         tolua_function(tolua_S,"getPlaceHolderColor",lua_cocos2dx_ui_TextField_getPlaceHolderColor);
         tolua_function(tolua_S,"getPasswordStyleText",lua_cocos2dx_ui_TextField_getPasswordStyleText);
@@ -25260,6 +25356,56 @@ int lua_cocos2dx_ui_LayoutComponent_setPercentHeight(lua_State* tolua_S)
 
     return 0;
 }
+int lua_cocos2dx_ui_LayoutComponent_setPercentOnlyEnabled(lua_State* tolua_S)
+{
+    int argc = 0;
+    cocos2d::ui::LayoutComponent* cobj = nullptr;
+    bool ok  = true;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_Error tolua_err;
+#endif
+
+
+#if COCOS2D_DEBUG >= 1
+    if (!tolua_isusertype(tolua_S,1,"ccui.LayoutComponent",0,&tolua_err)) goto tolua_lerror;
+#endif
+
+    cobj = (cocos2d::ui::LayoutComponent*)tolua_tousertype(tolua_S,1,0);
+
+#if COCOS2D_DEBUG >= 1
+    if (!cobj) 
+    {
+        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_cocos2dx_ui_LayoutComponent_setPercentOnlyEnabled'", nullptr);
+        return 0;
+    }
+#endif
+
+    argc = lua_gettop(tolua_S)-1;
+    if (argc == 1) 
+    {
+        bool arg0;
+
+        ok &= luaval_to_boolean(tolua_S, 2,&arg0, "ccui.LayoutComponent:setPercentOnlyEnabled");
+        if(!ok)
+        {
+            tolua_error(tolua_S,"invalid arguments in function 'lua_cocos2dx_ui_LayoutComponent_setPercentOnlyEnabled'", nullptr);
+            return 0;
+        }
+        cobj->setPercentOnlyEnabled(arg0);
+        lua_settop(tolua_S, 1);
+        return 1;
+    }
+    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "ccui.LayoutComponent:setPercentOnlyEnabled",argc, 1);
+    return 0;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_lerror:
+    tolua_error(tolua_S,"#ferror in function 'lua_cocos2dx_ui_LayoutComponent_setPercentOnlyEnabled'.",&tolua_err);
+#endif
+
+    return 0;
+}
 int lua_cocos2dx_ui_LayoutComponent_setHorizontalEdge(lua_State* tolua_S)
 {
     int argc = 0;
@@ -26188,6 +26334,7 @@ int lua_register_cocos2dx_ui_LayoutComponent(lua_State* tolua_S)
         tolua_function(tolua_S,"setRightMargin",lua_cocos2dx_ui_LayoutComponent_setRightMargin);
         tolua_function(tolua_S,"isPositionPercentYEnabled",lua_cocos2dx_ui_LayoutComponent_isPositionPercentYEnabled);
         tolua_function(tolua_S,"setPercentHeight",lua_cocos2dx_ui_LayoutComponent_setPercentHeight);
+        tolua_function(tolua_S,"setPercentOnlyEnabled",lua_cocos2dx_ui_LayoutComponent_setPercentOnlyEnabled);
         tolua_function(tolua_S,"setHorizontalEdge",lua_cocos2dx_ui_LayoutComponent_setHorizontalEdge);
         tolua_function(tolua_S,"setPosition",lua_cocos2dx_ui_LayoutComponent_setPosition);
         tolua_function(tolua_S,"setUsingPercentContentSize",lua_cocos2dx_ui_LayoutComponent_setUsingPercentContentSize);

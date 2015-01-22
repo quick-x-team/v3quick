@@ -1,7 +1,6 @@
 /*
- * Copyright (c) 2013-2015 Chukong Technologies Inc.
- *
- * http://www.cocos2d-x.org
+ * Created by Huabin LING on 21/1/15.
+ * Copyright (c) 2015 Chukong Technologies Inc.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -22,22 +21,21 @@
  * THE SOFTWARE.
  */
 
-const char* ccPositionColorPointsize_vert = STRINGIFY(
+#ifndef __cocos2d_js_bindings__jsb_cocos2dx_studio_conversions__
+#define __cocos2d_js_bindings__jsb_cocos2dx_studio_conversions__
 
-attribute vec4 a_position;
-attribute vec4 a_color;
-attribute float a_pointSize;
+#include "js/Value.h"
+#include "js/TypeDecls.h"
 
-\n#ifdef GL_ES\n
-varying lowp vec4 v_fragmentColor;
-\n#else\n
-varying vec4 v_fragmentColor;
-\n#endif\n
-
-void main()
+namespace cocostudio
 {
-    gl_Position = CC_MVPMatrix * a_position;
-    gl_PointSize = a_pointSize;
-    v_fragmentColor = a_color;
+    namespace timeline
+    {
+        struct AnimationInfo;
+    }
 }
-);
+
+extern jsval animationInfo_to_jsval(JSContext* cx, const cocostudio::timeline::AnimationInfo& v);
+extern bool jsval_to_animationInfo(JSContext* cx, jsval vp, cocostudio::timeline::AnimationInfo* ret);
+
+#endif /* defined(__cocos2d_js_bindings__jsb_cocos2dx_studio_conversions__) */
