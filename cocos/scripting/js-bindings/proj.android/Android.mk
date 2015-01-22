@@ -6,6 +6,8 @@ LOCAL_MODULE := cocos2d_js_android_static
 
 LOCAL_MODULE_FILENAME := libjscocos2dandroid
 
+LOCAL_ARM_MODE := arm
+
 LOCAL_SRC_FILES := ../manual/platform/android/CCJavascriptJavaBridge.cpp
 
 LOCAL_C_INCLUDES := $(LOCAL_PATH)/../../.. \
