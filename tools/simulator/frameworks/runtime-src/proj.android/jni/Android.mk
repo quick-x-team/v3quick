@@ -6,8 +6,6 @@ LOCAL_MODULE := cocos2dlua_shared
 
 LOCAL_MODULE_FILENAME := libcocos2dlua
 
-LOCAL_ARM_MODE := arm
-
 FILE_LIST := hellolua/main.cpp
 FILE_LIST += $(wildcard $(LOCAL_PATH)/../../Classes/*.cpp)
 FILE_LIST += $(wildcard $(LOCAL_PATH)/../../Classes/ide-support/*.cpp)
