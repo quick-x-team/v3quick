@@ -607,7 +607,7 @@
 			files = (
 				C03781BA18BF655400FE4F13 /* res in Resources */,
 				C03781BC18BF655400FE4F13 /* src in Resources */,
-				9FF504841A5E87B100AFDA55 /* ConsoleWindow.xib in Resources */,
+				87EB60251A7271B60085F57C /* ConsoleWindow.xib in Resources */,
 				9FC760431A67791200D1E6E7 /* lang in Resources */,
 				5023817617EBBE3400990C9B /* Icon.icns in Resources */,
 				9FFC07361A4A764100AED399 /* MainMenu.xib in Resources */,
