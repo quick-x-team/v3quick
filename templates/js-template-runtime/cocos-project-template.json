@@ -120,6 +120,10 @@
          ],
          "append_file":[
             {
+               "from":"tools/simulator/frameworks/runtime-src/Classes/ide-support/lang",
+               "to":"runtime/win32/lang"
+            },
+            {
                "from":"templates/js-template-runtime/project.json",
                "to":"runtime/ios/PrebuiltRuntimeJs.app/project.json"
             },
