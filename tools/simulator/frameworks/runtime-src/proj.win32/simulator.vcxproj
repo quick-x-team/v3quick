@@ -19,19 +19,15 @@
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <CharacterSet>Unicode</CharacterSet>
-    <PlatformToolset Condition="'$(VisualStudioVersion)' == '10.0'">v100</PlatformToolset>
     <PlatformToolset Condition="'$(VisualStudioVersion)' == '11.0'">v110</PlatformToolset>
-    <PlatformToolset Condition="'$(VisualStudioVersion)' == '11.0' and exists('$(MSBuildProgramFiles32)\Microsoft SDKs\Windows\v7.1A')">v110_xp</PlatformToolset>
-    <PlatformToolset Condition="'$(VisualStudioVersion)' == '12.0' and exists('$(MSBuildProgramFiles32)\Microsoft SDKs\Windows\v7.1A')">v120_xp</PlatformToolset>
+    <PlatformToolset Condition="'$(VisualStudioVersion)' == '12.0'">v120</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <CharacterSet>Unicode</CharacterSet>
-    <PlatformToolset Condition="'$(VisualStudioVersion)' == '10.0'">v100</PlatformToolset>
     <PlatformToolset Condition="'$(VisualStudioVersion)' == '11.0'">v110</PlatformToolset>
-    <PlatformToolset Condition="'$(VisualStudioVersion)' == '11.0' and exists('$(MSBuildProgramFiles32)\Microsoft SDKs\Windows\v7.1A')">v110_xp</PlatformToolset>
-    <PlatformToolset Condition="'$(VisualStudioVersion)' == '12.0' and exists('$(MSBuildProgramFiles32)\Microsoft SDKs\Windows\v7.1A')">v120_xp</PlatformToolset>
+    <PlatformToolset Condition="'$(VisualStudioVersion)' == '12.0'">v120</PlatformToolset>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
@@ -73,7 +69,7 @@
       <WarningLevel>Level3</WarningLevel>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <MinimalRebuild>false</MinimalRebuild>
-      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_WINDOWS;STRICT;_CRT_SECURE_NO_WARNINGS;_SCL_SECURE_NO_WARNINGS_DEBUG;COCOS2D_DEBUG=1;GLFW_EXPOSE_NATIVE_WIN32;GLFW_EXPOSE_NATIVE_WGL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -110,43 +106,50 @@
       </DllDataFileName>
     </Midl>
     <PreBuildEvent>
-      <Command>if not exist "$(LocalDebuggerWorkingDirectory)" mkdir "$(LocalDebuggerWorkingDirectory)"</Command>
-      <Message>copy files</Message>
+      <Command>
+      </Command>
+      <Message>
+      </Message>
     </PreBuildEvent>
     <PreLinkEvent>
       <Command>
       </Command>
     </PreLinkEvent>
     <PostBuildEvent>
-      <Command>xcopy /Y /Q "$(OutDir)*.dll" "$(ProjectDir)..\..\..\runtime\win32\"
+      <Command>if not exist "$(ProjectDir)..\..\..\runtime" mkdir "$(ProjectDir)..\..\..\runtime"
 
-xcopy /Y /Q "$(ProjectDir)..\Classes\ide-support\lang" "$(ProjectDir)..\..\..\runtime\win32\"
-xcopy /Y /Q "$(EngineRoot)external\spidermonkey\prebuilt\win32\*.dll" "$(ProjectDir)..\..\..\runtime\win32\"</Command>
+if not exist "$(ProjectDir)..\..\..\runtime\win32" mkdir "$(ProjectDir)..\..\..\runtime\win32"
+
+xcopy /Y /Q "$(OutDir)*.dll" "$(ProjectDir)..\..\..\runtime\win32"
+xcopy /Y /Q "$(OutDir)*.exe" "$(ProjectDir)..\..\..\runtime\win32"
+xcopy /Y /Q "$(OutDir)lang" "$(ProjectDir)..\..\..\runtime\win32"
+</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
-      <AdditionalIncludeDirectories>$(ProjectDir)..\Classes;$(ProjectDir)..\Classes\runtime;$(ProjectDir)..\Classes\protobuf-lite;$(EngineRoot)external\win32-specific\zlib\include;$(EngineRoot)cocos\scripting\lua-bindings\auto;$(EngineRoot)cocos\scripting\lua-bindings\manual;$(EngineRoot)cocos\audio\include;$(EngineRoot)external;$(EngineRoot)external\lua\lua;$(EngineRoot)external\lua\tolua;$(EngineRoot)external\chipmunk\include\chipmunk;$(EngineRoot)extensions;$(EngineRoot)external\curl\include\win32;$(EngineRoot)tools\simulator\libsimulator\lib;$(EngineRoot);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\Classes;$(ProjectDir)..\Classes\runtime;$(EngineRoot)cocos\base;$(EngineRoot)tools\simulator\libsimulator\lib\protobuf-lite;$(EngineRoot)external\win32-specific\zlib\include;$(EngineRoot)cocos\scripting\lua-bindings\auto;$(EngineRoot)cocos\scripting\lua-bindings\manual;$(EngineRoot)cocos\scripting\js-bindings\auto;$(EngineRoot)cocos\scripting\js-bindings\manual;$(EngineRoot)cocos\audio\include;$(EngineRoot)external;$(EngineRoot)external\lua\lua;$(EngineRoot)external\lua\tolua;$(EngineRoot)external\chipmunk\include\chipmunk;$(EngineRoot)extensions;$(EngineRoot)external\curl\include\win32;$(EngineRoot)external\spidermonkey\include\win32;$(EngineRoot)tools\simulator\libsimulator\lib;$(EngineRoot);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <ExceptionHandling>Sync</ExceptionHandling>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
-      <PreprocessorDefinitions>WIN32;_WINDOWS;STRICT;_CRT_SECURE_NO_WARNINGS;_SCL_SECURE_NO_WARNINGSNDEBUG;GLFW_EXPOSE_NATIVE_WIN32;GLFW_EXPOSE_NATIVE_WGL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>COCOS2D_DEBUG=1;WIN32;_WINDOWS;STRICT;_CRT_SECURE_NO_WARNINGS;_SCL_SECURE_NO_WARNINGSNDEBUG;GLFW_EXPOSE_NATIVE_WIN32;GLFW_EXPOSE_NATIVE_WGL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <DisableSpecificWarnings>4267;4251;4244;%(DisableSpecificWarnings)</DisableSpecificWarnings>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <ProgramDataBaseFileName>$(IntDir)vc$(PlatformToolsetVersion).pdb</ProgramDataBaseFileName>
       <ForcedIncludeFiles>algorithm</ForcedIncludeFiles>
       <CompileAs>CompileAsCpp</CompileAs>
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <MinimalRebuild>true</MinimalRebuild>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <TargetMachine>MachineX86</TargetMachine>
-      <AdditionalLibraryDirectories>$(OutDir);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>libcurl_imp.lib;lua51.lib;websockets.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <GenerateDebugInformation>true</GenerateDebugInformation>
-      <OutputFile>$(ProjectDir)../../../runtime/win32/$(TargetName)$(TargetExt)</OutputFile>
+      <AdditionalLibraryDirectories>$(OutDir);$(EngineRoot)external\spidermonkey\prebuilt\win32;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>libcurl_imp.lib;lua51.lib;websockets.lib;mozjs-28.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <OutputFile>$(OutDir)$(ProjectName).exe</OutputFile>
     </Link>
     <ResourceCompile>
       <Culture>0x0409</Culture>
@@ -166,16 +169,26 @@ xcopy /Y /Q "$(EngineRoot)external\spidermonkey\prebuilt\win32\*.dll" "$(Project
       </DllDataFileName>
     </Midl>
     <PreBuildEvent>
-      <Command>if not exist "$(LocalDebuggerWorkingDirectory)" mkdir "$(LocalDebuggerWorkingDirectory)"</Command>
-      <Message>copy files</Message>
+      <Command>if not exist "$(OutDir)" mkdir "$(OutDir)"
+
+xcopy /Y /Q "$(ProjectDir)..\Classes\ide-support\lang" "$(OutDir)"
+</Command>
+      <Message>
+      </Message>
     </PreBuildEvent>
     <PreLinkEvent>
       <Command>
       </Command>
     </PreLinkEvent>
     <PostBuildEvent>
-      <Command>xcopy /Y /Q "$(OutDir)*.dll" "$(ProjectDir)..\..\..\runtime\win32\"
-xcopy /Y /Q "$(ProjectDir)..\Classes\lang" "$(ProjectDir)..\..\..\runtime\win32\"</Command>
+      <Command>if not exist "$(ProjectDir)..\..\..\runtime" mkdir "$(ProjectDir)..\..\..\runtime"
+
+if not exist "$(ProjectDir)..\..\..\runtime\win32" mkdir "$(ProjectDir)..\..\..\runtime\win32"
+
+xcopy /Y /Q "$(OutDir)*.dll" "$(ProjectDir)..\..\..\runtime\win32"
+xcopy /Y /Q "$(OutDir)*.exe" "$(ProjectDir)..\..\..\runtime\win32"
+xcopy /Y /Q "$(OutDir)lang" "$(ProjectDir)..\..\..\runtime\win32"
+</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
