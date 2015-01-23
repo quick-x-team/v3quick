@@ -26,7 +26,7 @@
 
 // CCConfig.js
 //
-cc.ENGINE_VERSION = "Cocos2d-JS v3.2";
+cc.ENGINE_VERSION = "Cocos2d-JS v3.3 Beta0";
 
 cc.FIX_ARTIFACTS_BY_STRECHING_TEXEL = 0;
 cc.DIRECTOR_STATS_POSITION = {x: 0, y: 0};
@@ -1725,13 +1725,13 @@ cc.EventListenerMouse.prototype.onMouseDown = function(event) {
 cc.EventListenerKeyboard.prototype._onKeyPressed = function(keyCode, event) {
     if (!this.onKeyPressed)
         return;
-    this.onKeyPressed(jsbkeyArr[keyCode], event);
+    this.onKeyPressed(jsbKeyArr[keyCode], event);
 };
 
 cc.EventListenerKeyboard.prototype._onKeyReleased = function(keyCode, event) {
     if (!this.onKeyReleased)
         return;
-    this.onKeyReleased(jsbkeyArr[keyCode], event);
+    this.onKeyReleased(jsbKeyArr[keyCode], event);
 };
 
 cc.EventMouse.prototype.getLocation = function(){
@@ -2665,6 +2665,15 @@ cc.Node.prototype.setUserData = function (data) {
 };
 cc.Node.prototype.getUserData = function () {
     return this.userData;
+};
+
+//for compatibility with html5
+cc.Node.prototype._setNormalizedPosition = cc.Node.prototype.setNormalizedPosition;
+cc.Node.prototype.setNormalizedPosition = function(pos, y){
+    if(y === undefined)
+        cc.Node.prototype._setNormalizedPosition.call(this, pos);
+    else
+        cc.Node.prototype._setNormalizedPosition.call(this, cc.p(pos, y));
 };
 
 /** returns a "world" axis aligned bounding box of the node. <br/>
