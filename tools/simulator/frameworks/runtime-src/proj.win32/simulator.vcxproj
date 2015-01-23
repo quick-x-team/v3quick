@@ -116,8 +116,14 @@
       </Command>
     </PreLinkEvent>
     <PostBuildEvent>
-      <Command>
-      </Command>
+      <Command>if not exist "$(ProjectDir)..\..\..\runtime" mkdir "$(ProjectDir)..\..\..\runtime"
+
+if not exist "$(ProjectDir)..\..\..\runtime\win32" mkdir "$(ProjectDir)..\..\..\runtime\win32"
+
+xcopy /Y /Q "$(OutDir)*.dll" "$(ProjectDir)..\..\..\runtime\win32"
+xcopy /Y /Q "$(OutDir)*.exe" "$(ProjectDir)..\..\..\runtime\win32"
+xcopy /Y /Q "$(OutDir)lang" "$(ProjectDir)..\..\..\runtime\win32"
+</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -163,8 +169,10 @@
       </DllDataFileName>
     </Midl>
     <PreBuildEvent>
-      <Command>
-      </Command>
+      <Command>if not exist "$(OutDir)" mkdir "$(OutDir)"
+
+xcopy /Y /Q "$(ProjectDir)..\Classes\ide-support\lang" "$(OutDir)"
+</Command>
       <Message>
       </Message>
     </PreBuildEvent>
@@ -173,8 +181,14 @@
       </Command>
     </PreLinkEvent>
     <PostBuildEvent>
-      <Command>
-      </Command>
+      <Command>if not exist "$(ProjectDir)..\..\..\runtime" mkdir "$(ProjectDir)..\..\..\runtime"
+
+if not exist "$(ProjectDir)..\..\..\runtime\win32" mkdir "$(ProjectDir)..\..\..\runtime\win32"
+
+xcopy /Y /Q "$(OutDir)*.dll" "$(ProjectDir)..\..\..\runtime\win32"
+xcopy /Y /Q "$(OutDir)*.exe" "$(ProjectDir)..\..\..\runtime\win32"
+xcopy /Y /Q "$(OutDir)lang" "$(ProjectDir)..\..\..\runtime\win32"
+</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
