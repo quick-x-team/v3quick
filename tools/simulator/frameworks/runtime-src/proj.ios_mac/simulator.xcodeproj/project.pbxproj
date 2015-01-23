@@ -873,7 +873,7 @@
 		F293B6C215EB7BEA00256477 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				COPY_PHASE_STRIP = NO;
@@ -896,14 +896,14 @@
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/../../../../../ $(SRCROOT)/../../../../../cocos $(SRCROOT)/../../../../../cocos/base $(SRCROOT)/../../../../../cocos/physics $(SRCROOT)/../../../../../cocos/math/kazmath $(SRCROOT)/../../../../../cocos/2d $(SRCROOT)/../../../../../cocos/ui $(SRCROOT)/../../../../../cocos/network $(SRCROOT)/../../../../../cocos/audio/include $(SRCROOT)/../../../../../cocos/editor-support $(SRCROOT)/../../../../../extensions $(SRCROOT)/../../../../../external $(SRCROOT)/../../../../../external/chipmunk/include/chipmunk $(SRCROOT)/../../../../../external/lua/luajit/include $(SRCROOT)/../../../../../external/lua/tolua $(SRCROOT)/../../../../../cocos/scripting/lua-bindings/manual $(SRCROOT)/../../../../../cocos/scripting/lua-bindings/auto $(SRCROOT)/../../../../../cocos/scripting/js-bindings/auto $(SRCROOT)/../../../../../cocos/scripting/js-bindings/manual $(SRCROOT)/../../../../../external/spidermonkey/include/mac";
-				VALID_ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				VALID_ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 			};
 			name = Debug;
 		};
 		F293B6C315EB7BEA00256477 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				GCC_C_LANGUAGE_STANDARD = c99;
@@ -924,7 +924,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/../../../../../ $(SRCROOT)/../../../../../cocos $(SRCROOT)/../../../../../cocos/base $(SRCROOT)/../../../../../cocos/physics $(SRCROOT)/../../../../../cocos/math/kazmath $(SRCROOT)/../../../../../cocos/2d $(SRCROOT)/../../../../../cocos/ui $(SRCROOT)/../../../../../cocos/network $(SRCROOT)/../../../../../cocos/audio/include $(SRCROOT)/../../../../../cocos/editor-support $(SRCROOT)/../../../../../extensions $(SRCROOT)/../../../../../external $(SRCROOT)/../../../../../external/chipmunk/include/chipmunk $(SRCROOT)/../../../../../external/lua/luajit/include $(SRCROOT)/../../../../../external/lua/tolua $(SRCROOT)/../../../../../cocos/scripting/lua-bindings/manual $(SRCROOT)/../../../../../cocos/scripting/lua-bindings/auto $(SRCROOT)/../../../../../cocos/scripting/js-bindings/auto $(SRCROOT)/../../../../../cocos/scripting/js-bindings/manual $(SRCROOT)/../../../../../external/spidermonkey/include/mac";
 				VALIDATE_PRODUCT = YES;
-				VALID_ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				VALID_ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 			};
 			name = Release;
 		};
@@ -932,6 +932,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
+				ARCHS = "$(ARCHS_STANDARD)";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COMPRESS_PNG_FILES = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -947,13 +948,13 @@
 					"$(SRCROOT)/../../../libsimulator/lib/protobuf-lite",
 				);
 				INFOPLIST_FILE = ios/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1.1;
 				LIBRARY_SEARCH_PATHS = "/Users/jryin/workspace/cocos2d-js/external/spidermonkey/prebuilt/ios";
 				PRODUCT_NAME = Simulator;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "$(inherited) $(SRCROOT)/../../../../../cocos/platform/ios $(SRCROOT)/../../../../../external/curl/include/ios";
-				VALID_ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				VALID_ARCHS = "$(ARCHS_STANDARD)";
 			};
 			name = Debug;
 		};
@@ -961,6 +962,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
+				ARCHS = "$(ARCHS_STANDARD)";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COMPRESS_PNG_FILES = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -975,13 +977,13 @@
 					"$(SRCROOT)/../../../libsimulator/lib/protobuf-lite",
 				);
 				INFOPLIST_FILE = ios/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1.1;
 				LIBRARY_SEARCH_PATHS = "/Users/jryin/workspace/cocos2d-js/external/spidermonkey/prebuilt/ios";
 				PRODUCT_NAME = Simulator;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "$(inherited) $(SRCROOT)/../../../../../cocos/platform/ios $(SRCROOT)/../../../../../external/curl/include/ios";
-				VALID_ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				VALID_ARCHS = "$(ARCHS_STANDARD)";
 			};
 			name = Release;
 		};
