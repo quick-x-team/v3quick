@@ -53,10 +53,10 @@ INT_PTR CALLBACK AboutDialogCallback(HWND hDlg, UINT message, WPARAM wParam, LPA
 }
 void onHelpAbout()
 {
-    DialogBox(GetModuleHandle(NULL), 
-        MAKEINTRESOURCE(IDD_DIALOG_ABOUT), 
-        Director::getInstance()->getOpenGLView()->getWin32Window(), 
-        AboutDialogCallback);
+    DialogBox(GetModuleHandle(NULL),
+              MAKEINTRESOURCE(IDD_DIALOG_ABOUT),
+              Director::getInstance()->getOpenGLView()->getWin32Window(),
+              AboutDialogCallback);
 }
 
 void shutDownApp()
@@ -68,7 +68,7 @@ void shutDownApp()
 
 std::string getCurAppPath(void)
 {
-    TCHAR szAppDir[MAX_PATH] = { 0 };
+    TCHAR szAppDir[MAX_PATH] = {0};
     if (!GetModuleFileName(NULL, szAppDir, MAX_PATH))
         return "";
     int nEnd = 0;
@@ -84,18 +84,18 @@ std::string getCurAppPath(void)
     std::string strPath = chRtn;
     delete[] chRtn;
     chRtn = NULL;
-    char fuldir[MAX_PATH] = { 0 };
+    char fuldir[MAX_PATH] = {0};
     _fullpath(fuldir, strPath.c_str(), MAX_PATH);
     return fuldir;
 }
 
 static void initGLContextAttrs()
 {
-	//set OpenGL context attributions,now can only set six attributions:
-	//red,green,blue,alpha,depth,stencil
-	GLContextAttrs glContextAttrs = { 8, 8, 8, 8, 24, 8 };
+    //set OpenGL context attributions,now can only set six attributions:
+    //red,green,blue,alpha,depth,stencil
+    GLContextAttrs glContextAttrs = {8, 8, 8, 8, 24, 8};
 
-	GLView::setGLContextAttrs(glContextAttrs);
+    GLView::setGLContextAttrs(glContextAttrs);
 }
 
 SimulatorWin *SimulatorWin::_instance = nullptr;
@@ -154,7 +154,7 @@ void SimulatorWin::openNewPlayerWithProjectConfig(const ProjectConfig &config)
     commandLine.append(getApplicationExePath());
     commandLine.append(" ");
     commandLine.append(config.makeCommandLine());
-    
+
     CCLOG("SimulatorWin::openNewPlayerWithProjectConfig(): %s", commandLine.c_str());
 
     // http://msdn.microsoft.com/en-us/library/windows/desktop/ms682499(v=vs.85).aspx
@@ -307,7 +307,7 @@ int SimulatorWin::run()
     }
     CCLOG("SCREEN DPI = %d, SCREEN SCALE = %0.2f", dpi, screenScale);
 
-    // create opengl view
+    // check scale
     Size frameSize = _project.getFrameSize();
     float frameScale = 1.0f;
     if (_project.isRetinaDisplay())
@@ -320,12 +320,41 @@ int SimulatorWin::run()
         frameScale = screenScale;
     }
 
+    // check screen workarea
+    RECT workareaSize;
+    if (SystemParametersInfo(SPI_GETWORKAREA, NULL, &workareaSize, NULL))
+    {
+        float workareaWidth = fabsf(workareaSize.right - workareaSize.left);
+        float workareaHeight = fabsf(workareaSize.bottom - workareaSize.top);
+        float frameBorderCX = GetSystemMetrics(SM_CXSIZEFRAME);
+        float frameBorderCY = GetSystemMetrics(SM_CYSIZEFRAME);
+        workareaWidth -= frameBorderCX * 2;
+        workareaHeight -= (frameBorderCY * 2 + GetSystemMetrics(SM_CYCAPTION) + GetSystemMetrics(SM_CYMENU));
+        CCLOG("WORKAREA WIDTH %0.2f, HEIGHT %0.2f", workareaWidth, workareaHeight);
+        while (true && frameScale > 0.25f)
+        {
+            if (frameSize.width * frameScale > workareaWidth || frameSize.height * frameScale > workareaHeight)
+            {
+                frameScale = frameScale - 0.25f;
+            }
+            else
+            {
+                break;
+            }
+        }
+
+        if (frameScale < 0.25f) frameScale = 0.25f;
+    }
+    _project.setFrameScale(frameScale);
+    CCLOG("FRAME SCALE = %0.2f", frameScale);
+
+    // create opengl view
     const Rect frameRect = Rect(0, 0, frameSize.width, frameSize.height);
     ConfigParser::getInstance()->setInitViewSize(frameSize);
     const bool isResize = _project.isResizeWindow();
     std::stringstream title;
-    title << "Cocos Simulator - " << ConfigParser::getInstance()->getInitViewName();
-	initGLContextAttrs();
+    title << "Cocos Simulator (" << _project.getFrameScale() * 100 << "%)";
+    initGLContextAttrs();
     auto glview = GLViewImpl::createWithRect(title.str(), frameRect, frameScale);
     _hwnd = glview->getWin32Window();
     player::PlayerWin::createWithHwnd(_hwnd);
@@ -342,7 +371,7 @@ int SimulatorWin::run()
     // set window position
     if (_project.getProjectDir().length())
     {
-        setZoom(_project.getFrameScale()); 
+        setZoom(_project.getFrameScale());
     }
     Vec2 pos = _project.getWindowOffset();
     if (pos.x != 0 && pos.y != 0)
@@ -493,11 +522,16 @@ void SimulatorWin::setupUI()
                             }
                             menuItem->setChecked(true);
 
+                            // update window title
+                            std::stringstream title;
+                            title << "Cocos Simulator (" << project.getFrameScale() * 100 << "%)";
+                            SetWindowTextA(hwnd, title.str().c_str());
+
                             // update window size
                             RECT rect;
                             GetWindowRect(hwnd, &rect);
                             MoveWindow(hwnd, rect.left, rect.top, rect.right - rect.left, rect.bottom - rect.top + GetSystemMetrics(SM_CYMENU), FALSE);
-                        
+
                             // fix: can not update window on some windows system 
                             ::SendMessage(hwnd, WM_MOVE, NULL, NULL);
                         }
@@ -761,15 +795,15 @@ LRESULT CALLBACK SimulatorWin::windowProc(HWND hWnd, UINT uMsg, WPARAM wParam, L
     }
 
     case WM_COPYDATA:
+    {
+        PCOPYDATASTRUCT pMyCDS = (PCOPYDATASTRUCT)lParam;
+        if (pMyCDS->dwData == 1)
         {
-            PCOPYDATASTRUCT pMyCDS = (PCOPYDATASTRUCT) lParam;
-            if (pMyCDS->dwData == 1)
-            {
-                const char *szBuf = (const char*)(pMyCDS->lpData);
-                SimulatorWin::getInstance()->writeDebugLog(szBuf);
-                break;
-            }
+            const char *szBuf = (const char*)(pMyCDS->lpData);
+            SimulatorWin::getInstance()->writeDebugLog(szBuf);
+            break;
         }
+    }
 
     case WM_DESTROY:
     {
@@ -782,7 +816,7 @@ LRESULT CALLBACK SimulatorWin::windowProc(HWND hWnd, UINT uMsg, WPARAM wParam, L
         HDROP hDrop = (HDROP)wParam;
 
         const int count = DragQueryFileW(hDrop, 0xffffffff, NULL, 0);
-        
+
         if (count > 0)
         {
             int fileIndex = 0;
