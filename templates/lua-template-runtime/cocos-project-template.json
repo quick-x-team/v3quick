@@ -106,7 +106,13 @@
                 ]
             }
 
-        ]
+        ],
+        "append_file":[
+            {
+               "from":"tools/simulator/frameworks/runtime-src/Classes/ide-support/lang",
+               "to":"runtime/win32/lang"
+            }
+         ]
     },
     "do_add_native_support": {
         "append_from_template": {
