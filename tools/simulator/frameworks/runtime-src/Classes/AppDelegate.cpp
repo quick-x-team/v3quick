@@ -53,15 +53,8 @@ bool AppDelegate::applicationDidFinishLaunching()
     lua_State* L = engine->getLuaStack()->getLuaState();
     lua_module_register(L);
 
-    // If you want to use Quick-Cocos2d-X, please uncomment below code
-    // register_all_quick_manual(L);
-
-    LuaStack* stack = engine->getLuaStack();
+    auto stack = engine->getLuaStack();
     stack->setXXTEAKeyAndSign("2dxLua", strlen("2dxLua"), "XXTEA", strlen("XXTEA"));
-    
-    //register custom function
-    //LuaStack* stack = engine->getLuaStack();
-    //register_custom_function(stack->getLuaState());
     
     //
     // NOTE:Please don't remove this call if you want to debug with Cocos Code IDE
@@ -81,8 +74,7 @@ bool AppDelegate::applicationDidFinishLaunching()
     }
     
     // Runtime end
-    
-	cocos2d::log("iShow!");
+    cocos2d::log("iShow!");
     return true;
 }
 

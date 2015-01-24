@@ -132,7 +132,7 @@ _consolePort(kProjectConfigConsolePort),
 _uploadPort(kProjectConfigUploadPort),
 _debugPort(kProjectConfigDebugger),
 _viewName("simulator"),
-_entryfile("src/main.lua"),
+_entryfile(""),
 _initViewSize(ProjectConfig::DEFAULT_HEIGHT, ProjectConfig::DEFAULT_WIDTH),
 _bindAddress("")
 {
