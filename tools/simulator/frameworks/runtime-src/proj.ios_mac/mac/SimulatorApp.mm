@@ -104,7 +104,17 @@ static void glfwDropFunc(GLFWwindow *window, int count, const char **files)
     
     if (isDirectory)
     {
-        _project.setProjectDir([path cStringUsingEncoding:NSUTF8StringEncoding]);
+        // check src folder
+        if ([fm fileExistsAtPath:[path stringByAppendingString:@"/src/main.lua"]])
+        {
+            _project.setProjectDir([path cStringUsingEncoding:NSUTF8StringEncoding]);
+            _entryPath = "$(PROJDIR)/src/main.lua";
+        }
+        else if ([fm fileExistsAtPath:[path stringByAppendingString:@"/src/main.js"]])
+        {
+            _project.setProjectDir([path cStringUsingEncoding:NSUTF8StringEncoding]);
+            _entryPath = "$(PROJDIR)/src/main.js";
+        }
     }
     else
     {

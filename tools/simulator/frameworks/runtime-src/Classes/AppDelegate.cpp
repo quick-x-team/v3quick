@@ -7,7 +7,6 @@
 #include "runtime/Runtime.h"
 
 // Lua
-#include "lua_module_register.h"
 #include "ide-support/RuntimeLuaImpl.h"
 
 // Js
@@ -46,20 +45,7 @@ bool AppDelegate::applicationDidFinishLaunching()
 {
     // set default FPS
     Director::getInstance()->setAnimationInterval(1.0 / 60.0f);
-   
-    // register lua module
-    auto engine = LuaEngine::getInstance();
-    ScriptEngineManager::getInstance()->setScriptEngine(engine);
-    lua_State* L = engine->getLuaStack()->getLuaState();
-    lua_module_register(L);
-
-    auto stack = engine->getLuaStack();
-    stack->setXXTEAKeyAndSign("2dxLua", strlen("2dxLua"), "XXTEA", strlen("XXTEA"));
     
-    //
-    // NOTE:Please don't remove this call if you want to debug with Cocos Code IDE
-    // Runtime
-    //
     auto runtimeEngine = RuntimeEngine::getInstance();
     runtimeEngine->setEventTrackingEnable(true);
     runtimeEngine->addRuntime(RuntimeLuaImpl::create(), kRuntimeEngineLua);
@@ -68,11 +54,12 @@ bool AppDelegate::applicationDidFinishLaunching()
     runtimeEngine->start();
     
     // js need special debug port
-    if (runtimeEngine->getProjectConfig().getDebuggerType() != kCCRuntimeDebuggerNone)
+    if (runtimeEngine->getProjectConfig().getDebuggerType() != kCCRuntimeDebuggerNone && runtimeEngine->getRunTimeType() == 2)
     {
         jsRuntime->startWithDebugger();
     }
-    
+
+
     // Runtime end
     cocos2d::log("iShow!");
     return true;
