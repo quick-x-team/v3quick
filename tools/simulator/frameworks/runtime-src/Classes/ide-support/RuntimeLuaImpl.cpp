@@ -292,6 +292,7 @@ void RuntimeLuaImpl::startScript(const std::string& strDebugArg)
 {
     auto engine = LuaEngine::getInstance();
     auto stack = engine->getLuaStack();
+    lua_module_register(stack->getLuaState());
     
     const ProjectConfig &project = RuntimeEngine::getInstance()->getProjectConfig();
     
