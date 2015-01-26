@@ -14,6 +14,7 @@
 #include "lua_debugger.h"
 #include "CCLuaEngine.h"
 #include "LuaBasicConversions.h"
+#include "lua_module_register.h"
 
 #include "runtime/Runtime.h"
 #include "runtime/ConfigParser.h"
@@ -291,6 +292,7 @@ void RuntimeLuaImpl::startScript(const std::string& strDebugArg)
 {
     auto engine = LuaEngine::getInstance();
     auto stack = engine->getLuaStack();
+    lua_module_register(stack->getLuaState());
     
     const ProjectConfig &project = RuntimeEngine::getInstance()->getProjectConfig();
     
@@ -332,7 +334,9 @@ void RuntimeLuaImpl::init()
 {
     auto engine = LuaEngine::getInstance();
     ScriptEngineManager::getInstance()->setScriptEngine(engine);
+    lua_module_register(engine->getLuaStack()->getLuaState());
     register_runtime_override_function(engine->getLuaStack()->getLuaState());
+    engine->getLuaStack()->setXXTEAKeyAndSign("2dxLua", strlen("2dxLua"), "XXTEA", strlen("XXTEA"));
 }
 
 #endif // (COCOS2D_DEBUG > 0) && (CC_CODE_IDE_DEBUG_SUPPORT > 0)

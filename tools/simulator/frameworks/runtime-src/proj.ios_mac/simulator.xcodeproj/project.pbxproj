@@ -53,8 +53,6 @@
 		9FB5D6081A691774002361CA /* libjscocos2d iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9FB5D5D61A68FA00002361CA /* libjscocos2d iOS.a */; };
 		9FB5D60A1A6917D8002361CA /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 9FB5D6091A6917D8002361CA /* libsqlite3.dylib */; };
 		9FB5D60E1A691A02002361CA /* libjscocos2d Mac.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9FB5D5D41A68FA00002361CA /* libjscocos2d Mac.a */; };
-		9FB5D7CA1A693FD7002361CA /* script in Resources */ = {isa = PBXBuildFile; fileRef = 9FB5D7C91A693FD7002361CA /* script */; };
-		9FB5D7CB1A693FD7002361CA /* script in Resources */ = {isa = PBXBuildFile; fileRef = 9FB5D7C91A693FD7002361CA /* script */; };
 		9FB6C05F1A69815100945236 /* lang in Resources */ = {isa = PBXBuildFile; fileRef = 9FB6C0571A69815100945236 /* lang */; };
 		9FB6C0601A69815100945236 /* lua_debugger.c in Sources */ = {isa = PBXBuildFile; fileRef = 9FB6C0581A69815100945236 /* lua_debugger.c */; };
 		9FB6C0611A69815100945236 /* lua_debugger.c in Sources */ = {isa = PBXBuildFile; fileRef = 9FB6C0581A69815100945236 /* lua_debugger.c */; };
@@ -238,7 +236,6 @@
 		9FB5D6091A6917D8002361CA /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS8.1.sdk/usr/lib/libsqlite3.dylib; sourceTree = DEVELOPER_DIR; };
 		9FB5D60C1A69184C002361CA /* libjs_static.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libjs_static.a; path = ../../../../../external/spidermonkey/prebuilt/ios/libjs_static.a; sourceTree = "<group>"; };
 		9FB5D7321A692CF0002361CA /* js_module_register.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = js_module_register.h; path = ../Classes/js_module_register.h; sourceTree = "<group>"; };
-		9FB5D7C91A693FD7002361CA /* script */ = {isa = PBXFileReference; lastKnownFileType = folder; name = script; path = "../../../../../cocos/scripting/js-bindings/script"; sourceTree = "<group>"; };
 		9FB6C0561A69815100945236 /* CodeIDESupport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CodeIDESupport.h; sourceTree = "<group>"; };
 		9FB6C0571A69815100945236 /* lang */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = lang; sourceTree = "<group>"; };
 		9FB6C0581A69815100945236 /* lua_debugger.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = lua_debugger.c; sourceTree = "<group>"; };
@@ -503,7 +500,6 @@
 		F293BC4615EB859D00256477 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				9FB5D7C91A693FD7002361CA /* script */,
 				C05D1C111923449100B808A4 /* config.json */,
 			);
 			name = Resources;
@@ -672,7 +668,6 @@
 				9FB6C05F1A69815100945236 /* lang in Resources */,
 				DA96489E1A70F925001F41E8 /* ConsoleWindow.xib in Resources */,
 				5023817617EBBE3400990C9B /* Icon.icns in Resources */,
-				9FB5D7CB1A693FD7002361CA /* script in Resources */,
 				9FFC07361A4A764100AED399 /* MainMenu.xib in Resources */,
 				C05D1C131923449100B808A4 /* config.json in Resources */,
 			);
@@ -697,7 +692,6 @@
 				5091733717ECE17A00D62437 /* Icon-40.png in Resources */,
 				5023811E17EBBCAC00990C9B /* Icon-144.png in Resources */,
 				5023811A17EBBCAC00990C9B /* Default.png in Resources */,
-				9FB5D7CA1A693FD7002361CA /* script in Resources */,
 				5091733817ECE17A00D62437 /* Icon-50.png in Resources */,
 				5023812117EBBCAC00990C9B /* Icon-72.png in Resources */,
 				C05D1C121923449100B808A4 /* config.json in Resources */,
@@ -820,7 +814,7 @@
 					"$(SRCROOT)/../../../libsimulator/lib/protobuf-lite",
 				);
 				INFOPLIST_FILE = mac/Info.plist;
-				LIBRARY_SEARCH_PATHS = "/Users/jryin/workspace/cocos2d-js/external/spidermonkey/prebuilt/mac";
+				LIBRARY_SEARCH_PATHS = "";
 				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				OTHER_LDFLAGS = (
 					"-image_base",
@@ -855,7 +849,7 @@
 					"$(SRCROOT)/../../../libsimulator/lib/protobuf-lite",
 				);
 				INFOPLIST_FILE = mac/Info.plist;
-				LIBRARY_SEARCH_PATHS = "/Users/jryin/workspace/cocos2d-js/external/spidermonkey/prebuilt/mac";
+				LIBRARY_SEARCH_PATHS = "";
 				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				OTHER_LDFLAGS = (
 					"-image_base",
@@ -935,7 +929,7 @@
 					armv7,
 					arm64,
 				);
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: wang zhe (UTF8Q753X4)";
 				COMPRESS_PNG_FILES = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -968,7 +962,7 @@
 					armv7,
 					arm64,
 				);
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: wang zhe (UTF8Q753X4)";
 				COMPRESS_PNG_FILES = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = ios/Prefix.pch;
