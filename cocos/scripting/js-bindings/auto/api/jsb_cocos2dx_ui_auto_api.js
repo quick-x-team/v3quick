@@ -3268,6 +3268,300 @@ Slider : function (
 };
 
 /**
+ * @class UICCTextField
+ */
+ccui.UICCTextField = {
+
+/**
+ * @method onTextFieldAttachWithIME
+ * @param {cc.TextFieldTTF} arg0
+ * @return {bool}
+ */
+onTextFieldAttachWithIME : function (
+textfieldttf 
+)
+{
+    return false;
+},
+
+/**
+ * @method setPasswordText
+ * @param {String} arg0
+ */
+setPasswordText : function (
+str 
+)
+{
+},
+
+/**
+ * @method setAttachWithIME
+ * @param {bool} arg0
+ */
+setAttachWithIME : function (
+bool 
+)
+{
+},
+
+/**
+ * @method getDeleteBackward
+ * @return {bool}
+ */
+getDeleteBackward : function (
+)
+{
+    return false;
+},
+
+/**
+ * @method getAttachWithIME
+ * @return {bool}
+ */
+getAttachWithIME : function (
+)
+{
+    return false;
+},
+
+/**
+ * @method onTextFieldDeleteBackward
+ * @param {cc.TextFieldTTF} arg0
+ * @param {char} arg1
+ * @param {unsigned long} arg2
+ * @return {bool}
+ */
+onTextFieldDeleteBackward : function (
+textfieldttf, 
+char, 
+long 
+)
+{
+    return false;
+},
+
+/**
+ * @method getInsertText
+ * @return {bool}
+ */
+getInsertText : function (
+)
+{
+    return false;
+},
+
+/**
+ * @method deleteBackward
+ */
+deleteBackward : function (
+)
+{
+},
+
+/**
+ * @method setInsertText
+ * @param {bool} arg0
+ */
+setInsertText : function (
+bool 
+)
+{
+},
+
+/**
+ * @method getDetachWithIME
+ * @return {bool}
+ */
+getDetachWithIME : function (
+)
+{
+    return false;
+},
+
+/**
+ * @method getCharCount
+ * @return {int}
+ */
+getCharCount : function (
+)
+{
+    return 0;
+},
+
+/**
+ * @method closeIME
+ */
+closeIME : function (
+)
+{
+},
+
+/**
+ * @method setPasswordEnabled
+ * @param {bool} arg0
+ */
+setPasswordEnabled : function (
+bool 
+)
+{
+},
+
+/**
+ * @method setMaxLengthEnabled
+ * @param {bool} arg0
+ */
+setMaxLengthEnabled : function (
+bool 
+)
+{
+},
+
+/**
+ * @method isPasswordEnabled
+ * @return {bool}
+ */
+isPasswordEnabled : function (
+)
+{
+    return false;
+},
+
+/**
+ * @method insertText
+ * @param {char} arg0
+ * @param {unsigned long} arg1
+ */
+insertText : function (
+char, 
+long 
+)
+{
+},
+
+/**
+ * @method setPasswordStyleText
+ * @param {String} arg0
+ */
+setPasswordStyleText : function (
+str 
+)
+{
+},
+
+/**
+ * @method onTextFieldInsertText
+ * @param {cc.TextFieldTTF} arg0
+ * @param {char} arg1
+ * @param {unsigned long} arg2
+ * @return {bool}
+ */
+onTextFieldInsertText : function (
+textfieldttf, 
+char, 
+long 
+)
+{
+    return false;
+},
+
+/**
+ * @method onTextFieldDetachWithIME
+ * @param {cc.TextFieldTTF} arg0
+ * @return {bool}
+ */
+onTextFieldDetachWithIME : function (
+textfieldttf 
+)
+{
+    return false;
+},
+
+/**
+ * @method getMaxLength
+ * @return {int}
+ */
+getMaxLength : function (
+)
+{
+    return 0;
+},
+
+/**
+ * @method isMaxLengthEnabled
+ * @return {bool}
+ */
+isMaxLengthEnabled : function (
+)
+{
+    return false;
+},
+
+/**
+ * @method openIME
+ */
+openIME : function (
+)
+{
+},
+
+/**
+ * @method setDetachWithIME
+ * @param {bool} arg0
+ */
+setDetachWithIME : function (
+bool 
+)
+{
+},
+
+/**
+ * @method setMaxLength
+ * @param {int} arg0
+ */
+setMaxLength : function (
+int 
+)
+{
+},
+
+/**
+ * @method setDeleteBackward
+ * @param {bool} arg0
+ */
+setDeleteBackward : function (
+bool 
+)
+{
+},
+
+/**
+ * @method create
+ * @param {String} arg0
+ * @param {String} arg1
+ * @param {float} arg2
+ * @return {ccui.UICCTextField}
+ */
+create : function (
+str, 
+str, 
+float 
+)
+{
+    return ccui.UICCTextField;
+},
+
+/**
+ * @method UICCTextField
+ * @constructor
+ */
+UICCTextField : function (
+)
+{
+},
+
+};
+
+/**
  * @class TextField
  */
 ccui.TextField = {
