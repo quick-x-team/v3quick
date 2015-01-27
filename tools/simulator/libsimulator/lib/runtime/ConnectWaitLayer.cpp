@@ -80,24 +80,11 @@ ConnectWaitLayer::ConnectWaitLayer()
 
     std::string strip;
     int runtimeType = RuntimeEngine::getInstance()->getRunTimeType();
-    switch (runtimeType) {
-        case 1: {
-            strip = getIPAddress(runtimeType);
-            break;
-        }
-        case 2: {
-            strip = getIPAddress(runtimeType);
-            break;
-        }
-        case 3: {
-            strip = getIPAddress(runtimeType);
-            break;
-        }
-        default: {
-            strip = "0.0.0.0";
-            break;
-        }
-    }
+	strip = getIPAddress(runtimeType);
+	if (strip.empty())
+	{
+		strip = "0.0.0.0";
+	}
 
     char szIPAddress[64] = {0};
     sprintf(szIPAddress, "IP: %s", strip.c_str());
