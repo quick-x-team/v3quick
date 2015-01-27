@@ -106,8 +106,10 @@
       </DllDataFileName>
     </Midl>
     <PreBuildEvent>
-      <Command>
-      </Command>
+      <Command>if not exist "$(OutDir)" mkdir "$(OutDir)"
+
+xcopy /Y /Q "$(ProjectDir)..\Classes\ide-support\lang" "$(OutDir)"
+</Command>
       <Message>
       </Message>
     </PreBuildEvent>
