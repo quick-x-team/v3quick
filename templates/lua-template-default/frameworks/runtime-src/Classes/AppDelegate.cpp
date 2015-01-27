@@ -2,7 +2,6 @@
 #include "CCLuaEngine.h"
 #include "SimpleAudioEngine.h"
 #include "cocos2d.h"
-#include "lua_module_register.h"
 
 #if (CC_TARGET_PLATFORM != CC_PLATFORM_LINUX)
 #include "ide-support/CodeIDESupport.h"
@@ -48,19 +47,7 @@ bool AppDelegate::applicationDidFinishLaunching()
 {
     // set default FPS
     Director::getInstance()->setAnimationInterval(1.0 / 60.0f);
-   
-    // register lua module
-    auto engine = LuaEngine::getInstance();
-    ScriptEngineManager::getInstance()->setScriptEngine(engine);
-    lua_State* L = engine->getLuaStack()->getLuaState();
-    lua_module_register(L);
 
-    // If you want to use Quick-Cocos2d-X, please uncomment below code
-    // register_all_quick_manual(L);
-
-    LuaStack* stack = engine->getLuaStack();
-    stack->setXXTEAKeyAndSign("2dxLua", strlen("2dxLua"), "XXTEA", strlen("XXTEA"));
-    
     //register custom function
     //LuaStack* stack = engine->getLuaStack();
     //register_custom_function(stack->getLuaState());
@@ -71,6 +58,7 @@ bool AppDelegate::applicationDidFinishLaunching()
     RuntimeEngine::getInstance()->start();
     cocos2d::log("iShow!");
 #else
+    auto engine = LuaEngine::getInstance();
     if (engine->executeScriptFile("src/main.lua"))
     {
         return false;

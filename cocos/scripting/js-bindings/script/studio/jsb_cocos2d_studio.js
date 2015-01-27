@@ -41,7 +41,13 @@ ccs.MovementEventType = {
 ccs.InnerActionType = {
     LoopAction: 0,
     NoLoopAction: 1,
-    SingleFrame: 2,
+    SingleFrame: 2
+};
+
+ccs.AnimationInfo = function (name, startIndex, endIndex) {
+    this.name = name || "";
+    this.startIndex = startIndex != undefined ? startIndex : 0;
+    this.endIndex = endIndex != undefined ? endIndex : 0;
 };
 
 // Armature
