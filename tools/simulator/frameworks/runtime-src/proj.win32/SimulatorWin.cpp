@@ -16,6 +16,7 @@
 #include <objidl.h>
 #include <shlguid.h>
 #include <shellapi.h>
+#include <Winuser.h>
 
 #include "SimulatorWin.h"
 
@@ -30,15 +31,30 @@
 #include "platform/win32/PlayerWin.h"
 #include "platform/win32/PlayerMenuServiceWin.h"
 
+#include "resource.h"
+
 USING_NS_CC;
 
 static WNDPROC g_oldWindowProc = NULL;
 INT_PTR CALLBACK AboutDialogCallback(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam)
 {
+    LOGFONT lf;
+    HFONT hFont;
+
     UNREFERENCED_PARAMETER(lParam);
     switch (message)
     {
     case WM_INITDIALOG:
+        ZeroMemory(&lf, sizeof(LOGFONT));
+        lf.lfHeight = 24;
+        lf.lfWeight = 200;
+        _tcscpy(lf.lfFaceName, _T("Arial"));
+
+        hFont = CreateFontIndirect(&lf);
+        if ((HFONT)0 != hFont)
+        {
+            SendMessage(GetDlgItem(hDlg, IDC_ABOUT_TITLE), WM_SETFONT, (WPARAM)hFont, (LPARAM)TRUE);
+        }
         return (INT_PTR)TRUE;
 
     case WM_COMMAND:
@@ -439,12 +455,33 @@ void SimulatorWin::setupUI()
 
     menuBar->addItem("VIEW_SCALE_MENU_SEP", "-", "VIEW_MENU");
     std::vector<player::PlayerMenuItem*> scaleMenuVector;
+    auto scale200Menu = menuBar->addItem("VIEW_SCALE_MENU_200", tr("Zoom Out").append(" (200%)"), "VIEW_MENU");
+    auto scale175Menu = menuBar->addItem("VIEW_SCALE_MENU_175", tr("Zoom Out").append(" (175%)"), "VIEW_MENU");
+    auto scale150Menu = menuBar->addItem("VIEW_SCALE_MENU_150", tr("Zoom Out").append(" (150%)"), "VIEW_MENU");
+    auto scale125Menu = menuBar->addItem("VIEW_SCALE_MENU_125", tr("Zoom Out").append(" (125%)"), "VIEW_MENU");
     auto scale100Menu = menuBar->addItem("VIEW_SCALE_MENU_100", tr("Zoom Out").append(" (100%)"), "VIEW_MENU");
     auto scale75Menu = menuBar->addItem("VIEW_SCALE_MENU_75", tr("Zoom Out").append(" (75%)"), "VIEW_MENU");
     auto scale50Menu = menuBar->addItem("VIEW_SCALE_MENU_50", tr("Zoom Out").append(" (50%)"), "VIEW_MENU");
     auto scale25Menu = menuBar->addItem("VIEW_SCALE_MENU_25", tr("Zoom Out").append(" (25%)"), "VIEW_MENU");
     int frameScale = int(_project.getFrameScale() * 100);
-    if (frameScale == 100)
+
+    if (frameScale == 200)
+    {
+        scale200Menu->setChecked(true);
+    }
+    else if (frameScale == 175)
+    {
+        scale175Menu->setChecked(true);
+    }
+    else if (frameScale == 150)
+    {
+        scale150Menu->setChecked(true);
+    }
+    else if (frameScale == 125)
+    {
+        scale125Menu->setChecked(true);
+    }
+    else if (frameScale == 100)
     {
         scale100Menu->setChecked(true);
     }
@@ -465,6 +502,10 @@ void SimulatorWin::setupUI()
         scale100Menu->setChecked(true);
     }
 
+    scaleMenuVector.push_back(scale200Menu);
+    scaleMenuVector.push_back(scale175Menu);
+    scaleMenuVector.push_back(scale150Menu);
+    scaleMenuVector.push_back(scale125Menu);
     scaleMenuVector.push_back(scale100Menu);
     scaleMenuVector.push_back(scale75Menu);
     scaleMenuVector.push_back(scale50Menu);
