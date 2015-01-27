@@ -2,6 +2,7 @@
 #include "CCLuaEngine.h"
 #include "SimpleAudioEngine.h"
 #include "cocos2d.h"
+#include "lua_module_register.h"
 
 #if (CC_TARGET_PLATFORM != CC_PLATFORM_LINUX)
 #include "ide-support/CodeIDESupport.h"
@@ -59,6 +60,9 @@ bool AppDelegate::applicationDidFinishLaunching()
     cocos2d::log("iShow!");
 #else
     auto engine = LuaEngine::getInstance();
+    ScriptEngineManager::getInstance()->setScriptEngine(engine);
+    lua_module_register(engine->getLuaStack()->getLuaState());
+    engine->getLuaStack()->setXXTEAKeyAndSign("2dxLua", strlen("2dxLua"), "XXTEA", strlen("XXTEA"));
     if (engine->executeScriptFile("src/main.lua"))
     {
         return false;
