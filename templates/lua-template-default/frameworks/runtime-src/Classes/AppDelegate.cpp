@@ -58,6 +58,7 @@ bool AppDelegate::applicationDidFinishLaunching()
     RuntimeEngine::getInstance()->start();
     cocos2d::log("iShow!");
 #else
+    auto engine = LuaEngine::getInstance();
     if (engine->executeScriptFile("src/main.lua"))
     {
         return false;
