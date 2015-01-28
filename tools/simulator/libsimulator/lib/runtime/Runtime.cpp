@@ -226,13 +226,7 @@ void RuntimeEngine::start()
 #endif
 
     // set search path
-    bool flagRunningSimulator = false;
     string path = FileUtils::getInstance()->fullPathForFilename(_project.getScriptFileRealPath().c_str());
-    if (path.empty())
-    {
-        flagRunningSimulator = true;
-        path = FileUtils::getInstance()->fullPathForFilename("config.json");
-    }
     size_t pos;
     while ((pos = path.find_first_of("\\")) != std::string::npos)
     {
@@ -244,11 +238,6 @@ void RuntimeEngine::start()
     {
         workdir = path.substr(0, p);
         FileUtils::getInstance()->addSearchPath(workdir);
-        if (flagRunningSimulator)
-        {
-            workdir.append("/src");
-            FileUtils::getInstance()->addSearchPath(workdir);
-        }
     }
 
     // update search pathes

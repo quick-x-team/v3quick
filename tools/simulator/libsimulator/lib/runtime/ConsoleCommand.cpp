@@ -211,6 +211,7 @@ void ConsoleCommand::onSendCommand(int fd, const std::string &args)
                 std::vector<std::string> searchPathArray = FileUtils::getInstance()->getSearchPaths();
                 searchPathArray.insert(searchPathArray.begin(), FileServer::getShareInstance()->getWritePath());
                 FileUtils::getInstance()->setSearchPaths(searchPathArray);
+                FileUtils::getInstance()->setDefaultResourceRootPath(FileServer::getShareInstance()->getWritePath());
 #endif
                 
                 dReplyParse.AddMember("code", 0, dReplyParse.GetAllocator());
