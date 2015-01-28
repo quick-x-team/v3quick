@@ -192,6 +192,9 @@ xcopy /Y /Q "$(OutDir)*.exe" "$(ProjectDir)..\..\..\runtime\win32"
 xcopy /Y /Q "$(OutDir)lang" "$(ProjectDir)..\..\..\runtime\win32"
 </Command>
     </PostBuildEvent>
+    <Manifest>
+      <AdditionalManifestFiles>DeclareDPIAware.manifest %(AdditionalManifestFiles)</AdditionalManifestFiles>
+    </Manifest>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="..\Classes\AppDelegate.h" />

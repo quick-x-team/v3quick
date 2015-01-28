@@ -489,7 +489,8 @@ static void glfwDropFunc(GLFWwindow *window, int count, const char **files)
     
     ProjectConfig &project = _project;
     auto dispatcher = Director::getInstance()->getEventDispatcher();
-    dispatcher->addEventListenerWithFixedPriority(EventListenerCustom::create(kAppEventName, [&project, scaleMenuVector](EventCustom* event){
+    auto window = _window;
+    dispatcher->addEventListenerWithFixedPriority(EventListenerCustom::create(kAppEventName, [&project, scaleMenuVector, window](EventCustom* event){
         auto menuEvent = dynamic_cast<AppEvent*>(event);
         if (menuEvent)
         {
@@ -523,10 +524,9 @@ static void glfwDropFunc(GLFWwindow *window, int count, const char **files)
                             string tmp = data.erase(0, strlen("VIEW_SCALE_MENU_"));
                             float scale = atof(tmp.c_str()) / 100.0f;
                             project.setFrameScale(scale);
-                            
+                            [window setTitle:[NSString stringWithFormat:@"Cocos Simulator (%d%%)", (int)(project.getFrameScale() * 100)]];
                             auto glview = static_cast<GLViewImpl*>(Director::getInstance()->getOpenGLView());
                             glview->setFrameZoomFactor(scale);
-                            
                             // update scale menu state
                             for (auto &it : scaleMenuVector)
                             {
