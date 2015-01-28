@@ -21,6 +21,10 @@ string getIPAddress(int runtimeType)
     		activityPath = "org/cocos2dx/javascript/AppActivity";
     		break;
     	}
+        default: {
+            activityPath = "org/cocos2dx/lua/AppActivity";
+            break;
+        }
     }
 
     if (JniHelper::getStaticMethodInfo(t, activityPath, "getLocalIpAddress", "()Ljava/lang/String;")) {
