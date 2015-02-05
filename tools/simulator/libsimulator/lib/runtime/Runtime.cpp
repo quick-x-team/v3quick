@@ -382,22 +382,3 @@ void RuntimeEngine::trackLaunchEvent()
 {
     trackEvent(_launchEvent);
 }
-
-int RuntimeEngine::getRunTimeType()
-{
-    if(0 == _launchEvent.compare("empty")) {
-        setupRuntime();
-    }
-
-    if(0 == _launchEvent.compare("lua")) {
-        return 1;
-    } else if(0 == _launchEvent.compare("js")) {
-        return 2;
-    } else if(0 == _launchEvent.compare("ccs")) {
-        return 3;
-    } else {
-        return 0;
-    }
-}
-
-
