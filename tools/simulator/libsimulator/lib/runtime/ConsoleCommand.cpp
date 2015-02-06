@@ -89,23 +89,32 @@ void ConsoleCommand::onSendCommand(int fd, const std::string &args)
                 dReplyParse.AddMember("seq",dArgParse["seq"],dReplyParse.GetAllocator());
             }
             
-            auto runtime = RuntimeEngine::getInstance()->getRuntime();
-            if (!runtime)
-            {
-                RuntimeEngine::getInstance()->setupRuntime();
-            }
             if(strcmp(strcmd.c_str(), "start-logic") == 0)
             {
-                RuntimeEngine::getInstance()->getRuntime()->onStartDebuger(dArgParse, dReplyParse);
+                auto runtime = RuntimeEngine::getInstance()->getRuntime();
+                if (!runtime)
+                {
+                    RuntimeEngine::getInstance()->setupRuntime();
+                    runtime = RuntimeEngine::getInstance()->getRuntime();
+                }
+                if (runtime) runtime->onStartDebuger(dArgParse, dReplyParse);
             } else if (strcmp(strcmd.c_str(),"clearcompile")==0)
             {
-                runtime->onClearCompile(dArgParse, dReplyParse);
+                auto runtime = RuntimeEngine::getInstance()->getRuntime();
+                if (runtime) runtime->onClearCompile(dArgParse, dReplyParse);
             } else if(strcmp(strcmd.c_str(),"precompile")==0)
             {
-                runtime->onPrecompile(dArgParse, dReplyParse);
+                auto runtime = RuntimeEngine::getInstance()->getRuntime();
+                if (runtime) runtime->onPrecompile(dArgParse, dReplyParse);
             } else if(strcmp(strcmd.c_str(), "reload") == 0)
             {
-                runtime->onReload(dArgParse, dReplyParse);
+                auto runtime = RuntimeEngine::getInstance()->getRuntime();
+                if (!runtime)
+                {
+                    RuntimeEngine::getInstance()->setupRuntime();
+                    runtime = RuntimeEngine::getInstance()->getRuntime();
+                }
+                if (runtime) runtime->onReload(dArgParse, dReplyParse);
             } else if(strcmp(strcmd.c_str(), "getversion") == 0)
             {
                 rapidjson::Value bodyvalue(rapidjson::kObjectType);
@@ -182,7 +191,7 @@ void ConsoleCommand::onSendCommand(int fd, const std::string &args)
                 shutDownApp();
 #else
                 exit(0);
-#endif	
+#endif
             } else if(strcmp(strcmd.c_str(), "getplatform") == 0)
             {
                 string platform="UNKNOW";
@@ -210,7 +219,6 @@ void ConsoleCommand::onSendCommand(int fd, const std::string &args)
                 std::vector<std::string> searchPathArray = FileUtils::getInstance()->getSearchPaths();
                 searchPathArray.insert(searchPathArray.begin(), FileServer::getShareInstance()->getWritePath());
                 FileUtils::getInstance()->setSearchPaths(searchPathArray);
-                FileUtils::getInstance()->setDefaultResourceRootPath(FileServer::getShareInstance()->getWritePath());
 #endif
                 
                 dReplyParse.AddMember("code", 0, dReplyParse.GetAllocator());

@@ -248,10 +248,10 @@ void RuntimeEngine::start()
         FileUtils::getInstance()->addSearchPath(path);
     }
 
-    setupRuntime();
     //
     if (_project.getDebuggerType() == kCCRuntimeDebuggerNone)
     {
+        setupRuntime();
         startScript(_project.getScriptFileRealPath());
     }
     else
