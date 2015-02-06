@@ -6,7 +6,7 @@
 using namespace std;
 using namespace cocos2d;
 
-static std::string ACTIVITY_PATH("");
+static std::string ACTIVITY_PATH("org/cocos2dx/lua/AppActivity");
 
 void setActivityPathForAndroid(const std::string& path)
 {
@@ -17,11 +17,6 @@ string getIPAddress()
 {
 	JniMethodInfo t;
     string IPAddress("");
-
-    if (ACTIVITY_PATH.length() <=0)
-    {
-        ACTIVITY_PATH = "org/cocos2dx/lua/AppActivity";
-    }
 
     if (JniHelper::getStaticMethodInfo(t, ACTIVITY_PATH.c_str(), "getLocalIpAddress", "()Ljava/lang/String;")) {
         jstring str = (jstring)t.env->CallStaticObjectMethod(t.classID, t.methodID);
