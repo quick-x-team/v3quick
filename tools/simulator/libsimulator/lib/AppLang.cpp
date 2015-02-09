@@ -66,8 +66,7 @@ std::string AppLang::getString(const std::string &lang, const std::string &key)
     {
         const rapidjson::Value& v = _docRootjson[langKey];
         if (v.HasMember(ckey))
-        { 
-            std::string tmpv = v[ckey].GetString();
+        {
             return v[ckey].GetString();
         }
     }

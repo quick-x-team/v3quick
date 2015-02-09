@@ -6,7 +6,8 @@
     "Portrait": "竖屏",
     "Landscape": "横屏",
     "Refresh": "刷新(重启)",
-    "Zoom Out": "缩放"
+    "Zoom Out": "缩放",
+    "Simulator": "模拟器"
   },
   "zh-Hans": {
     "View": "视图",
@@ -15,6 +16,7 @@
     "Portrait": "竖屏",
     "Landscape": "横屏",
     "Refresh": "刷新(重启)",
-    "Zoom Out": "缩放"
+    "Zoom Out": "缩放",
+    "Simulator": "模拟器"
   }
 }

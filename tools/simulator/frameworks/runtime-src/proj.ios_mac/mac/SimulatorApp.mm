@@ -341,7 +341,7 @@ static void glfwDropFunc(GLFWwindow *window, int count, const char **files)
     // create opengl view
     const cocos2d::Rect frameRect = cocos2d::Rect(0, 0, frameSize.width, frameSize.height);
     std::stringstream title;
-    title << "Cocos Simulator (" << _project.getFrameScale() * 100 << "%)";
+    title << "Cocos " << tr("Simulator") << " (" << _project.getFrameScale() * 100 << "%)";
     GLViewImpl *eglView = GLViewImpl::createWithRect(title.str(), frameRect, frameScale);
     
     auto director = Director::getInstance();
@@ -523,10 +523,8 @@ static void glfwDropFunc(GLFWwindow *window, int count, const char **files)
                         {
                             string tmp = data.erase(0, strlen("VIEW_SCALE_MENU_"));
                             float scale = atof(tmp.c_str()) / 100.0f;
-                            project.setFrameScale(scale);
-                            [window setTitle:[NSString stringWithFormat:@"Cocos Simulator (%d%%)", (int)(project.getFrameScale() * 100)]];
-                            auto glview = static_cast<GLViewImpl*>(Director::getInstance()->getOpenGLView());
-                            glview->setFrameZoomFactor(scale);
+                            [SIMULATOR setZoom:scale];
+                            
                             // update scale menu state
                             for (auto &it : scaleMenuVector)
                             {
@@ -642,14 +640,15 @@ static void glfwDropFunc(GLFWwindow *window, int count, const char **files)
     if(_fileHandle!=nil){
         [_fileHandle writeData:[str dataUsingEncoding:NSUTF8StringEncoding]];
     }
-    
 }
 
 - (void) setZoom:(float)scale
 {
     Director::getInstance()->getOpenGLView()->setFrameZoomFactor(scale);
     _project.setFrameScale(scale);
-    [_window setTitle:[NSString stringWithFormat:@"Cocos Simulator (%d%%)", (int)(_project.getFrameScale() * 100)]];
+    std::stringstream title;
+    title << "Cocos " << tr("Simulator") << " (" << _project.getFrameScale() * 100 << "%)";
+    [_window setTitle:[NSString stringWithUTF8String:title.str().c_str()]];
 }
 
 - (BOOL) applicationShouldHandleReopen:(NSApplication *)sender hasVisibleWindows:(BOOL)flag

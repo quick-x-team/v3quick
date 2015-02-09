@@ -369,7 +369,7 @@ int SimulatorWin::run()
     ConfigParser::getInstance()->setInitViewSize(frameSize);
     const bool isResize = _project.isResizeWindow();
     std::stringstream title;
-    title << "Cocos Simulator (" << _project.getFrameScale() * 100 << "%)";
+    title << "Cocos " << tr("Simulator") << " (" << _project.getFrameScale() * 100 << "%)";
     initGLContextAttrs();
     auto glview = GLViewImpl::createWithRect(title.str(), frameRect, frameScale);
     _hwnd = glview->getWin32Window();
@@ -565,7 +565,7 @@ void SimulatorWin::setupUI()
 
                             // update window title
                             std::stringstream title;
-                            title << "Cocos Simulator (" << project.getFrameScale() * 100 << "%)";
+                            title << "Cocos " << tr("Simulator") << " (" << project.getFrameScale() * 100 << "%)";
                             SetWindowTextA(hwnd, title.str().c_str());
 
                             // update window size
