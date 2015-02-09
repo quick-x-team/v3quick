@@ -9,7 +9,8 @@
     "Zoom Out": "缩放",
     "Simulator": "模拟器",
     "Open File": "打开文件",
-    "Open Project": "打开工程"
+    "Open Project": "打开工程",
+    "Error": "错误"
   },
   "zh-Hans": {
     "View": "视图",

@@ -378,7 +378,7 @@ int SimulatorWin::run()
     ConfigParser::getInstance()->setInitViewSize(frameSize);
     const bool isResize = _project.isResizeWindow();
     std::stringstream title;
-    title << "Cocos " << tr("Simulator") << " (" << _project.getFrameScale() * 100 << "%)";
+    title << "Cocos Simulator (" << _project.getFrameScale() * 100 << "%)";
     initGLContextAttrs();
     auto glview = GLViewImpl::createWithRect(title.str(), frameRect, frameScale);
     _hwnd = glview->getWin32Window();
@@ -387,6 +387,9 @@ int SimulatorWin::run()
     //SendMessage(_hwnd, WM_SETICON, ICON_BIG, (LPARAM)icon);
     //SendMessage(_hwnd, WM_SETICON, ICON_SMALL, (LPARAM)icon);
     //FreeResource(icon);
+
+    // path for looking Lang file, Studio Default images
+    FileUtils::getInstance()->addSearchPath(getApplicationPath().c_str());
 
     auto director = Director::getInstance();
     director->setOpenGLView(glview);
@@ -406,9 +409,6 @@ int SimulatorWin::run()
         MoveWindow(_hwnd, pos.x, pos.y, rect.right - rect.left, rect.bottom - rect.top, FALSE);
     }
 
-    // path for looking Lang file, Studio Default images
-    FileUtils::getInstance()->addSearchPath(getApplicationPath().c_str());
-
     // init player services
     setupUI();
     DrawMenuBar(_hwnd);
@@ -424,6 +424,9 @@ int SimulatorWin::run()
     RECT rect;
     GetWindowRect(_hwnd, &rect);
     MoveWindow(_hwnd, rect.left, rect.top, rect.right - rect.left, rect.bottom - rect.top + GetSystemMetrics(SM_CYMENU), FALSE);
+
+    // update window title
+    updateWindowTitle();
 
     // startup message loop
     return app->run();
@@ -565,8 +568,7 @@ void SimulatorWin::setupUI()
                             float scale = atof(tmp.c_str()) / 100.0f;
                             project.setFrameScale(scale);
 
-                            auto glview = static_cast<GLViewImpl*>(Director::getInstance()->getOpenGLView());
-                            glview->setFrameZoomFactor(scale);
+                            _instance->setZoom(scale);
 
                             // update scale menu state
                             for (auto &it : scaleMenuVector)
@@ -576,9 +578,7 @@ void SimulatorWin::setupUI()
                             menuItem->setChecked(true);
 
                             // update window title
-                            std::stringstream title;
-                            title << "Cocos " << tr("Simulator") << " (" << project.getFrameScale() * 100 << "%)";
-                            SetWindowTextA(hwnd, title.str().c_str());
+                            _instance->updateWindowTitle();
 
                             // update window size
                             RECT rect;
@@ -668,6 +668,15 @@ void SimulatorWin::setZoom(float frameScale)
 {
     _project.setFrameScale(frameScale);
     cocos2d::Director::getInstance()->getOpenGLView()->setFrameZoomFactor(frameScale);
+}
+
+void SimulatorWin::updateWindowTitle()
+{
+    std::stringstream title;
+    title << "Cocos " << tr("Simulator") << " (" << _project.getFrameScale() * 100 << "%)";
+    std::u16string u16title;
+    cocos2d::StringUtils::UTF8ToUTF16(title.str(), u16title);
+    SetWindowText(_hwnd, (LPCTSTR)u16title.c_str());
 }
 
 // debug log
@@ -935,8 +944,10 @@ void SimulatorWin::onOpenFile(const std::string &filePath)
     }
     else
     {
-        auto msg = tr("Only Support") + " config.json;*.csb;*.csd";
-        MessageBox(msg.c_str(), tr("Error").c_str());
+        auto title = tr("Open File") + tr("Error");
+        auto msg = tr("Only support") + " config.json;*.csb;*.csd";
+        auto msgBox = player::PlayerProtocol::getInstance()->getMessageBoxService();
+        msgBox->showMessageBox(title, msg);
     }
 }
 
@@ -1018,7 +1029,8 @@ void SimulatorWin::onOpenProjectFolder(const std::string &folderPath)
         else
         {
             auto title = tr("Open Project") + tr("Error");
-            MessageBox(tr("Can not find project").c_str(), title.c_str());
+            auto msgBox = player::PlayerProtocol::getInstance()->getMessageBoxService();
+            msgBox->showMessageBox(title, tr("Can not find project"));
         }
     }
 }

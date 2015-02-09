@@ -35,6 +35,7 @@ protected:
     // 
     void setupUI();
     void setZoom(float frameScale);
+    void updateWindowTitle();
 
     // debug log
     void writeDebugLog(const char *log);
