@@ -40,6 +40,11 @@ protected:
     void writeDebugLog(const char *log);
     void parseCocosProjectConfig(ProjectConfig &config);
 
+    //
+    void onOpenFile(const std::string &filePath);
+    void onOpenProjectFolder(const std::string &folderPath);
+    void onDrop(const std::string &path);
+
     // helper
     std::string convertPathFormatToUnixStyle(const std::string& path);
     std::string getUserDocumentPath();

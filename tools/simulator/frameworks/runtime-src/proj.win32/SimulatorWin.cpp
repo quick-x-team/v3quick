@@ -105,6 +105,15 @@ std::string getCurAppPath(void)
     return fuldir;
 }
 
+static bool stringEndWith(const std::string str, const std::string needle)
+{
+    if (str.length() >= needle.length()) 
+    {
+        return (0 == str.compare(str.length() - needle.length(), needle.length(), needle));
+    }
+    return false;
+}
+
 static void initGLContextAttrs()
 {
     //set OpenGL context attributions,now can only set six attributions:
@@ -429,6 +438,9 @@ void SimulatorWin::setupUI()
     // FILE
     menuBar->addItem("FILE_MENU", tr("File"));
     menuBar->addItem("EXIT_MENU", tr("Exit"), "FILE_MENU");
+    menuBar->addItem("OPEN_FILE_MENU", tr("Open File") + "...", "FILE_MENU");
+    menuBar->addItem("OPEN_PROJECT_MENU", tr("Open Project") + "...", "FILE_MENU");
+
 
     // VIEW
     menuBar->addItem("VIEW_MENU", tr("View"));
@@ -600,6 +612,25 @@ void SimulatorWin::setupUI()
                         {
                             project.changeFrameOrientationToLandscape();
                             _instance->openProjectWithProjectConfig(project);
+                        }
+                        else if (data == "OPEN_FILE_MENU")
+                        {
+                            auto fileDialog = player::PlayerProtocol::getInstance()->getFileDialogService();
+                            stringstream extensions;
+                            extensions << "All Support File|config.json,*.csd,*csd;"
+                                << "Project Config File|config.json;"
+                                << "Cocos Studio File|*.csd;"
+                                << "Cocos Studio Binary File|*.csb";
+                            auto entry = fileDialog->openFile(tr("Choose File"), "", extensions.str());
+                            
+                            _instance->onOpenFile(entry);
+                        }
+                        else if (data == "OPEN_PROJECT_MENU")
+                        {
+                            auto fileDialog = player::PlayerProtocol::getInstance()->getFileDialogService();
+                            auto path = fileDialog->openDirectory(tr("Choose Folder"), "");
+                            
+                            _instance->onOpenProjectFolder(path);
                         }
                     }
                 }
@@ -871,11 +902,7 @@ LRESULT CALLBACK SimulatorWin::windowProc(HWND hWnd, UINT uMsg, WPARAM wParam, L
             CC_SAFE_FREE(utf8);
             DragFinish(hDrop);
 
-            // broadcast drop event
-            AppEvent forwardEvent("APP.EVENT.DROP", APP_EVENT_DROP);
-            forwardEvent.setDataString(firstFile);
-
-            Director::getInstance()->getEventDispatcher()->dispatchEvent(&forwardEvent);
+            _instance->onDrop(firstFile);
         }
     }   // WM_DROPFILES
 
@@ -883,3 +910,128 @@ LRESULT CALLBACK SimulatorWin::windowProc(HWND hWnd, UINT uMsg, WPARAM wParam, L
     return g_oldWindowProc(hWnd, uMsg, wParam, lParam);
 }
 
+void SimulatorWin::onOpenFile(const std::string &filePath)
+{
+    string entry = filePath;
+    if (entry.empty()) return;
+
+    if (stringEndWith(entry, "config.json") || stringEndWith(entry, ".csb") || stringEndWith(entry, ".csd"))
+    {
+        replaceAll(entry, "\\", "/");
+        size_t p = entry.find_last_of("/");
+        if (p != entry.npos)
+        {
+            string workdir = entry.substr(0, p);
+            _project.setProjectDir(workdir);
+        }
+
+        _project.setScriptFile(entry);
+        if (stringEndWith(entry, CONFIG_FILE))
+        {
+            ConfigParser::getInstance()->readConfig(entry);
+            _project.setScriptFile(ConfigParser::getInstance()->getEntryFile());
+        }
+        openProjectWithProjectConfig(_project);
+    }
+    else
+    {
+        auto msg = tr("Only Support") + " config.json;*.csb;*.csd";
+        MessageBox(msg.c_str(), tr("Error").c_str());
+    }
+}
+
+/*
+1. find @folderPath/config.json
+2. get project name from file: @folderPath/folderName.ccs
+3. find @folderPath/cocosstudio/MainScene.csd
+4. find @folderPath/cocosstudio/MainScene.csb
+*/
+void SimulatorWin::onOpenProjectFolder(const std::string &folderPath)
+{
+    string path = folderPath;
+    if (!path.empty())
+    {
+        replaceAll(path, "\\", "/");
+
+        auto fileUtils = FileUtils::getInstance();
+        bool foundProjectFile = false;
+        // 1. check config.json
+        auto configPath = path + "/" + CONFIG_FILE;
+        if (fileUtils->isFileExist(configPath))
+        {
+            ConfigParser::getInstance()->readConfig(configPath);
+            _project.setScriptFile(ConfigParser::getInstance()->getEntryFile());
+            foundProjectFile = true;
+        }
+        // check ccs project
+        else
+        {
+            // 2.
+            if (path.at(path.size() - 1) == '/') path.erase(path.size() - 1);
+            ssize_t pos = path.find_last_of('/');
+            if (pos != std::string::npos)
+            {
+                auto folderName = path.substr(path.find_last_of('/'), path.size());
+                auto ccsFilePath = path + folderName + ".ccs";
+                if (fileUtils->isFileExist(ccsFilePath))
+                {
+                    auto fileContent = fileUtils->getStringFromFile(ccsFilePath);
+
+                    string matchString("<Project Name=\"");
+                    pos = fileContent.find(matchString);
+                    // get project file name
+                    if (pos != std::string::npos)
+                    {
+                        fileContent = fileContent.substr(pos + matchString.size(), fileContent.size());
+                        ssize_t posEnd = fileContent.find_first_of('"');
+                        auto projectFileName = path + "/cocosstudio/" + fileContent.substr(0, posEnd);
+                        _project.setScriptFile(projectFileName);
+                        foundProjectFile = true;
+                    }
+                }
+            }
+
+            if (!foundProjectFile)
+            {
+                auto csdFilePath = path + "/cocosstudio/MainScene.csd";
+                auto csbFilePath = path + "/cocosstudio/MainScene.csb";
+                // 3.
+                if (fileUtils->isFileExist(csdFilePath))
+                {
+                    _project.setScriptFile(csdFilePath);
+                    foundProjectFile = true;
+                }
+                // 4.
+                else if (fileUtils->isFileExist(csbFilePath))
+                {
+                    _project.setScriptFile(csbFilePath);
+                    foundProjectFile = true;
+                }
+            }
+        }
+
+        if (foundProjectFile)
+        {
+            _project.setProjectDir(path);
+            openProjectWithProjectConfig(_project);
+        }
+        else
+        {
+            auto title = tr("Open Project") + tr("Error");
+            MessageBox(tr("Can not find project").c_str(), title.c_str());
+        }
+    }
+}
+
+void SimulatorWin::onDrop(const std::string &path)
+{
+    auto fileUtils = FileUtils::getInstance();
+    if (fileUtils->isDirectoryExist(path))
+    {
+        onOpenProjectFolder(path);
+    }
+    else if (fileUtils->isFileExist(path))
+    {
+        onOpenFile(path);
+    }
+}

@@ -7,7 +7,9 @@
     "Landscape": "横屏",
     "Refresh": "刷新(重启)",
     "Zoom Out": "缩放",
-    "Simulator": "模拟器"
+    "Simulator": "模拟器",
+    "Open File": "打开文件",
+    "Open Project": "打开工程"
   },
   "zh-Hans": {
     "View": "视图",
