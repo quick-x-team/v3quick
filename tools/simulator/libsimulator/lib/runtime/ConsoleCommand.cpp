@@ -160,6 +160,10 @@ void ConsoleCommand::onSendCommand(int fd, const std::string &args)
                     {
                         filename = objectfiles[i].GetString();
                         
+                        // remove js compiled script
+                        auto runtime = RuntimeEngine::getInstance()->getRuntime();
+                        if (runtime) runtime->onRemove(filename);
+                        
                         // remove file from disk
                         string filepath(_fileserver->getWritePath() + "/" + filename);
                         if (FileUtils::getInstance()->isFileExist(filepath)) 
