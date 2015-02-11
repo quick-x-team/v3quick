@@ -4974,6 +4974,7 @@
         "cocos/scripting/js-bindings/script/jsb_cocos2d.js", 
         "cocos/scripting/js-bindings/script/jsb_cocos2d_constants.js", 
         "cocos/scripting/js-bindings/script/jsb_cocosbuilder.js", 
+        "cocos/scripting/js-bindings/script/jsb_common.js", 
         "cocos/scripting/js-bindings/script/jsb_create_apis.js", 
         "cocos/scripting/js-bindings/script/jsb_debugger.js", 
         "cocos/scripting/js-bindings/script/jsb_deprecated.js", 
