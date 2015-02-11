@@ -101,10 +101,20 @@ void ConsoleCommand::onSendCommand(int fd, const std::string &args)
             } else if (strcmp(strcmd.c_str(),"clearcompile")==0)
             {
                 auto runtime = RuntimeEngine::getInstance()->getRuntime();
+                if (!runtime)
+                {
+                    RuntimeEngine::getInstance()->setupRuntime();
+                    runtime = RuntimeEngine::getInstance()->getRuntime();
+                }
                 if (runtime) runtime->onClearCompile(dArgParse, dReplyParse);
             } else if(strcmp(strcmd.c_str(),"precompile")==0)
             {
                 auto runtime = RuntimeEngine::getInstance()->getRuntime();
+                if (!runtime)
+                {
+                    RuntimeEngine::getInstance()->setupRuntime();
+                    runtime = RuntimeEngine::getInstance()->getRuntime();
+                }
                 if (runtime) runtime->onPrecompile(dArgParse, dReplyParse);
             } else if(strcmp(strcmd.c_str(), "reload") == 0)
             {
