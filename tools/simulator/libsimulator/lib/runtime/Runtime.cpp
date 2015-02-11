@@ -169,6 +169,7 @@ void RuntimeEngine::setupRuntime()
 void RuntimeEngine::setProjectConfig(const ProjectConfig &config)
 {
     _project = config;
+    setProjectPath(_project.getProjectDir());
 }
 
 const ProjectConfig &RuntimeEngine::getProjectConfig()
@@ -226,13 +227,7 @@ void RuntimeEngine::start()
 #endif
 
     // set search path
-    bool flagRunningSimulator = false;
     string path = FileUtils::getInstance()->fullPathForFilename(_project.getScriptFileRealPath().c_str());
-    if (path.empty())
-    {
-        flagRunningSimulator = true;
-        path = FileUtils::getInstance()->fullPathForFilename("config.json");
-    }
     size_t pos;
     while ((pos = path.find_first_of("\\")) != std::string::npos)
     {
@@ -244,11 +239,6 @@ void RuntimeEngine::start()
     {
         workdir = path.substr(0, p);
         FileUtils::getInstance()->addSearchPath(workdir);
-        if (flagRunningSimulator)
-        {
-            workdir.append("/src");
-            FileUtils::getInstance()->addSearchPath(workdir);
-        }
     }
 
     // update search pathes
@@ -259,10 +249,10 @@ void RuntimeEngine::start()
         FileUtils::getInstance()->addSearchPath(path);
     }
 
-    setupRuntime();
     //
     if (_project.getDebuggerType() == kCCRuntimeDebuggerNone)
     {
+        setupRuntime();
         startScript(_project.getScriptFileRealPath());
     }
     else
@@ -393,22 +383,3 @@ void RuntimeEngine::trackLaunchEvent()
 {
     trackEvent(_launchEvent);
 }
-
-int RuntimeEngine::getRunTimeType()
-{
-    if(0 == _launchEvent.compare("empty")) {
-        setupRuntime();
-    }
-
-    if(0 == _launchEvent.compare("lua")) {
-        return 1;
-    } else if(0 == _launchEvent.compare("js")) {
-        return 2;
-    } else if(0 == _launchEvent.compare("ccs")) {
-        return 3;
-    } else {
-        return 0;
-    }
-}
-
-
