@@ -31,16 +31,6 @@
                "exclude":[]
             },
             {
-               "from":"templates/js-template-runtime/src",
-               "to":"runtime/win32/src",
-               "exclude":[]
-            },
-            {
-               "from":"templates/js-template-runtime/res",
-               "to":"runtime/win32/res",
-               "exclude":[]
-            },
-            {
                "from":"external/win32-specific/gles/prebuilt",
                "to":"runtime/win32",
                "include": [
