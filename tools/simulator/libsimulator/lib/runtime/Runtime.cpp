@@ -169,6 +169,7 @@ void RuntimeEngine::setupRuntime()
 void RuntimeEngine::setProjectConfig(const ProjectConfig &config)
 {
     _project = config;
+    setProjectPath(_project.getProjectDir());
 }
 
 const ProjectConfig &RuntimeEngine::getProjectConfig()
