@@ -19,6 +19,13 @@
     },
     "android_cfg": {
         "project_path": "project/proj.android"
+    }, 
+    "linux_cfg": {
+        "project_path": "project/proj.linux",
+        "project_name": "js-moonwarriors",
+        "cmake_path": "../../",
+        "build_dir": "../../build/linux-build",
+        "build_result_dir": "js-moonwarriors"
     },
     "engine_dir": "../../"
 }

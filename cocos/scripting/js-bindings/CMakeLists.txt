@@ -31,6 +31,8 @@ else() # Assume Linux
   set(PLATFORM_FOLDER linux)
 endif()
 
+set(cocos_root "../../..")
+
 set(JSBINDING_SRC
   auto/jsb_cocos2dx_auto.cpp
   auto/jsb_cocos2dx_builder_auto.cpp
@@ -52,6 +54,7 @@ set(JSBINDING_SRC
   manual/chipmunk/js_bindings_chipmunk_auto_classes.cpp
   manual/chipmunk/js_bindings_chipmunk_registration.cpp
   manual/cocosbuilder/js_bindings_ccbreader.cpp
+  manual/cocostudio/jsb_cocos2dx_studio_conversions.cpp
   manual/cocostudio/jsb_cocos2dx_studio_manual.cpp
   manual/extension/jsb_cocos2dx_extension_manual.cpp
   manual/localstorage/js_bindings_system_functions.cpp
@@ -61,39 +64,40 @@ set(JSBINDING_SRC
   manual/network/jsb_socketio.cpp
   manual/spine/jsb_cocos2dx_spine_manual.cpp
   manual/ui/jsb_cocos2dx_ui_manual.cpp
-  ../cocos2d-x/cocos/storage/local-storage/LocalStorage.cpp
+  ${cocos_root}/cocos/storage/local-storage/LocalStorage.cpp
 )
 
 include_directories(
   auto
   manual
-  ../external/spidermonkey/include/${PLATFORM_FOLDER}
-  ../cocos2d-x/cocos/base
-  ../cocos2d-x/cocos/2d
-  ../cocos2d-x/cocos/ui 
-  ../cocos2d-x/cocos/audio/include
-  ../cocos2d-x/cocos/storage
-  ../cocos2d-x/cocos/network
-  ../cocos2d-x/cocos/platform
-  ../cocos2d-x/extensions
-  ../cocos2d-x/external
-  ../cocos2d-x/cocos/editor-support
-  ../cocos2d-x/cocos/editor-support/spine
-  ../cocos2d-x/cocos/editor-support/cocosbuilder
-  ../cocos2d-x/cocos/editor-support/cocostudio
-  ../cocos2d-x/external/chipmunk/include/chipmunk
+  manual/cocostudio
+  ${cocos_root}/external/spidermonkey/include/${PLATFORM_FOLDER}
+  ${cocos_root}/cocos/base
+  ${cocos_root}/cocos/2d
+  ${cocos_root}/cocos/ui 
+  ${cocos_root}/cocos/audio/include
+  ${cocos_root}/cocos/storage
+  ${cocos_root}/cocos/network
+  ${cocos_root}/cocos/platform
+  ${cocos_root}/extensions
+  ${cocos_root}/external
+  ${cocos_root}/cocos/editor-support
+  ${cocos_root}/cocos/editor-support/spine
+  ${cocos_root}/cocos/editor-support/cocosbuilder
+  ${cocos_root}/cocos/editor-support/cocostudio
+  ${cocos_root}/external/chipmunk/include/chipmunk
 )
 
-add_library(jsbindings STATIC
+add_library(jscocos2d STATIC
   ${JSBINDING_SRC}
 )
 
-target_link_libraries(jsbindings
+target_link_libraries(jscocos2d
   sqlite3
   js_static
 )
 
-set_target_properties(jsbindings
+set_target_properties(jscocos2d
     PROPERTIES
     ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib"
     LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib"

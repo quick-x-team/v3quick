@@ -107,7 +107,7 @@ std::string getCurAppPath(void)
 
 static bool stringEndWith(const std::string str, const std::string needle)
 {
-    if (str.length() >= needle.length()) 
+    if (str.length() >= needle.length())
     {
         return (0 == str.compare(str.length() - needle.length(), needle.length(), needle));
     }
@@ -197,15 +197,15 @@ void SimulatorWin::openNewPlayerWithProjectConfig(const ProjectConfig &config)
     MultiByteToWideChar(CP_UTF8, 0, commandLine.c_str(), -1, command, MAX_COMMAND);
 
     BOOL success = CreateProcess(NULL,
-                                 command,   // command line 
-                                 NULL,      // process security attributes 
-                                 NULL,      // primary thread security attributes 
-                                 FALSE,     // handles are inherited 
-                                 0,         // creation flags 
-                                 NULL,      // use parent's environment 
-                                 NULL,      // use parent's current directory 
-                                 &si,       // STARTUPINFO pointer 
-                                 &pi);      // receives PROCESS_INFORMATION 
+                                 command,   // command line
+                                 NULL,      // process security attributes
+                                 NULL,      // primary thread security attributes
+                                 FALSE,     // handles are inherited
+                                 0,         // creation flags
+                                 NULL,      // use parent's environment
+                                 NULL,      // use parent's current directory
+                                 &si,       // STARTUPINFO pointer
+                                 &pi);      // receives PROCESS_INFORMATION
 
     if (!success)
     {
@@ -440,10 +440,10 @@ void SimulatorWin::setupUI()
 
     // FILE
     menuBar->addItem("FILE_MENU", tr("File"));
-    menuBar->addItem("EXIT_MENU", tr("Exit"), "FILE_MENU");
     menuBar->addItem("OPEN_FILE_MENU", tr("Open File") + "...", "FILE_MENU");
     menuBar->addItem("OPEN_PROJECT_MENU", tr("Open Project") + "...", "FILE_MENU");
-
+    menuBar->addItem("FILE_MENU_SEP1", "-", "FILE_MENU");
+    menuBar->addItem("EXIT_MENU", tr("Exit"), "FILE_MENU");
 
     // VIEW
     menuBar->addItem("VIEW_MENU", tr("View"));
@@ -585,7 +585,7 @@ void SimulatorWin::setupUI()
                             GetWindowRect(hwnd, &rect);
                             MoveWindow(hwnd, rect.left, rect.top, rect.right - rect.left, rect.bottom - rect.top + GetSystemMetrics(SM_CYMENU), FALSE);
 
-                            // fix: can not update window on some windows system 
+                            // fix: can not update window on some windows system
                             ::SendMessage(hwnd, WM_MOVE, NULL, NULL);
                         }
                         else if (data.find("VIEWSIZE_ITEM_MENU_") == 0) // begin with VIEWSIZE_ITEM_MENU_
@@ -622,14 +622,14 @@ void SimulatorWin::setupUI()
                                 << "Cocos Studio File|*.csd;"
                                 << "Cocos Studio Binary File|*.csb";
                             auto entry = fileDialog->openFile(tr("Choose File"), "", extensions.str());
-                            
+
                             _instance->onOpenFile(entry);
                         }
                         else if (data == "OPEN_PROJECT_MENU")
                         {
                             auto fileDialog = player::PlayerProtocol::getInstance()->getFileDialogService();
                             auto path = fileDialog->openDirectory(tr("Choose Folder"), "");
-                            
+
                             _instance->onOpenProjectFolder(path);
                         }
                     }
