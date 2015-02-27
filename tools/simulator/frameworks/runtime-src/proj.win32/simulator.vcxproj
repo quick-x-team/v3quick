@@ -193,7 +193,8 @@ xcopy /Y /Q "$(OutDir)lang" "$(ProjectDir)..\..\..\runtime\win32"
 </Command>
     </PostBuildEvent>
     <Manifest>
-      <AdditionalManifestFiles>DeclareDPIAware.manifest %(AdditionalManifestFiles)</AdditionalManifestFiles>
+      <AdditionalManifestFiles>
+      </AdditionalManifestFiles>
     </Manifest>
   </ItemDefinitionGroup>
   <ItemGroup>
