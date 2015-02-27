@@ -2273,6 +2273,14 @@ initWithPhysics : function (
 },
 
 /**
+ * @method setCameraOrderDirty
+ */
+setCameraOrderDirty : function (
+)
+{
+},
+
+/**
  * @method render
  * @param {cc.Renderer} arg0
  */
@@ -18237,6 +18245,24 @@ scene
 },
 
 /**
+ * @method initPerspective
+ * @param {float} arg0
+ * @param {float} arg1
+ * @param {float} arg2
+ * @param {float} arg3
+ * @return {bool}
+ */
+initPerspective : function (
+float, 
+float, 
+float, 
+float 
+)
+{
+    return false;
+},
+
+/**
  * @method getProjectionMatrix
  * @return {mat4_object}
  */
@@ -18284,6 +18310,28 @@ getType : function (
 )
 {
     return 0;
+},
+
+/**
+ * @method initDefault
+ * @return {bool}
+ */
+initDefault : function (
+)
+{
+    return false;
+},
+
+/**
+ * @method project
+ * @param {vec3_object} arg0
+ * @return {vec2_object}
+ */
+project : function (
+vec3 
+)
+{
+    return cc.Vec2;
 },
 
 /**
@@ -18351,39 +18399,31 @@ float
 },
 
 /**
- * @method initPerspective
- * @param {float} arg0
- * @param {float} arg1
- * @param {float} arg2
- * @param {float} arg3
- * @return {bool}
- */
-initPerspective : function (
-float, 
-float, 
-float, 
-float 
-)
-{
-    return false;
-},
-
-/**
- * @method initDefault
- * @return {bool}
- */
-initDefault : function (
-)
-{
-    return false;
-},
-
-/**
  * @method setAdditionalProjection
  * @param {mat4_object} arg0
  */
 setAdditionalProjection : function (
 mat4 
+)
+{
+},
+
+/**
+ * @method getDepth
+ * @return {int}
+ */
+getDepth : function (
+)
+{
+    return 0;
+},
+
+/**
+ * @method setDepth
+ * @param {int} arg0
+ */
+setDepth : function (
+int 
 )
 {
 },
