@@ -156,3 +156,14 @@ tests/cpp-tests/Resources/audio
 /external/protobuf-lite/
 /external/flatbuffers/
 /external/spidermonkey/
+/external/android/
+/external/ios/
+/external/linux/
+/external/mac/
+/external/win32/
+/external/winrt_8.1/
+/external/wp_8.1/
+/tests/js-tests/
+/tests/lua-empty-test/src/cocos/
+/tests/lua-game-controller-test/src/cocos/
+/tests/lua-tests/src/cocos/

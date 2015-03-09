@@ -86,7 +86,7 @@ std::string& replaceAll(std::string& str, const std::string& old_value, const st
 
 const char* getRuntimeVersion()
 {
-    return "1.9";
+    return "2.0";
 }
 
 //////////////////////// Loader ////////////////////
