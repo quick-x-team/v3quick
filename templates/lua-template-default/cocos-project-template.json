@@ -140,6 +140,8 @@
                 "from": "tools/simulator/frameworks/runtime-src/Classes/ide-support",
                 "to": "frameworks/runtime-src/Classes/ide-support",
                 "exclude": [
+                    "CodeIDESupport.h",
+                    "lang",
                     "RuntimeJsImpl.*"
                 ]
             }
