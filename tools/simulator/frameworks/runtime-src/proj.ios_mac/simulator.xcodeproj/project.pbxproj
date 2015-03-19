@@ -962,7 +962,7 @@
 				);
 				INFOPLIST_FILE = ios/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1.1;
-				LIBRARY_SEARCH_PATHS = "/Users/jryin/workspace/cocos2d-js/external/spidermonkey/prebuilt/ios";
+				LIBRARY_SEARCH_PATHS = "";
 				PRODUCT_NAME = Simulator;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -994,7 +994,7 @@
 				);
 				INFOPLIST_FILE = ios/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1.1;
-				LIBRARY_SEARCH_PATHS = "/Users/jryin/workspace/cocos2d-js/external/spidermonkey/prebuilt/ios";
+				LIBRARY_SEARCH_PATHS = "";
 				PRODUCT_NAME = Simulator;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
