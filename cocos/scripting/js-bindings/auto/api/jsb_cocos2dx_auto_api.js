@@ -2301,16 +2301,6 @@ eventcustom
 },
 
 /**
- * @method init
- * @return {bool}
- */
-init : function (
-)
-{
-    return false;
-},
-
-/**
  * @method getPhysicsWorld
  * @return {cc.PhysicsWorld}
  */
@@ -2478,6 +2468,16 @@ isOpenGLReady : function (
 )
 {
     return false;
+},
+
+/**
+ * @method setCursorVisible
+ * @param {bool} arg0
+ */
+setCursorVisible : function (
+bool 
+)
+{
 },
 
 /**
@@ -8241,32 +8241,12 @@ size
  */
 cc.Grid3DAction = {
 
-/**
- * @method getGrid
- * @return {cc.GridBase}
- */
-getGrid : function (
-)
-{
-    return cc.GridBase;
-},
-
 };
 
 /**
  * @class TiledGrid3DAction
  */
 cc.TiledGrid3DAction = {
-
-/**
- * @method getGrid
- * @return {cc.GridBase}
- */
-getGrid : function (
-)
-{
-    return cc.GridBase;
-},
 
 };
 
@@ -9098,16 +9078,6 @@ Twirl : function (
 cc.PageTurn3D = {
 
 /**
- * @method getGrid
- * @return {cc.GridBase}
- */
-getGrid : function (
-)
-{
-    return cc.GridBase;
-},
-
-/**
  * @method create
  * @param {float} arg0
  * @param {size_object} arg1
@@ -9513,18 +9483,6 @@ FadeOutBLTiles : function (
  * @class FadeOutUpTiles
  */
 cc.FadeOutUpTiles = {
-
-/**
- * @method transformTile
- * @param {vec2_object} arg0
- * @param {float} arg1
- */
-transformTile : function (
-vec2, 
-float 
-)
-{
-},
 
 /**
  * @method create
@@ -10663,16 +10621,6 @@ int
 },
 
 /**
- * @method init
- * @return {bool}
- */
-init : function (
-)
-{
-    return false;
-},
-
-/**
  * @method drawDot
  * @param {vec2_object} arg0
  * @param {float} arg1
@@ -10974,14 +10922,6 @@ int
 )
 {
     return false;
-},
-
-/**
- * @method updateAtlasValues
- */
-updateAtlasValues : function (
-)
-{
 },
 
 /**
@@ -11367,6 +11307,22 @@ sprite
 },
 
 /**
+ * @method addSpriteWithoutQuad
+ * @param {cc.Sprite} arg0
+ * @param {int} arg1
+ * @param {int} arg2
+ * @return {cc.SpriteBatchNode}
+ */
+addSpriteWithoutQuad : function (
+sprite, 
+int, 
+int 
+)
+{
+    return cc.SpriteBatchNode;
+},
+
+/**
  * @method reorderBatch
  * @param {bool} arg0
  */
@@ -11374,6 +11330,80 @@ reorderBatch : function (
 bool 
 )
 {
+},
+
+/**
+ * @method initWithTexture
+ * @param {cc.Texture2D} arg0
+ * @param {int} arg1
+ * @return {bool}
+ */
+initWithTexture : function (
+texture2d, 
+int 
+)
+{
+    return false;
+},
+
+/**
+ * @method getBlendFunc
+ * @return {cc.BlendFunc}
+ */
+getBlendFunc : function (
+)
+{
+    return cc.BlendFunc;
+},
+
+/**
+ * @method lowestAtlasIndexInChild
+ * @param {cc.Sprite} arg0
+ * @return {int}
+ */
+lowestAtlasIndexInChild : function (
+sprite 
+)
+{
+    return 0;
+},
+
+/**
+ * @method atlasIndexForChild
+ * @param {cc.Sprite} arg0
+ * @param {int} arg1
+ * @return {int}
+ */
+atlasIndexForChild : function (
+sprite, 
+int 
+)
+{
+    return 0;
+},
+
+/**
+ * @method setTextureAtlas
+ * @param {cc.TextureAtlas} arg0
+ */
+setTextureAtlas : function (
+textureatlas 
+)
+{
+},
+
+/**
+ * @method initWithFile
+ * @param {String} arg0
+ * @param {int} arg1
+ * @return {bool}
+ */
+initWithFile : function (
+str, 
+int 
+)
+{
+    return false;
 },
 
 /**
@@ -11387,6 +11417,36 @@ getTexture : function (
 },
 
 /**
+ * @method increaseAtlasCapacity
+ */
+increaseAtlasCapacity : function (
+)
+{
+},
+
+/**
+ * @method getTextureAtlas
+ * @return {cc.TextureAtlas}
+ */
+getTextureAtlas : function (
+)
+{
+    return cc.TextureAtlas;
+},
+
+/**
+ * @method insertQuadFromSprite
+ * @param {cc.Sprite} arg0
+ * @param {int} arg1
+ */
+insertQuadFromSprite : function (
+sprite, 
+int 
+)
+{
+},
+
+/**
  * @method setTexture
  * @param {cc.Texture2D} arg0
  */
@@ -11394,6 +11454,32 @@ setTexture : function (
 texture2d 
 )
 {
+},
+
+/**
+ * @method rebuildIndexInOrder
+ * @param {cc.Sprite} arg0
+ * @param {int} arg1
+ * @return {int}
+ */
+rebuildIndexInOrder : function (
+sprite, 
+int 
+)
+{
+    return 0;
+},
+
+/**
+ * @method highestAtlasIndexInChild
+ * @param {cc.Sprite} arg0
+ * @return {int}
+ */
+highestAtlasIndexInChild : function (
+sprite 
+)
+{
+    return 0;
 },
 
 /**
@@ -11419,126 +11505,6 @@ sprite
 },
 
 /**
- * @method addSpriteWithoutQuad
- * @param {cc.Sprite} arg0
- * @param {int} arg1
- * @param {int} arg2
- * @return {cc.SpriteBatchNode}
- */
-addSpriteWithoutQuad : function (
-sprite, 
-int, 
-int 
-)
-{
-    return cc.SpriteBatchNode;
-},
-
-/**
- * @method atlasIndexForChild
- * @param {cc.Sprite} arg0
- * @param {int} arg1
- * @return {int}
- */
-atlasIndexForChild : function (
-sprite, 
-int 
-)
-{
-    return 0;
-},
-
-/**
- * @method increaseAtlasCapacity
- */
-increaseAtlasCapacity : function (
-)
-{
-},
-
-/**
- * @method init
- * @return {bool}
- */
-init : function (
-)
-{
-    return false;
-},
-
-/**
- * @method lowestAtlasIndexInChild
- * @param {cc.Sprite} arg0
- * @return {int}
- */
-lowestAtlasIndexInChild : function (
-sprite 
-)
-{
-    return 0;
-},
-
-/**
- * @method getBlendFunc
- * @return {cc.BlendFunc}
- */
-getBlendFunc : function (
-)
-{
-    return cc.BlendFunc;
-},
-
-/**
- * @method initWithTexture
- * @param {cc.Texture2D} arg0
- * @param {int} arg1
- * @return {bool}
- */
-initWithTexture : function (
-texture2d, 
-int 
-)
-{
-    return false;
-},
-
-/**
- * @method setTextureAtlas
- * @param {cc.TextureAtlas} arg0
- */
-setTextureAtlas : function (
-textureatlas 
-)
-{
-},
-
-/**
- * @method insertQuadFromSprite
- * @param {cc.Sprite} arg0
- * @param {int} arg1
- */
-insertQuadFromSprite : function (
-sprite, 
-int 
-)
-{
-},
-
-/**
- * @method initWithFile
- * @param {String} arg0
- * @param {int} arg1
- * @return {bool}
- */
-initWithFile : function (
-str, 
-int 
-)
-{
-    return false;
-},
-
-/**
  * @method setBlendFunc
  * @param {cc.BlendFunc} arg0
  */
@@ -11546,42 +11512,6 @@ setBlendFunc : function (
 blendfunc 
 )
 {
-},
-
-/**
- * @method rebuildIndexInOrder
- * @param {cc.Sprite} arg0
- * @param {int} arg1
- * @return {int}
- */
-rebuildIndexInOrder : function (
-sprite, 
-int 
-)
-{
-    return 0;
-},
-
-/**
- * @method getTextureAtlas
- * @return {cc.TextureAtlas}
- */
-getTextureAtlas : function (
-)
-{
-    return cc.TextureAtlas;
-},
-
-/**
- * @method highestAtlasIndexInChild
- * @param {cc.Sprite} arg0
- * @return {int}
- */
-highestAtlasIndexInChild : function (
-sprite 
-)
-{
-    return 0;
 },
 
 /**
@@ -12167,16 +12097,6 @@ getBlendFunc : function (
 },
 
 /**
- * @method isOpacityModifyRGB
- * @return {bool}
- */
-isOpacityModifyRGB : function (
-)
-{
-    return false;
-},
-
-/**
  * @method getLetter
  * @param {int} arg0
  * @return {cc.Sprite}
@@ -12236,16 +12156,6 @@ vec2
 )
 {
     return false;
-},
-
-/**
- * @method setOpacityModifyRGB
- * @param {bool} arg0
- */
-setOpacityModifyRGB : function (
-bool 
-)
-{
 },
 
 /**
@@ -12425,7 +12335,7 @@ float
 * @param {color4b_object|color4b_object} color4b
 * @param {float} float
 * @param {float} float
-* @return {bool|bool|bool}
+* @return {bool|bool}
 */
 initWithColor : function(
 color4b,
@@ -12559,16 +12469,6 @@ getVector : function (
 },
 
 /**
- * @method init
- * @return {bool}
- */
-init : function (
-)
-{
-    return false;
-},
-
-/**
  * @method setEndColor
  * @param {color3b_object} arg0
  */
@@ -12663,16 +12563,6 @@ cc.LayerMultiplex = {
  */
 initWithArray : function (
 array 
-)
-{
-    return false;
-},
-
-/**
- * @method init
- * @return {bool}
- */
-init : function (
 )
 {
     return false;
@@ -13106,16 +12996,6 @@ TransitionSlideInL : function (
 cc.TransitionSlideInR = {
 
 /**
- * @method action
- * @return {cc.ActionInterval}
- */
-action : function (
-)
-{
-    return cc.ActionInterval;
-},
-
-/**
  * @method create
  * @param {float} arg0
  * @param {cc.Scene} arg1
@@ -13146,16 +13026,6 @@ TransitionSlideInR : function (
 cc.TransitionSlideInB = {
 
 /**
- * @method action
- * @return {cc.ActionInterval}
- */
-action : function (
-)
-{
-    return cc.ActionInterval;
-},
-
-/**
  * @method create
  * @param {float} arg0
  * @param {cc.Scene} arg1
@@ -13184,16 +13054,6 @@ TransitionSlideInB : function (
  * @class TransitionSlideInT
  */
 cc.TransitionSlideInT = {
-
-/**
- * @method action
- * @return {cc.ActionInterval}
- */
-action : function (
-)
-{
-    return cc.ActionInterval;
-},
 
 /**
  * @method create
@@ -14708,16 +14568,6 @@ isEnabled : function (
 },
 
 /**
- * @method init
- * @return {bool}
- */
-init : function (
-)
-{
-    return false;
-},
-
-/**
  * @method alignItemsHorizontallyWithPadding
  * @param {float} arg0
  */
@@ -14803,10 +14653,10 @@ getAlphaThreshold : function (
 
 /**
  * @method init
-* @param {cc.Node} node
-* @return {bool|bool}
-*/
-init : function(
+ * @param {cc.Node} arg0
+ * @return {bool}
+ */
+init : function (
 node 
 )
 {
@@ -15256,18 +15106,6 @@ float
 },
 
 /**
- * @method initWithSpriteFrameName
- * @param {String} arg0
- * @return {bool}
- */
-initWithSpriteFrameName : function (
-str 
-)
-{
-    return false;
-},
-
-/**
  * @method initWithTexture
 * @param {cc.Texture2D|cc.Texture2D|cc.Texture2D} texture2d
 * @param {rect_object|rect_object} rect
@@ -15314,14 +15152,6 @@ bool
 },
 
 /**
- * @method updateTransform
- */
-updateTransform : function (
-)
-{
-},
-
-/**
  * @method setTextureRect
 * @param {rect_object|rect_object} rect
 * @param {bool} bool
@@ -15336,10 +15166,12 @@ size
 },
 
 /**
- * @method init
+ * @method initWithSpriteFrameName
+ * @param {String} arg0
  * @return {bool}
  */
-init : function (
+initWithSpriteFrameName : function (
+str 
 )
 {
     return false;
@@ -16234,16 +16066,6 @@ getRadialAccelVar : function (
 },
 
 /**
- * @method init
- * @return {bool}
- */
-init : function (
-)
-{
-    return false;
-},
-
-/**
  * @method getEndSizeVar
  * @return {float}
  */
@@ -16254,40 +16076,10 @@ getEndSizeVar : function (
 },
 
 /**
- * @method setRotation
- * @param {float} arg0
- */
-setRotation : function (
-float 
-)
-{
-},
-
-/**
  * @method setTangentialAccel
  * @param {float} arg0
  */
 setTangentialAccel : function (
-float 
-)
-{
-},
-
-/**
- * @method setScaleY
- * @param {float} arg0
- */
-setScaleY : function (
-float 
-)
-{
-},
-
-/**
- * @method setScaleX
- * @param {float} arg0
- */
-setScaleX : function (
 float 
 )
 {
@@ -16619,16 +16411,6 @@ getEndRadius : function (
 )
 {
     return 0;
-},
-
-/**
- * @method isOpacityModifyRGB
- * @return {bool}
- */
-isOpacityModifyRGB : function (
-)
-{
-    return false;
 },
 
 /**
@@ -16972,16 +16754,6 @@ getRotationIsDir : function (
 },
 
 /**
- * @method setScale
- * @param {float} arg0
- */
-setScale : function (
-float 
-)
-{
-},
-
-/**
  * @method getEmissionRate
  * @return {float}
  */
@@ -17017,16 +16789,6 @@ getLifeVar : function (
  */
 setStartSizeVar : function (
 float 
-)
-{
-},
-
-/**
- * @method setOpacityModifyRGB
- * @param {bool} arg0
- */
-setOpacityModifyRGB : function (
-bool 
 )
 {
 },
@@ -17296,16 +17058,6 @@ ParticleSystemQuad : function (
  * @class ParticleFire
  */
 cc.ParticleFire = {
-
-/**
- * @method init
- * @return {bool}
- */
-init : function (
-)
-{
-    return false;
-},
 
 /**
  * @method create
