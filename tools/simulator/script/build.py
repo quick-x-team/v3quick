@@ -393,7 +393,8 @@ class SimulatorCompiler(object):
         output_dir = os.path.join(self.output_dir,"ios")
 
         mkdir(output_dir)
-        rm(os.path.join(output_dir,ipa_name,".ipa"))
+        ipa_file_path = os.path.join(output_dir, ipa_name + ".ipa")
+        rm(ipa_file_path)
         command = ' '.join([
             "cd \"%s\"" % (project_directory),
             " && xcodebuild archive -scheme \"%s\" -archivePath \"%s.xcarchive\" -configuration %s -jobs %d" % (scheme,scheme,"Debug" if configuration=='debug' else "Release",jobs),
