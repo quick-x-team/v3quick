@@ -971,6 +971,7 @@ void SimulatorWin::onOpenProjectFolder(const std::string &folderPath)
         if (fileUtils->isFileExist(configPath))
         {
             ConfigParser::getInstance()->readConfig(configPath);
+            _project.setProjectDir(path);
             _project.setScriptFile(ConfigParser::getInstance()->getEntryFile());
             foundProjectFile = true;
         }
@@ -996,6 +997,7 @@ void SimulatorWin::onOpenProjectFolder(const std::string &folderPath)
                         fileContent = fileContent.substr(pos + matchString.size(), fileContent.size());
                         ssize_t posEnd = fileContent.find_first_of('"');
                         auto projectFileName = path + "/cocosstudio/" + fileContent.substr(0, posEnd);
+                        _project.setProjectDir(path);
                         _project.setScriptFile(projectFileName);
                         foundProjectFile = true;
                     }
@@ -1009,12 +1011,14 @@ void SimulatorWin::onOpenProjectFolder(const std::string &folderPath)
                 // 3.
                 if (fileUtils->isFileExist(csdFilePath))
                 {
+                    _project.setProjectDir(path);
                     _project.setScriptFile(csdFilePath);
                     foundProjectFile = true;
                 }
                 // 4.
                 else if (fileUtils->isFileExist(csbFilePath))
                 {
+                    _project.setProjectDir(path);
                     _project.setScriptFile(csbFilePath);
                     foundProjectFile = true;
                 }
@@ -1023,7 +1027,6 @@ void SimulatorWin::onOpenProjectFolder(const std::string &folderPath)
 
         if (foundProjectFile)
         {
-            _project.setProjectDir(path);
             openProjectWithProjectConfig(_project);
         }
         else
