@@ -33,15 +33,15 @@
 NS_CC_BEGIN
 
 /**
-* @addtogroup GUI
-* @{
-* @addtogroup Label
-* @{
-*/
+ * @addtogroup _2d
+ * @{
+ */
 
 /**
  * @brief Possible GlyphCollection used by Label.
  *
+ * Specify a collections of characters to be load when Label created.
+ * Consider using DYNAMIC.
  */
 enum class GlyphCollection {
     DYNAMIC,
@@ -63,14 +63,16 @@ enum class LabelEffect {
 
 /**
  * @struct TTFConfig
- *
+ * @see `GlyphCollection`
  */
 typedef struct _ttfConfig
 {
     std::string fontFilePath;
     int fontSize;
-    GlyphCollection glyphs;
+
+    GlyphCollection glyphs; 
     const char *customGlyphs;
+    
     bool distanceFieldEnabled;
     int outlineSize;
 
@@ -615,7 +617,6 @@ private:
 };
 
 // end group
-/// @}
 /// @}
 
 NS_CC_END

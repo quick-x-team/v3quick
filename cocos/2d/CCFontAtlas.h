@@ -1,6 +1,6 @@
 /****************************************************************************
  Copyright (c) 2013      Zynga Inc.
- Copyright (c) 2013-2014 Chukong Technologies Inc.
+ Copyright (c) 2013-2015 Chukong Technologies Inc.
  
  http://www.cocos2d-x.org
  
@@ -22,8 +22,11 @@
  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  THE SOFTWARE.
  ****************************************************************************/
+
 #ifndef _CCFontAtlas_h_
 #define _CCFontAtlas_h_
+
+/// @cond DO_NOT_SHOW
 
 #include <string>
 #include <unordered_map>
@@ -34,13 +37,10 @@
 
 NS_CC_BEGIN
 
-//fwd
 class Font;
 class Texture2D;
 class EventCustom;
 class EventListenerCustom;
-
-/// @cond
 
 struct FontLetterDefinition
 {
@@ -130,9 +130,7 @@ protected:
     bool _antialiasEnabled;
 };
 
-/// @endcond
-
 NS_CC_END
 
-
+/// @endcond
 #endif /* defined(__cocos2d_libs__CCFontAtlas__) */
