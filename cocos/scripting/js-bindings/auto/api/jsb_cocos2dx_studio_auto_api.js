@@ -405,7 +405,7 @@ str
 
 /**
  * @method getMovementCount
- * @return {int}
+ * @return {long}
  */
 getMovementCount : function (
 )
@@ -1776,7 +1776,7 @@ bool
 
 /**
  * @method getMovementCount
- * @return {int}
+ * @return {long}
  */
 getMovementCount : function (
 )
@@ -4386,6 +4386,82 @@ create : function (
  * @constructor
  */
 ActionTimeline : function (
+)
+{
+},
+
+};
+
+/**
+ * @class ObjectExtensionData
+ */
+ccs.ObjectExtensionData = {
+
+/**
+ * @method setActionTag
+ * @param {int} arg0
+ */
+setActionTag : function (
+int 
+)
+{
+},
+
+/**
+ * @method setCustomProperty
+ * @param {String} arg0
+ */
+setCustomProperty : function (
+str 
+)
+{
+},
+
+/**
+ * @method init
+ * @return {bool}
+ */
+init : function (
+)
+{
+    return false;
+},
+
+/**
+ * @method getCustomProperty
+ * @return {String}
+ */
+getCustomProperty : function (
+)
+{
+    return ;
+},
+
+/**
+ * @method getActionTag
+ * @return {int}
+ */
+getActionTag : function (
+)
+{
+    return 0;
+},
+
+/**
+ * @method create
+ * @return {ccs.ObjectExtensionData}
+ */
+create : function (
+)
+{
+    return ccs.ObjectExtensionData;
+},
+
+/**
+ * @method ObjectExtensionData
+ * @constructor
+ */
+ObjectExtensionData : function (
 )
 {
 },
