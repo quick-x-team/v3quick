@@ -107,7 +107,16 @@
 
         node.setTag(json["Tag"] || 0);
 
-        node.setUserObject(new ccs.ActionTimelineData(json["ActionTag"] || 0));
+        var actionTag = json["ActionTag"] || 0;
+        if (cc.sys.isNative){
+            var extensionData = new ccs.ObjectExtensionData();
+            var customProperty = json["UserData"];
+            extensionData.setCustomProperty(customProperty);
+            extensionData.setActionTag(actionTag);
+            node.setUserObject(extensionData);
+        } else {
+            node.setUserObject(new ccs.ActionTimelineData(actionTag));
+        }
 
         node.setCascadeColorEnabled(true);
         node.setCascadeOpacityEnabled(true);
@@ -224,7 +233,16 @@
 
         var actionTag = json["ActionTag"] || 0;
         widget.setActionTag(actionTag);
-        widget.setUserObject(new ccs.ActionTimelineData(actionTag));
+
+        if (cc.sys.isNative){
+            var extensionData = new ccs.ObjectExtensionData();
+            var customProperty = json["UserData"];
+            extensionData.setCustomProperty(customProperty);
+            extensionData.setActionTag(actionTag);
+            widget.setUserObject(extensionData);
+        } else {
+            widget.setUserObject(new ccs.ActionTimelineData(actionTag));
+        }
 
         var rotationSkewX = json["RotationSkewX"];
         if (rotationSkewX)
