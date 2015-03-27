@@ -1164,7 +1164,9 @@
                 parser.generalAttributes(obj.node, json);
                 if(obj.action && obj.node){
                     obj.action.tag = obj.node.tag;
-                    obj.action.setTimeSpeed(json["InnerActionSpeed"]);
+                    var innerActionSpeed = json["InnerActionSpeed"];
+                    if(innerActionSpeed !== undefined)
+                        obj.action.setTimeSpeed(innerActionSpeed);
                     obj.node.runAction(obj.action);
                     obj.action.gotoFrameAndPause(0);
                 }
