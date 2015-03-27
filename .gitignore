@@ -166,3 +166,6 @@ tests/cpp-tests/Resources/audio
 /tests/lua-empty-test/src/cocos/
 /tests/lua-game-controller-test/src/cocos/
 /tests/lua-tests/src/cocos/
+cocos2d-x-3rd-party-libs-bin-3-deps-35/
+build/Release.win32_2012/
+build/Release.win32_2013/
