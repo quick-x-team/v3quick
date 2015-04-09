@@ -13,3 +13,5 @@ else
   APP_CPPFLAGS += -DNDEBUG
   APP_OPTIM := release
 endif
+
+COCOS_SIMULATOR_BUILD := 1
