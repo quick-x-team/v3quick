@@ -2823,9 +2823,13 @@ _p.setBoundingHeight = _p.setHeight;
 //
 // cc.Scheduler scheduleCallbackForTarget
 //
-cc.Scheduler.prototype.scheduleCallbackForTarget = function (target, callback_fn, interval, repeat, delay, paused) {
+_p = cc.Scheduler.prototype;
+_p.scheduleCallbackForTarget = function (target, callback_fn, interval, repeat, delay, paused) {
     this.schedule(callback_fn, target, interval, repeat, delay, paused, target.__instanceId + "");
 };
+_p.unscheduleCallbackForTarget = _p.unschedule;
+_p.unscheduleUpdateForTarget = _p.unscheduleUpdate;
+_p.unscheduleAllCallbacksForTarget = _p.unscheduleAllForTarget;
 
 
 //
