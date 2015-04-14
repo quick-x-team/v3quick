@@ -9,92 +9,10 @@ var cc = cc || {};
 cc.Configuration = {
 
 /**
- * @method checkForGLExtension
- * @param {String} arg0
- * @return {bool}
- */
-checkForGLExtension : function (
-str 
-)
-{
-    return false;
-},
-
-/**
- * @method init
- * @return {bool}
- */
-init : function (
-)
-{
-    return false;
-},
-
-/**
- * @method supportsS3TC
- * @return {bool}
- */
-supportsS3TC : function (
-)
-{
-    return false;
-},
-
-/**
  * @method supportsPVRTC
  * @return {bool}
  */
 supportsPVRTC : function (
-)
-{
-    return false;
-},
-
-/**
- * @method supportsShareableVAO
- * @return {bool}
- */
-supportsShareableVAO : function (
-)
-{
-    return false;
-},
-
-/**
- * @method getInfo
- * @return {String}
- */
-getInfo : function (
-)
-{
-    return ;
-},
-
-/**
- * @method getMaxSupportSpotLightInShader
- * @return {int}
- */
-getMaxSupportSpotLightInShader : function (
-)
-{
-    return 0;
-},
-
-/**
- * @method getMaxTextureUnits
- * @return {int}
- */
-getMaxTextureUnits : function (
-)
-{
-    return 0;
-},
-
-/**
- * @method supportsNPOT
- * @return {bool}
- */
-supportsNPOT : function (
 )
 {
     return false;
@@ -111,10 +29,32 @@ getMaxModelviewStackDepth : function (
 },
 
 /**
- * @method supportsDiscardFramebuffer
+ * @method supportsShareableVAO
  * @return {bool}
  */
-supportsDiscardFramebuffer : function (
+supportsShareableVAO : function (
+)
+{
+    return false;
+},
+
+/**
+ * @method supportsBGRA8888
+ * @return {bool}
+ */
+supportsBGRA8888 : function (
+)
+{
+    return false;
+},
+
+/**
+ * @method checkForGLExtension
+ * @param {String} arg0
+ * @return {bool}
+ */
+checkForGLExtension : function (
+str 
 )
 {
     return false;
@@ -131,6 +71,46 @@ supportsATITC : function (
 },
 
 /**
+ * @method supportsNPOT
+ * @return {bool}
+ */
+supportsNPOT : function (
+)
+{
+    return false;
+},
+
+/**
+ * @method init
+ * @return {bool}
+ */
+init : function (
+)
+{
+    return false;
+},
+
+/**
+ * @method getMaxSupportPointLightInShader
+ * @return {int}
+ */
+getMaxSupportPointLightInShader : function (
+)
+{
+    return 0;
+},
+
+/**
+ * @method getMaxTextureSize
+ * @return {int}
+ */
+getMaxTextureSize : function (
+)
+{
+    return 0;
+},
+
+/**
  * @method setValue
  * @param {String} arg0
  * @param {cc.Value} arg1
@@ -143,11 +123,13 @@ value
 },
 
 /**
- * @method gatherGPUInfo
+ * @method getMaxSupportSpotLightInShader
+ * @return {int}
  */
-gatherGPUInfo : function (
+getMaxSupportSpotLightInShader : function (
 )
 {
+    return 0;
 },
 
 /**
@@ -171,13 +153,13 @@ getMaxSupportDirLightInShader : function (
 },
 
 /**
- * @method getMaxSupportPointLightInShader
- * @return {int}
+ * @method isHighAnimate3DQuality
+ * @return {bool}
  */
-getMaxSupportPointLightInShader : function (
+isHighAnimate3DQuality : function (
 )
 {
-    return 0;
+    return false;
 },
 
 /**
@@ -188,6 +170,46 @@ loadConfigFile : function (
 str 
 )
 {
+},
+
+/**
+ * @method supportsDiscardFramebuffer
+ * @return {bool}
+ */
+supportsDiscardFramebuffer : function (
+)
+{
+    return false;
+},
+
+/**
+ * @method supportsS3TC
+ * @return {bool}
+ */
+supportsS3TC : function (
+)
+{
+    return false;
+},
+
+/**
+ * @method getInfo
+ * @return {String}
+ */
+getInfo : function (
+)
+{
+    return ;
+},
+
+/**
+ * @method getMaxTextureUnits
+ * @return {int}
+ */
+getMaxTextureUnits : function (
+)
+{
+    return 0;
 },
 
 /**
@@ -205,23 +227,11 @@ value
 },
 
 /**
- * @method getMaxTextureSize
- * @return {int}
+ * @method gatherGPUInfo
  */
-getMaxTextureSize : function (
+gatherGPUInfo : function (
 )
 {
-    return 0;
-},
-
-/**
- * @method supportsBGRA8888
- * @return {bool}
- */
-supportsBGRA8888 : function (
-)
-{
-    return false;
 },
 
 /**
@@ -1058,6 +1068,16 @@ getonEnterTransitionDidFinishCallback : function (
 },
 
 /**
+ * @method isOpacityModifyRGB
+ * @return {bool}
+ */
+isOpacityModifyRGB : function (
+)
+{
+    return false;
+},
+
+/**
  * @method getNodeToWorldAffineTransform
  * @return {cc.AffineTransform}
  */
@@ -1065,16 +1085,6 @@ getNodeToWorldAffineTransform : function (
 )
 {
     return cc.AffineTransform;
-},
-
-/**
- * @method getNodeToWorldTransform
- * @return {mat4_object}
- */
-getNodeToWorldTransform : function (
-)
-{
-    return cc.Mat4;
 },
 
 /**
@@ -1224,13 +1234,13 @@ getRotationSkewY : function (
 },
 
 /**
- * @method getNodeToParentAffineTransform
- * @return {cc.AffineTransform}
+ * @method getNodeToWorldTransform
+ * @return {mat4_object}
  */
-getNodeToParentAffineTransform : function (
+getNodeToWorldTransform : function (
 )
 {
-    return cc.AffineTransform;
+    return cc.Mat4;
 },
 
 /**
@@ -1274,13 +1284,13 @@ getRotation3D : function (
 },
 
 /**
- * @method getNodeToParentTransform
- * @return {mat4_object}
+ * @method getNodeToParentAffineTransform
+ * @return {cc.AffineTransform}
  */
-getNodeToParentTransform : function (
+getNodeToParentAffineTransform : function (
 )
 {
-    return cc.Mat4;
+    return cc.AffineTransform;
 },
 
 /**
@@ -1399,7 +1409,7 @@ getAnchorPoint : function (
 
 /**
  * @method getNumberOfRunningActions
- * @return {long}
+ * @return {int}
  */
 getNumberOfRunningActions : function (
 )
@@ -1427,12 +1437,22 @@ isVisible : function (
 
 /**
  * @method getChildrenCount
- * @return {long}
+ * @return {int}
  */
 getChildrenCount : function (
 )
 {
     return 0;
+},
+
+/**
+ * @method getNodeToParentTransform
+ * @return {mat4_object}
+ */
+getNodeToParentTransform : function (
+)
+{
+    return cc.Mat4;
 },
 
 /**
@@ -1513,6 +1533,16 @@ getAnchorPointInPoints : function (
 )
 {
     return cc.Vec2;
+},
+
+/**
+ * @method getRotationQuat
+ * @return {cc.Quaternion}
+ */
+getRotationQuat : function (
+)
+{
+    return cc.Quaternion;
 },
 
 /**
@@ -1650,16 +1680,6 @@ str
 },
 
 /**
- * @method setAdditionalTransform
-* @param {cc.AffineTransform|mat4_object} affinetransform
-*/
-setAdditionalTransform : function(
-mat4 
-)
-{
-},
-
-/**
  * @method updatePhysicsBodyTransform
  * @param {mat4_object} arg0
  * @param {unsigned int} arg1
@@ -1703,16 +1723,6 @@ getScheduler : function(
 )
 {
     return cc.Scheduler;
-},
-
-/**
- * @method getParentToNodeAffineTransform
- * @return {cc.AffineTransform}
- */
-getParentToNodeAffineTransform : function (
-)
-{
-    return cc.AffineTransform;
 },
 
 /**
@@ -1766,6 +1776,16 @@ getParent : function(
 )
 {
     return cc.Node;
+},
+
+/**
+ * @method getWorldToNodeTransform
+ * @return {mat4_object}
+ */
+getWorldToNodeTransform : function (
+)
+{
+    return cc.Mat4;
 },
 
 /**
@@ -1831,13 +1851,13 @@ bool
 },
 
 /**
- * @method getParentToNodeTransform
- * @return {mat4_object}
+ * @method getParentToNodeAffineTransform
+ * @return {cc.AffineTransform}
  */
-getParentToNodeTransform : function (
+getParentToNodeAffineTransform : function (
 )
 {
-    return cc.Mat4;
+    return cc.AffineTransform;
 },
 
 /**
@@ -1942,16 +1962,6 @@ setLocalZOrder : function (
 int 
 )
 {
-},
-
-/**
- * @method getWorldToNodeAffineTransform
- * @return {cc.AffineTransform}
- */
-getWorldToNodeAffineTransform : function (
-)
-{
-    return cc.AffineTransform;
 },
 
 /**
@@ -2129,13 +2139,13 @@ sortAllChildren : function (
 },
 
 /**
- * @method getWorldToNodeTransform
- * @return {mat4_object}
+ * @method getWorldToNodeAffineTransform
+ * @return {cc.AffineTransform}
  */
-getWorldToNodeTransform : function (
+getWorldToNodeAffineTransform : function (
 )
 {
-    return cc.Mat4;
+    return cc.AffineTransform;
 },
 
 /**
@@ -2156,6 +2166,16 @@ getNormalizedPosition : function (
 )
 {
     return cc.Vec2;
+},
+
+/**
+ * @method getParentToNodeTransform
+ * @return {mat4_object}
+ */
+getParentToNodeTransform : function (
+)
+{
+    return cc.Mat4;
 },
 
 /**
@@ -2191,13 +2211,13 @@ isCascadeColorEnabled : function (
 },
 
 /**
- * @method isOpacityModifyRGB
- * @return {bool}
+ * @method setRotationQuat
+ * @param {cc.Quaternion} arg0
  */
-isOpacityModifyRGB : function (
+setRotationQuat : function (
+quaternion 
 )
 {
-    return false;
 },
 
 /**
@@ -2263,16 +2283,6 @@ __NodeRGBA : function (
 cc.Scene = {
 
 /**
- * @method initWithPhysics
- * @return {bool}
- */
-initWithPhysics : function (
-)
-{
-    return false;
-},
-
-/**
  * @method setCameraOrderDirty
  */
 setCameraOrderDirty : function (
@@ -2298,16 +2308,6 @@ onProjectionChanged : function (
 eventcustom 
 )
 {
-},
-
-/**
- * @method getPhysicsWorld
- * @return {cc.PhysicsWorld}
- */
-getPhysicsWorld : function (
-)
-{
-    return cc.PhysicsWorld;
 },
 
 /**
@@ -2349,16 +2349,6 @@ size
  * @return {cc.Scene}
  */
 create : function (
-)
-{
-    return cc.Scene;
-},
-
-/**
- * @method createWithPhysics
- * @return {cc.Scene}
- */
-createWithPhysics : function (
 )
 {
     return cc.Scene;
@@ -3343,11 +3333,49 @@ float
 },
 
 /**
+ * @method unscheduleAllWithMinPriority
+ * @param {int} arg0
+ */
+unscheduleAllWithMinPriority : function (
+int 
+)
+{
+},
+
+/**
+ * @method update
+ * @param {float} arg0
+ */
+update : function (
+float 
+)
+{
+},
+
+/**
+ * @method unscheduleScriptEntry
+ * @param {unsigned int} arg0
+ */
+unscheduleScriptEntry : function (
+int 
+)
+{
+},
+
+/**
  * @method performFunctionInCocosThread
  * @param {function} arg0
  */
 performFunctionInCocosThread : function (
 func 
+)
+{
+},
+
+/**
+ * @method unscheduleAll
+ */
+unscheduleAll : function (
 )
 {
 },
@@ -6752,7 +6780,7 @@ node
 /**
  * @method getNumberOfRunningActionsInTarget
  * @param {cc.Node} arg0
- * @return {long}
+ * @return {int}
  */
 getNumberOfRunningActionsInTarget : function (
 node 
@@ -10191,7 +10219,7 @@ mat4
 
 /**
  * @method getUniformCount
- * @return {long}
+ * @return {int}
  */
 getUniformCount : function (
 )
@@ -10245,7 +10273,7 @@ int
 
 /**
  * @method getVertexAttribCount
- * @return {long}
+ * @return {int}
  */
 getVertexAttribCount : function (
 )
@@ -10303,26 +10331,6 @@ func
  */
 apply : function (
 mat4 
-)
-{
-},
-
-/**
- * @method setVertexAttribPointer
- * @param {String} arg0
- * @param {int} arg1
- * @param {unsigned int} arg2
- * @param {unsigned char} arg3
- * @param {int} arg4
- * @param {void} arg5
- */
-setVertexAttribPointer : function (
-str, 
-int, 
-int, 
-char, 
-int, 
-void 
 )
 {
 },
@@ -10458,7 +10466,7 @@ getBlendFunc : function (
 
 /**
  * @method getQuadsToDraw
- * @return {long}
+ * @return {int}
  */
 getQuadsToDraw : function (
 )
@@ -10496,10 +10504,10 @@ int
 
 /**
  * @method setQuadsToDraw
- * @param {long} arg0
+ * @param {int} arg0
  */
 setQuadsToDraw : function (
-long 
+int 
 )
 {
 },
@@ -11335,12 +11343,12 @@ bool
 /**
  * @method initWithTexture
  * @param {cc.Texture2D} arg0
- * @param {long} arg1
+ * @param {int} arg1
  * @return {bool}
  */
 initWithTexture : function (
 texture2d, 
-long 
+int 
 )
 {
     return false;
@@ -11359,7 +11367,7 @@ getBlendFunc : function (
 /**
  * @method lowestAtlasIndexInChild
  * @param {cc.Sprite} arg0
- * @return {long}
+ * @return {int}
  */
 lowestAtlasIndexInChild : function (
 sprite 
@@ -11372,7 +11380,7 @@ sprite
  * @method atlasIndexForChild
  * @param {cc.Sprite} arg0
  * @param {int} arg1
- * @return {long}
+ * @return {int}
  */
 atlasIndexForChild : function (
 sprite, 
@@ -11395,12 +11403,12 @@ textureatlas
 /**
  * @method initWithFile
  * @param {String} arg0
- * @param {long} arg1
+ * @param {int} arg1
  * @return {bool}
  */
 initWithFile : function (
 str, 
-long 
+int 
 )
 {
     return false;
@@ -11437,11 +11445,11 @@ getTextureAtlas : function (
 /**
  * @method insertQuadFromSprite
  * @param {cc.Sprite} arg0
- * @param {long} arg1
+ * @param {int} arg1
  */
 insertQuadFromSprite : function (
 sprite, 
-long 
+int 
 )
 {
 },
@@ -11459,12 +11467,12 @@ texture2d
 /**
  * @method rebuildIndexInOrder
  * @param {cc.Sprite} arg0
- * @param {long} arg1
- * @return {long}
+ * @param {int} arg1
+ * @return {int}
  */
 rebuildIndexInOrder : function (
 sprite, 
-long 
+int 
 )
 {
     return 0;
@@ -11473,7 +11481,7 @@ long
 /**
  * @method highestAtlasIndexInChild
  * @param {cc.Sprite} arg0
- * @return {long}
+ * @return {int}
  */
 highestAtlasIndexInChild : function (
 sprite 
@@ -11484,11 +11492,11 @@ sprite
 
 /**
  * @method removeChildAtIndex
- * @param {long} arg0
+ * @param {int} arg0
  * @param {bool} arg1
  */
 removeChildAtIndex : function (
-long, 
+int, 
 bool 
 )
 {
@@ -11517,12 +11525,12 @@ blendfunc
 /**
  * @method create
  * @param {String} arg0
- * @param {long} arg1
+ * @param {int} arg1
  * @return {cc.SpriteBatchNode}
  */
 create : function (
 str, 
-long 
+int 
 )
 {
     return cc.SpriteBatchNode;
@@ -11531,12 +11539,12 @@ long
 /**
  * @method createWithTexture
  * @param {cc.Texture2D} arg0
- * @param {long} arg1
+ * @param {int} arg1
  * @return {cc.SpriteBatchNode}
  */
 createWithTexture : function (
 texture2d, 
-long 
+int 
 )
 {
     return cc.SpriteBatchNode;
@@ -11610,8 +11618,10 @@ getHeight : function (
 
 /**
  * @method disableEffect
- */
-disableEffect : function (
+* @param {cc.LabelEffect} labeleffect
+*/
+disableEffect : function(
+labeleffect 
 )
 {
 },
@@ -12634,6 +12644,16 @@ actioninterval
 cc.TransitionScene = {
 
 /**
+ * @method getInScene
+ * @return {cc.Scene}
+ */
+getInScene : function (
+)
+{
+    return cc.Scene;
+},
+
+/**
  * @method finish
  */
 finish : function (
@@ -12653,6 +12673,16 @@ scene
 )
 {
     return false;
+},
+
+/**
+ * @method getDuration
+ * @return {float}
+ */
+getDuration : function (
+)
+{
+    return 0;
 },
 
 /**
@@ -14652,18 +14682,6 @@ getAlphaThreshold : function (
 },
 
 /**
- * @method init
- * @param {cc.Node} arg0
- * @return {bool}
- */
-init : function (
-node 
-)
-{
-    return false;
-},
-
-/**
  * @method getStencil
  * @return {cc.Node}
  */
@@ -14810,6 +14828,16 @@ isFastMode : function (
 },
 
 /**
+ * @method getStroke
+ * @return {float}
+ */
+getStroke : function (
+)
+{
+    return 0;
+},
+
+/**
  * @method initWithFade
 * @param {float|float} float
 * @param {float|float} float
@@ -14835,6 +14863,16 @@ str
  */
 setFastMode : function (
 bool 
+)
+{
+},
+
+/**
+ * @method setStroke
+ * @param {float} arg0
+ */
+setStroke : function (
+float 
 )
 {
 },
@@ -15191,7 +15229,7 @@ spriteframe
 
 /**
  * @method getAtlasIndex
- * @return {long}
+ * @return {int}
  */
 getAtlasIndex : function (
 )
@@ -15222,11 +15260,11 @@ getBlendFunc : function (
 /**
  * @method setDisplayFrameWithAnimationName
  * @param {String} arg0
- * @param {long} arg1
+ * @param {int} arg1
  */
 setDisplayFrameWithAnimationName : function (
 str, 
-long 
+int 
 )
 {
 },
@@ -15263,10 +15301,10 @@ isDirty : function (
 
 /**
  * @method setAtlasIndex
- * @param {long} arg0
+ * @param {int} arg0
  */
 setAtlasIndex : function (
-long 
+int 
 )
 {
 },
@@ -15436,6 +15474,200 @@ spriteframe
  * @constructor
  */
 Sprite : function (
+)
+{
+},
+
+};
+
+/**
+ * @class Image
+ */
+cc.Image = {
+
+/**
+ * @method hasPremultipliedAlpha
+ * @return {bool}
+ */
+hasPremultipliedAlpha : function (
+)
+{
+    return false;
+},
+
+/**
+ * @method getDataLen
+ * @return {int}
+ */
+getDataLen : function (
+)
+{
+    return 0;
+},
+
+/**
+ * @method saveToFile
+ * @param {String} arg0
+ * @param {bool} arg1
+ * @return {bool}
+ */
+saveToFile : function (
+str, 
+bool 
+)
+{
+    return false;
+},
+
+/**
+ * @method hasAlpha
+ * @return {bool}
+ */
+hasAlpha : function (
+)
+{
+    return false;
+},
+
+/**
+ * @method isCompressed
+ * @return {bool}
+ */
+isCompressed : function (
+)
+{
+    return false;
+},
+
+/**
+ * @method getHeight
+ * @return {int}
+ */
+getHeight : function (
+)
+{
+    return 0;
+},
+
+/**
+ * @method initWithImageFile
+ * @param {String} arg0
+ * @return {bool}
+ */
+initWithImageFile : function (
+str 
+)
+{
+    return false;
+},
+
+/**
+ * @method getWidth
+ * @return {int}
+ */
+getWidth : function (
+)
+{
+    return 0;
+},
+
+/**
+ * @method getBitPerPixel
+ * @return {int}
+ */
+getBitPerPixel : function (
+)
+{
+    return 0;
+},
+
+/**
+ * @method getFileType
+ * @return {cc.Image::Format}
+ */
+getFileType : function (
+)
+{
+    return 0;
+},
+
+/**
+ * @method getNumberOfMipmaps
+ * @return {int}
+ */
+getNumberOfMipmaps : function (
+)
+{
+    return 0;
+},
+
+/**
+ * @method getRenderFormat
+ * @return {cc.Texture2D::PixelFormat}
+ */
+getRenderFormat : function (
+)
+{
+    return 0;
+},
+
+/**
+ * @method getData
+ * @return {unsigned char}
+ */
+getData : function (
+)
+{
+    return 0;
+},
+
+/**
+ * @method getMipmaps
+ * @return {cc._MipmapInfo}
+ */
+getMipmaps : function (
+)
+{
+    return cc._MipmapInfo;
+},
+
+/**
+ * @method initWithRawData
+ * @param {unsigned char} arg0
+ * @param {int} arg1
+ * @param {int} arg2
+ * @param {int} arg3
+ * @param {int} arg4
+ * @param {bool} arg5
+ * @return {bool}
+ */
+initWithRawData : function (
+char, 
+int, 
+int, 
+int, 
+int, 
+bool 
+)
+{
+    return false;
+},
+
+/**
+ * @method setPVRImagesHavePremultipliedAlpha
+ * @param {bool} arg0
+ */
+setPVRImagesHavePremultipliedAlpha : function (
+bool 
+)
+{
+},
+
+/**
+ * @method Image
+ * @constructor
+ */
+Image : function (
 )
 {
 },
@@ -18111,18 +18343,6 @@ vec3
 },
 
 /**
- * @method isVisibleInFrustum
- * @param {cc.AABB} arg0
- * @return {bool}
- */
-isVisibleInFrustum : function (
-aabb 
-)
-{
-    return false;
-},
-
-/**
  * @method setCameraFlag
  * @param {cc.CameraFlag} arg0
  */
@@ -18251,6 +18471,371 @@ getVisitingCamera : function (
  * @constructor
  */
 Camera : function (
+)
+{
+},
+
+};
+
+/**
+ * @class BaseLight
+ */
+cc.BaseLight = {
+
+/**
+ * @method setEnabled
+ * @param {bool} arg0
+ */
+setEnabled : function (
+bool 
+)
+{
+},
+
+/**
+ * @method getIntensity
+ * @return {float}
+ */
+getIntensity : function (
+)
+{
+    return 0;
+},
+
+/**
+ * @method isEnabled
+ * @return {bool}
+ */
+isEnabled : function (
+)
+{
+    return false;
+},
+
+/**
+ * @method getLightType
+ * @return {cc.LightType}
+ */
+getLightType : function (
+)
+{
+    return 0;
+},
+
+/**
+ * @method setLightFlag
+ * @param {cc.LightFlag} arg0
+ */
+setLightFlag : function (
+lightflag 
+)
+{
+},
+
+/**
+ * @method setIntensity
+ * @param {float} arg0
+ */
+setIntensity : function (
+float 
+)
+{
+},
+
+/**
+ * @method getLightFlag
+ * @return {cc.LightFlag}
+ */
+getLightFlag : function (
+)
+{
+    return 0;
+},
+
+};
+
+/**
+ * @class DirectionLight
+ */
+cc.DirectionLight = {
+
+/**
+ * @method getDirection
+ * @return {vec3_object}
+ */
+getDirection : function (
+)
+{
+    return cc.Vec3;
+},
+
+/**
+ * @method getDirectionInWorld
+ * @return {vec3_object}
+ */
+getDirectionInWorld : function (
+)
+{
+    return cc.Vec3;
+},
+
+/**
+ * @method setDirection
+ * @param {vec3_object} arg0
+ */
+setDirection : function (
+vec3 
+)
+{
+},
+
+/**
+ * @method create
+ * @param {vec3_object} arg0
+ * @param {color3b_object} arg1
+ * @return {cc.DirectionLight}
+ */
+create : function (
+vec3, 
+color3b 
+)
+{
+    return cc.DirectionLight;
+},
+
+/**
+ * @method DirectionLight
+ * @constructor
+ */
+DirectionLight : function (
+)
+{
+},
+
+};
+
+/**
+ * @class PointLight
+ */
+cc.PointLight = {
+
+/**
+ * @method getRange
+ * @return {float}
+ */
+getRange : function (
+)
+{
+    return 0;
+},
+
+/**
+ * @method setRange
+ * @param {float} arg0
+ */
+setRange : function (
+float 
+)
+{
+},
+
+/**
+ * @method create
+ * @param {vec3_object} arg0
+ * @param {color3b_object} arg1
+ * @param {float} arg2
+ * @return {point_object}
+ */
+create : function (
+vec3, 
+color3b, 
+float 
+)
+{
+    return cc.PointLight;
+},
+
+/**
+ * @method PointLight
+ * @constructor
+ */
+PointLight : function (
+)
+{
+},
+
+};
+
+/**
+ * @class SpotLight
+ */
+cc.SpotLight = {
+
+/**
+ * @method getRange
+ * @return {float}
+ */
+getRange : function (
+)
+{
+    return 0;
+},
+
+/**
+ * @method setDirection
+ * @param {vec3_object} arg0
+ */
+setDirection : function (
+vec3 
+)
+{
+},
+
+/**
+ * @method getCosInnerAngle
+ * @return {float}
+ */
+getCosInnerAngle : function (
+)
+{
+    return 0;
+},
+
+/**
+ * @method getOuterAngle
+ * @return {float}
+ */
+getOuterAngle : function (
+)
+{
+    return 0;
+},
+
+/**
+ * @method getInnerAngle
+ * @return {float}
+ */
+getInnerAngle : function (
+)
+{
+    return 0;
+},
+
+/**
+ * @method getDirection
+ * @return {vec3_object}
+ */
+getDirection : function (
+)
+{
+    return cc.Vec3;
+},
+
+/**
+ * @method getCosOuterAngle
+ * @return {float}
+ */
+getCosOuterAngle : function (
+)
+{
+    return 0;
+},
+
+/**
+ * @method setOuterAngle
+ * @param {float} arg0
+ */
+setOuterAngle : function (
+float 
+)
+{
+},
+
+/**
+ * @method setInnerAngle
+ * @param {float} arg0
+ */
+setInnerAngle : function (
+float 
+)
+{
+},
+
+/**
+ * @method getDirectionInWorld
+ * @return {vec3_object}
+ */
+getDirectionInWorld : function (
+)
+{
+    return cc.Vec3;
+},
+
+/**
+ * @method setRange
+ * @param {float} arg0
+ */
+setRange : function (
+float 
+)
+{
+},
+
+/**
+ * @method create
+ * @param {vec3_object} arg0
+ * @param {vec3_object} arg1
+ * @param {color3b_object} arg2
+ * @param {float} arg3
+ * @param {float} arg4
+ * @param {float} arg5
+ * @return {cc.SpotLight}
+ */
+create : function (
+vec3, 
+vec3, 
+color3b, 
+float, 
+float, 
+float 
+)
+{
+    return cc.SpotLight;
+},
+
+/**
+ * @method SpotLight
+ * @constructor
+ */
+SpotLight : function (
+)
+{
+},
+
+};
+
+/**
+ * @class AmbientLight
+ */
+cc.AmbientLight = {
+
+/**
+ * @method create
+ * @param {color3b_object} arg0
+ * @return {cc.AmbientLight}
+ */
+create : function (
+color3b 
+)
+{
+    return cc.AmbientLight;
+},
+
+/**
+ * @method AmbientLight
+ * @constructor
+ */
+AmbientLight : function (
 )
 {
 },
@@ -20931,6 +21516,41 @@ getInstance : function (
 )
 {
     return cc.SimpleAudioEngine;
+},
+
+};
+
+/**
+ * @class AsyncTaskPool
+ */
+cc.AsyncTaskPool = {
+
+/**
+ * @method stopTasks
+ * @param {cc.AsyncTaskPool::TaskType} arg0
+ */
+stopTasks : function (
+tasktype 
+)
+{
+},
+
+/**
+ * @method destoryInstance
+ */
+destoryInstance : function (
+)
+{
+},
+
+/**
+ * @method getInstance
+ * @return {cc.AsyncTaskPool}
+ */
+getInstance : function (
+)
+{
+    return cc.AsyncTaskPool;
 },
 
 };
