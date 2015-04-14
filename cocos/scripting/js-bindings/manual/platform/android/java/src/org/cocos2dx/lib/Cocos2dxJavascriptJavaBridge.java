@@ -20,20 +20,8 @@
  * THE SOFTWARE.
  */
 
-#include "ScriptingCore.h"
-#include "cocos2d_specifics.hpp"
+package org.cocos2dx.lib;
 
-NS_CC_BEGIN
-
-class GLNode : public cocos2d::Node
-{
-public:
-    void draw(Renderer *renderer, const Mat4& transform, uint32_t flags) override;
-protected:
-    void onDraw(Mat4 &transform, uint32_t flags);
-    cocos2d::CustomCommand _customCommand;
-};
-
-NS_CC_END
-
-void js_register_cocos2dx_GLNode(JSContext *cx, JS::HandleObject global);
+public class Cocos2dxJavascriptJavaBridge {
+	public static native int evalString(String value);
+}
