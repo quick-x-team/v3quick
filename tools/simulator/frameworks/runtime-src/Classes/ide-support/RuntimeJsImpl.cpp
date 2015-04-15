@@ -47,7 +47,7 @@ static bool reloadScript(const string& file)
 
 bool runtime_FileUtils_addSearchPath(JSContext *cx, uint32_t argc, jsval *vp)
 {
-    jsval *argv = JS_ARGV(cx, vp);
+    JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     bool ok = true;
     JSObject *obj = JS_THIS_OBJECT(cx, vp);
     js_proxy_t *proxy = jsb_get_js_proxy(obj);
@@ -57,12 +57,12 @@ bool runtime_FileUtils_addSearchPath(JSContext *cx, uint32_t argc, jsval *vp)
         std::string arg0;
         bool arg1 = false;
 
-        ok &= jsval_to_std_string(cx, argv[0], &arg0);
+        ok &= jsval_to_std_string(cx, args.get(0), &arg0);
         JSB_PRECONDITION2(ok, cx, false, "cocos2dx_FileUtils_addSearchPath : Error processing arguments");
 
         if (argc == 2)
         {
-            arg1 = JS::ToBoolean(JS::RootedValue(cx, argv[1]));
+            arg1 = JS::ToBoolean(JS::RootedValue(cx, args.get(1)));
         }
 
         if (! FileUtils::getInstance()->isAbsolutePath(arg0))
@@ -82,7 +82,7 @@ bool runtime_FileUtils_addSearchPath(JSContext *cx, uint32_t argc, jsval *vp)
 #endif
         }
 
-        JS_SET_RVAL(cx, vp, JSVAL_VOID);
+        args.rval().setUndefined();
         return true;
     }
 
@@ -92,7 +92,7 @@ bool runtime_FileUtils_addSearchPath(JSContext *cx, uint32_t argc, jsval *vp)
 
 bool runtime_FileUtils_setSearchPaths(JSContext *cx, uint32_t argc, jsval *vp)
 {
-    jsval *argv = JS_ARGV(cx, vp);
+    JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     bool ok = true;
     JSObject *obj = JS_THIS_OBJECT(cx, vp);
     js_proxy_t *proxy = jsb_get_js_proxy(obj);
@@ -100,7 +100,7 @@ bool runtime_FileUtils_setSearchPaths(JSContext *cx, uint32_t argc, jsval *vp)
     JSB_PRECONDITION2( cobj, cx, false, "js_cocos2dx_FileUtils_setSearchPaths : Invalid Native Object");
     if (argc == 1) {
         std::vector<std::string> vecPaths, writePaths;
-        ok &= jsval_to_std_vector_string(cx, argv[0], &vecPaths);
+        ok &= jsval_to_std_vector_string(cx, args.get(0), &vecPaths);
         JSB_PRECONDITION2(ok, cx, false, "js_cocos2dx_FileUtils_setSearchPaths : Error processing arguments");
 
         std::vector<std::string> originPath; // for IOS platform.
@@ -128,7 +128,7 @@ bool runtime_FileUtils_setSearchPaths(JSContext *cx, uint32_t argc, jsval *vp)
 
         cobj->setSearchPaths(vecPaths);
 
-        JS_SET_RVAL(cx, vp, JSVAL_VOID);
+        args.rval().setUndefined();
         return true;
     }
 
@@ -136,7 +136,7 @@ bool runtime_FileUtils_setSearchPaths(JSContext *cx, uint32_t argc, jsval *vp)
     return false;
 }
 
-void register_FileUtils(JSContext *cx, JSObject *global)
+void register_FileUtils(JSContext *cx, JS::HandleObject global)
 {
     JS::RootedValue  nsval(cx);
     JS::RootedObject ns(cx);
@@ -144,13 +144,12 @@ void register_FileUtils(JSContext *cx, JSObject *global)
     if (nsval == JSVAL_VOID) {
         return;
     } else {
-        JS_ValueToObject(cx, nsval, &ns);
+        ns.set(nsval.toObjectOrNull());
     }
-    global = ns;
 
-    JSObject  *tmpObj = JSVAL_TO_OBJECT(anonEvaluate(cx, global, "(function () { return cc.FileUtils.getInstance(); })()"));
-    JS_DefineFunction(cx, tmpObj, "addSearchPath", runtime_FileUtils_addSearchPath, 1, JSPROP_PERMANENT | JSPROP_ENUMERATE);
-    JS_DefineFunction(cx, tmpObj, "setSearchPaths", runtime_FileUtils_setSearchPaths, 1, JSPROP_PERMANENT | JSPROP_ENUMERATE);
+    JS::RootedObject proto(cx, jsb_cocos2d_FileUtils_prototype);
+    JS_DefineFunction(cx, proto, "addSearchPath", runtime_FileUtils_addSearchPath, 1, JSPROP_PERMANENT | JSPROP_ENUMERATE);
+    JS_DefineFunction(cx, proto, "setSearchPaths", runtime_FileUtils_setSearchPaths, 1, JSPROP_PERMANENT | JSPROP_ENUMERATE);
 }
 
 RuntimeJsImpl* RuntimeJsImpl::create()

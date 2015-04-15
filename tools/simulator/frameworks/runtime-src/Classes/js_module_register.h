@@ -33,7 +33,6 @@ int js_module_register()
     ScriptingCore* sc = ScriptingCore::getInstance();
     sc->addRegisterCallback(register_all_cocos2dx);
     sc->addRegisterCallback(register_cocos2dx_js_core);
-    sc->addRegisterCallback(register_cocos2dx_js_extensions);
     sc->addRegisterCallback(jsb_register_system);
     
     // extension can be commented out to reduce the package
