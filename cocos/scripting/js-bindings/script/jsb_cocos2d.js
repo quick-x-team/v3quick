@@ -26,7 +26,7 @@
 
 // CCConfig.js
 //
-cc.ENGINE_VERSION = "Cocos2d-JS v3.3 RC0";
+cc.ENGINE_VERSION = "Cocos2d-JS v3.5";
 
 cc.FIX_ARTIFACTS_BY_STRECHING_TEXEL = 0;
 cc.DIRECTOR_STATS_POSITION = {x: 0, y: 0};
@@ -100,18 +100,6 @@ cc.DEVICE_ORIENTATION_PORTRAIT_UPSIDE_DOWN = 2;
 cc.DEVICE_ORIENTATION_LANDSCAPE_RIGHT = 3;
 cc.DEVICE_MAX_ORIENTATIONS = 2;
 
-cc.TEXTURE_PIXELFORMAT_RGBA8888 = 0;
-cc.TEXTURE_PIXELFORMAT_RGB888 = 1;
-cc.TEXTURE_PIXELFORMAT_RGB565 = 2;
-cc.TEXTURE_PIXELFORMAT_A8 = 3;
-cc.TEXTURE_PIXELFORMAT_I8 = 4;
-cc.TEXTURE_PIXELFORMAT_AI88 = 5;
-cc.TEXTURE_PIXELFORMAT_RGBA4444 = 6;
-cc.TEXTURE_PIXELFORMAT_RGB5A1 = 7;
-cc.TEXTURE_PIXELFORMAT_PVRTC4 = 8;
-cc.TEXTURE_PIXELFORMAT_PVRTC4 = 9;
-cc.TEXTURE_PIXELFORMAT_DEFAULT = cc.TEXTURE_PIXELFORMAT_RGBA8888;
-
 cc.IMAGE_FORMAT_JPEG = 0;
 cc.IMAGE_FORMAT_PNG = 1;
 cc.IMAGE_FORMAT_RAWDATA = 9;
@@ -143,7 +131,10 @@ cc.DEFAULT_PADDING = 5;
 cc.Scheduler.PRIORITY_SYSTEM    = -2147483648;
 
 var _Class = cc.Texture2D;
+
+_Class.PIXEL_FORMAT_NONE = -1;
 _Class.PIXEL_FORMAT_AUTO = 0;
+_Class.PIXEL_FORMAT_BGRA8888 = 1;
 _Class.PIXEL_FORMAT_RGBA8888 = 2;
 _Class.PIXEL_FORMAT_RGB888 = 3;
 _Class.PIXEL_FORMAT_RGB565 = 4;
@@ -153,8 +144,17 @@ _Class.PIXEL_FORMAT_AI88 = 7;
 _Class.PIXEL_FORMAT_RGBA4444 = 8;
 _Class.PIXEL_FORMAT_RGB5A1 = 9;
 _Class.PIXEL_FORMAT_PVRTC4 = 10;
+_Class.PIXEL_FORMAT_PVRTC4A = 11;
 _Class.PIXEL_FORMAT_PVRTC2 = 11;
-_Class.PIXEL_FORMAT_DEFAULT = _Class.PIXEL_FORMAT_RGBA8888;
+_Class.PIXEL_FORMAT_PVRTC2A = 13;
+_Class.PIXEL_FORMAT_ETC = 14;
+_Class.PIXEL_FORMAT_S3TC_DXT1 = 15;
+_Class.PIXEL_FORMAT_S3TC_DXT3 = 16;
+_Class.PIXEL_FORMAT_S3TC_DXT5 = 17;
+_Class.PIXEL_FORMAT_ATC_RGB = 18;
+_Class.PIXEL_FORMAT_ATC_EXPLICIT_ALPHA = 19;
+_Class.PIXEL_FORMAT_ATC_INTERPOLATED_ALPHA = 20;
+_Class.PIXEL_FORMAT_DEFAULT = _Class.PIXEL_FORMAT_AUTO;
 _Class.defaultPixelFormat = _Class.PIXEL_FORMAT_DEFAULT;
 
 // For blend
@@ -1461,6 +1461,7 @@ cc.TMXLayer.extend = cc.Class.extend;
 cc.TMXTiledMap.extend = cc.Class.extend;
 cc.TMXMapInfo.extend = cc.Class.extend;
 cc.TransitionScene.extend = cc.Class.extend;
+cc.GLProgram.extend = cc.Class.extend;
 
 
 // Cocos2d-html5 supports multi scene resources preloading.
@@ -2171,7 +2172,6 @@ var templateSetBlendFunc = function(src, dst) {
     else
         blendf = {src: src, dst: dst};
     this._setBlendFunc(blendf);
-    var b = this.getBlendFunc();
 };
 for (var i = 0, l = protoHasBlend.length; i < l; i++) {
     var proto = protoHasBlend[i];
@@ -2724,6 +2724,16 @@ cc.Node.prototype._getBoundingBoxToCurrentNode = function (parentTransform) {
     return rect;
 };
 
+cc.Node.prototype._setNormalizedPosition = cc.Node.prototype.setNormalizedPosition;
+cc.Node.prototype.setNormalizedPosition = function (posOrX, y) {
+    if (y === undefined) {
+        this._setNormalizedPosition(posOrX);
+    }
+    else {
+        this._setNormalizedPosition(cc.p(posOrX, y));
+    }
+};
+
 
 //
 // cc.Layer bake/unbake/isBaked
@@ -2799,3 +2809,39 @@ cc.LabelTTF.prototype.setDimensions = function (dim, height) {
     }
     this._setDimensions(dim);
 };
+
+
+//
+// Label adaptation to LabelTTF/LabelBMFont/LabelAtlas
+//
+_p = cc.Label.prototype;
+_p.enableStroke = _p.enableOutline;
+_p.setBoundingWidth = _p.setWidth;
+_p.setBoundingHeight = _p.setHeight;
+
+
+//
+// cc.Scheduler scheduleCallbackForTarget
+//
+_p = cc.Scheduler.prototype;
+_p.scheduleCallbackForTarget = function (target, callback_fn, interval, repeat, delay, paused) {
+    this.schedule(callback_fn, target, interval, repeat, delay, paused, target.__instanceId + "");
+};
+_p.unscheduleCallbackForTarget = _p.unschedule;
+_p.unscheduleUpdateForTarget = _p.unscheduleUpdate;
+_p.unscheduleAllCallbacksForTarget = _p.unscheduleAllForTarget;
+
+
+//
+// 3D module rename to jsb namespace
+//
+jsb.BaseLight = cc.BaseLight;
+delete cc.BaseLight;
+jsb.DirectionLight = cc.DirectionLight;
+delete cc.DirectionLight;
+jsb.PointLight = cc.PointLight;
+delete cc.PointLight;
+jsb.SpotLight = cc.SpotLight;
+delete cc.SpotLight;
+jsb.AmbientLight = cc.AmbientLight;
+delete cc.AmbientLight;

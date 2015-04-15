@@ -41,6 +41,8 @@ LOCAL_SRC_FILES := ../auto/jsb_cocos2dx_auto.cpp \
                    ../auto/jsb_cocos2dx_spine_auto.cpp \
                    ../auto/jsb_cocos2dx_studio_auto.cpp \
                    ../auto/jsb_cocos2dx_ui_auto.cpp \
+                   ../auto/jsb_cocos2dx_3d_auto.cpp \
+                   ../auto/jsb_cocos2dx_3d_extension_auto.cpp \
                    ../manual/ScriptingCore.cpp \
                    ../manual/cocos2d_specifics.cpp \
                    ../manual/js_manual_conversions.cpp \
@@ -50,11 +52,13 @@ LOCAL_SRC_FILES := ../auto/jsb_cocos2dx_auto.cpp \
                    ../manual/jsb_opengl_manual.cpp \
                    ../manual/jsb_opengl_registration.cpp \
                    ../manual/jsb_event_dispatcher_manual.cpp \
+                   ../manual/platform/android/CCJavascriptJavaBridge.cpp \
                    ../manual/chipmunk/js_bindings_chipmunk_auto_classes.cpp \
                    ../manual/chipmunk/js_bindings_chipmunk_functions.cpp \
                    ../manual/chipmunk/js_bindings_chipmunk_manual.cpp \
                    ../manual/chipmunk/js_bindings_chipmunk_registration.cpp \
                    ../manual/cocosbuilder/js_bindings_ccbreader.cpp \
+                   ../manual/cocostudio/jsb_cocos2dx_studio_conversions.cpp \
                    ../manual/cocostudio/jsb_cocos2dx_studio_manual.cpp \
                    ../manual/extension/jsb_cocos2dx_extension_manual.cpp \
                    ../manual/localstorage/js_bindings_system_functions.cpp \
@@ -64,7 +68,7 @@ LOCAL_SRC_FILES := ../auto/jsb_cocos2dx_auto.cpp \
                    ../manual/network/XMLHTTPRequest.cpp \
                    ../manual/spine/jsb_cocos2dx_spine_manual.cpp \
                    ../manual/ui/jsb_cocos2dx_ui_manual.cpp \
-                   ../manual/cocostudio/jsb_cocos2dx_studio_conversions.cpp
+                   ../manual/3d/jsb_cocos2dx_3d_manual.cpp
                    
 
 LOCAL_CFLAGS := -DCOCOS2D_JAVASCRIPT
@@ -73,6 +77,7 @@ LOCAL_EXPORT_CFLAGS := -DCOCOS2D_JAVASCRIPT
 
 LOCAL_C_INCLUDES := $(LOCAL_PATH)/../manual \
                     $(LOCAL_PATH)/../manual/cocostudio \
+                    $(LOCAL_PATH)/../manual/spine \
                     $(LOCAL_PATH)/../auto \
                     $(LOCAL_PATH)/../../../2d \
                     $(LOCAL_PATH)/../../../base \
