@@ -97,10 +97,6 @@ void SkeletonAnimation::initialize () {
 	_spAnimationState* stateInternal = (_spAnimationState*)_state;
 	stateInternal->disposeTrackEntry = disposeTrackEntry;
 }
-    
-SkeletonAnimation::SkeletonAnimation ()
-        : SkeletonRenderer() {
-}
 
 SkeletonAnimation::SkeletonAnimation ()
 		: SkeletonRenderer() {
