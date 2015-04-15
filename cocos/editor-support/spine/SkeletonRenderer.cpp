@@ -75,7 +75,6 @@ void SkeletonRenderer::initialize () {
 	setOpacityModifyRGB(true);
 
 	setGLProgram(ShaderCache::getInstance()->getGLProgram(GLProgram::SHADER_NAME_POSITION_TEXTURE_COLOR));
-	scheduleUpdate();
 }
 
 void SkeletonRenderer::setSkeletonData (spSkeletonData *skeletonData, bool ownsSkeletonData) {
@@ -346,14 +345,20 @@ spSlot* SkeletonRenderer::findSlot (const std::string& slotName) const {
 }
 
 bool SkeletonRenderer::setSkin (const std::string& skinName) {
-	return spSkeleton_setSkinByName(_skeleton, skinName.c_str()) ? true : false;
+	return spSkeleton_setSkinByName(_skeleton, skinName.empty() ? 0 : skinName.c_str()) ? true : false;
+}
+bool SkeletonRenderer::setSkin (const char* skinName) {
+	return spSkeleton_setSkinByName(_skeleton, skinName) ? true : false;
 }
 
 spAttachment* SkeletonRenderer::getAttachment (const std::string& slotName, const std::string& attachmentName) const {
 	return spSkeleton_getAttachmentForSlotName(_skeleton, slotName.c_str(), attachmentName.c_str());
 }
 bool SkeletonRenderer::setAttachment (const std::string& slotName, const std::string& attachmentName) {
-	return spSkeleton_setAttachment(_skeleton, slotName.c_str(), attachmentName.c_str()) ? true : false;
+	return spSkeleton_setAttachment(_skeleton, slotName.c_str(), attachmentName.empty() ? 0 : attachmentName.c_str()) ? true : false;
+}
+bool SkeletonRenderer::setAttachment (const std::string& slotName, const char* attachmentName) {
+	return spSkeleton_setAttachment(_skeleton, slotName.c_str(), attachmentName) ? true : false;
 }
 
 spSkeleton* SkeletonRenderer::getSkeleton () {
@@ -379,6 +384,16 @@ void SkeletonRenderer::setDebugBonesEnabled (bool enabled) {
 }
 bool SkeletonRenderer::getDebugBonesEnabled () const {
 	return _debugBones;
+}
+
+void SkeletonRenderer::onEnter () {
+	Node::onEnter();
+	scheduleUpdate();
+}
+
+void SkeletonRenderer::onExit () {
+	Node::onExit();
+	unscheduleUpdate();
 }
 
 // --- CCBlendProtocol
