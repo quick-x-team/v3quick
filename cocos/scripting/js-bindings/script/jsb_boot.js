@@ -548,15 +548,6 @@ cc.loader = {
         });
     },
     
-    remoteImgLoaded: function(succeed, tex) {
-        if (succeed) {
-            this.cb && this.cb(null, tex);
-        }
-        else {
-            this.cb && this.cb("Load image failed");
-        }
-    },
-    
     /**
      * Load a single image.
      * @param {!string} url
@@ -573,7 +564,14 @@ cc.loader = {
             cb && cb(null, cachedTex);
         }
         else if (url.match(jsb.urlRegExp)) {
-            jsb.loadRemoteImg(url, cc.loader.remoteImgLoaded.bind({cb: cb}));
+            jsb.loadRemoteImg(url, function(succeed, tex) {
+                if (succeed) {
+                    cb && cb(null, tex);
+                }
+                else {
+                    cb && cb("Load image failed");
+                }
+            });
         }
         else {
             cc.textureCache._addImageAsync(url, function (tex){
