@@ -2,6 +2,8 @@ LOCAL_PATH := $(call my-dir)
 
 include $(CLEAR_VARS)
 
+LOCAL_ARM_MODE := arm
+
 LOCAL_MODULE := cocos2djs_shared
 
 LOCAL_MODULE_FILENAME := libcocos2djs
