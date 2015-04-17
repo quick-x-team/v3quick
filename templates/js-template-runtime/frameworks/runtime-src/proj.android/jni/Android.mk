@@ -6,6 +6,8 @@ LOCAL_MODULE := cocos2djs_shared
 
 LOCAL_MODULE_FILENAME := libcocos2djs
 
+LOCAL_ARM_MODE := arm
+
 LOCAL_SRC_FILES := \
 ../../Classes/AppDelegate.cpp \
 ../../Classes/ide-support/SimpleConfigParser.cpp \
