@@ -120,6 +120,7 @@ project.properties
 
 # Ignore prebuilt libraries folder
 /external/*
+!/external/spidermonkey/
 !/external/config.json
 /templates/lua-template-runtime/runtime
 /templates/js-template-runtime/runtime
