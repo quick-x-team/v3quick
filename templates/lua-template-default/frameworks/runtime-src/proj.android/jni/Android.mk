@@ -6,12 +6,12 @@ LOCAL_MODULE := cocos2dlua_shared
 
 LOCAL_MODULE_FILENAME := libcocos2dlua
 
-FILE_LIST := hellolua/main.cpp
-FILE_LIST += $(wildcard $(LOCAL_PATH)/../../Classes/*.cpp)
-FILE_LIST += $(wildcard $(LOCAL_PATH)/../../Classes/ide-support/*.cpp)
-FILE_LIST += $(wildcard $(LOCAL_PATH)/../../Classes/ide-support/*.c)
-
-LOCAL_SRC_FILES := $(FILE_LIST:$(LOCAL_PATH)/%=%)
+LOCAL_SRC_FILES := \
+../../Classes/AppDelegate.cpp \
+../../Classes/ide-support/SimpleConfigParser.cpp \
+../../Classes/ide-support/RuntimeLuaImpl.cpp \
+../../Classes/ide-support/lua_debugger.c \
+hellolua/main.cpp
 
 LOCAL_C_INCLUDES := \
 $(LOCAL_PATH)/../../Classes \
