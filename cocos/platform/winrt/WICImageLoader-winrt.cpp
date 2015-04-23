@@ -24,7 +24,7 @@ THE SOFTWARE.
 Based upon code from the DirectX Tool Kit by Microsoft Corporation,
 obtained from https://directxtk.codeplex.com
 ****************************************************************************/
-#include "WICImageLoader-win.h"
+#include "WICImageLoader-winrt.h"
 
 NS_CC_BEGIN
 
@@ -53,8 +53,8 @@ static WICConvert g_WICConvert[] =
 
 	{ GUID_WICPixelFormat32bppBGR101010,        GUID_WICPixelFormat32bppRGBA1010102 }, // DXGI_FORMAT_R10G10B10A2_UNORM
 
-	{ GUID_WICPixelFormat24bppBGR,              GUID_WICPixelFormat32bppRGBA }, // DXGI_FORMAT_R8G8B8A8_UNORM 
-	{ GUID_WICPixelFormat24bppRGB,              GUID_WICPixelFormat32bppRGBA }, // DXGI_FORMAT_R8G8B8A8_UNORM 
+    { GUID_WICPixelFormat24bppBGR,              GUID_WICPixelFormat24bppRGB }, // DXGI_FORMAT_R8G8B8A8_UNORM 
+    { GUID_WICPixelFormat24bppRGB,              GUID_WICPixelFormat24bppRGB }, // DXGI_FORMAT_R8G8B8A8_UNORM 
 	{ GUID_WICPixelFormat32bppPBGRA,            GUID_WICPixelFormat32bppRGBA }, // DXGI_FORMAT_R8G8B8A8_UNORM 
 	{ GUID_WICPixelFormat32bppPRGBA,            GUID_WICPixelFormat32bppRGBA }, // DXGI_FORMAT_R8G8B8A8_UNORM 
 
@@ -325,23 +325,21 @@ WICPixelFormatGUID WICImageLoader::getPixelFormat()
 	return _format;
 }
 
-bool WICImageLoader::encodeImageData(std::string path, ImageBlob data, size_t dataLen, WICPixelFormatGUID pixelFormat, int width, int height, GUID containerFormat)
+bool WICImageLoader::encodeImageData(std::string path, const unsigned char* data, size_t dataLen, WICPixelFormatGUID pixelFormat, int width, int height, GUID containerFormat)
 {
 	assert(data != NULL);
 	assert(dataLen > 0 && width > 0 && height > 0);
 
 	IWICImagingFactory* pFact = getWICFactory();
 
-	HRESULT hr = S_FALSE;
+	HRESULT hr = E_FAIL;
 	IWICStream* pStream = NULL;
 
-	if(NULL != pFact)
-	{
+	if (NULL != pFact) {
 		hr = pFact->CreateStream(&pStream);
 	}
 
-	if(SUCCEEDED(hr))
-	{
+	if (SUCCEEDED(hr)) {
 		std::wstring wpath;
 		wpath.assign(path.begin(), path.end());
 		hr = pStream->InitializeFromFilename(wpath.c_str(), GENERIC_WRITE);
@@ -349,54 +347,50 @@ bool WICImageLoader::encodeImageData(std::string path, ImageBlob data, size_t da
 
 	IWICBitmapEncoder* pEnc = NULL;
 
-	if(SUCCEEDED(hr))
-	{
+	if (SUCCEEDED(hr)) {
 		hr = pFact->CreateEncoder(containerFormat, NULL, &pEnc);
 	}
 
-	if(SUCCEEDED(hr))
-	{
+	if (SUCCEEDED(hr)) {
 		hr = pEnc->Initialize(pStream, WICBitmapEncoderNoCache);
 	}
 
 	IWICBitmapFrameEncode* pFrame = NULL;
 	IPropertyBag2* pProp = NULL;
 
-	if(SUCCEEDED(hr))
-	{
+	if (SUCCEEDED(hr)) {
 		hr = pEnc->CreateNewFrame(&pFrame, &pProp);
 	}
 
-	if(SUCCEEDED(hr))
-	{
+	if (SUCCEEDED(hr)) {
 		hr = pFrame->Initialize(pProp);
 	}
 
-	if(SUCCEEDED(hr))
-	{
+	if (SUCCEEDED(hr)) {
 		hr = pFrame->SetSize(width, height);
 	}
 
-	if(SUCCEEDED(hr))
-	{
-		hr = pFrame->SetPixelFormat(&pixelFormat);
+	if (SUCCEEDED(hr)) {
+		WICPixelFormatGUID targetFormat = pixelFormat;
+		hr = pFrame->SetPixelFormat(&targetFormat);
+
+		if (targetFormat != pixelFormat) {
+			hr = E_INVALIDARG;
+		}
 	}
 
-	if(SUCCEEDED(hr))
-	{
+	if (SUCCEEDED(hr)) {
 		size_t bpp = getBitsPerPixel(pixelFormat);
 		size_t stride = (width * bpp + 7) / 8;
 
 		hr = pFrame->WritePixels(height, stride, dataLen, (BYTE*)data);
 	}
 
-	if(SUCCEEDED(hr))
-	{
+	if (SUCCEEDED(hr)) {
 		hr = pFrame->Commit();
 	}
 
-	if(SUCCEEDED(hr))
-	{
+	if (SUCCEEDED(hr)) {
 		hr = pEnc->Commit();
 	}
 

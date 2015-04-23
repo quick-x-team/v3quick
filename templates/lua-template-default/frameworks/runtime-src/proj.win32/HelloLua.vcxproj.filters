@@ -30,16 +30,13 @@
       <Filter>win32</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\ide-support\CodeIDESupport.h">
-      <Filter>Classes\ide-support</Filter>
+      <Filter>Classes</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\ide-support\lua_debugger.h">
-      <Filter>Classes\ide-support</Filter>
+      <Filter>Classes</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\ide-support\RuntimeLuaImpl.h">
-      <Filter>Classes\ide-support</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\ide-support\SimpleConfigParser.h">
-      <Filter>Classes\ide-support</Filter>
+      <Filter>Classes</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -54,13 +51,10 @@
       <Filter>win32</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\ide-support\lua_debugger.c">
-      <Filter>Classes\ide-support</Filter>
+      <Filter>Classes</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\ide-support\RuntimeLuaImpl.cpp">
-      <Filter>Classes\ide-support</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\ide-support\SimpleConfigParser.cpp">
-      <Filter>Classes\ide-support</Filter>
+      <Filter>Classes</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
