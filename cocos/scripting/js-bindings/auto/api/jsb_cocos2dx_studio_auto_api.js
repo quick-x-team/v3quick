@@ -405,7 +405,7 @@ str
 
 /**
  * @method getMovementCount
- * @return {int}
+ * @return {long}
  */
 getMovementCount : function (
 )
@@ -1776,7 +1776,7 @@ bool
 
 /**
  * @method getMovementCount
- * @return {int}
+ * @return {long}
  */
 getMovementCount : function (
 )
@@ -3074,26 +3074,6 @@ getTweenType : function (
 )
 {
     return 0;
-},
-
-/**
- * @method getEasingParams
- * @return {Array}
- */
-getEasingParams : function (
-)
-{
-    return new Array();
-},
-
-/**
- * @method setEasingParams
- * @param {Array} arg0
- */
-setEasingParams : function (
-array 
-)
-{
 },
 
 /**
