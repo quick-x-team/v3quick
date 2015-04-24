@@ -28,7 +28,7 @@ bool JSB_localStorageGetItem(JSContext *cx, uint32_t argc, jsval *vp) {
 
     jsval ret_jsval = std_string_to_jsval(cx, ret_val);
     args.rval().set(ret_jsval);
-
+    
     return true;
 }
 

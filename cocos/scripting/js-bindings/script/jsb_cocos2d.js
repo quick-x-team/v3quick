@@ -26,7 +26,7 @@
 
 // CCConfig.js
 //
-cc.ENGINE_VERSION = "Cocos2d-JS v3.5";
+cc.ENGINE_VERSION = "Cocos2d-JS v3.6 Beta";
 
 cc.FIX_ARTIFACTS_BY_STRECHING_TEXEL = 0;
 cc.DIRECTOR_STATS_POSITION = {x: 0, y: 0};
@@ -2724,17 +2724,6 @@ cc.Node.prototype._getBoundingBoxToCurrentNode = function (parentTransform) {
     return rect;
 };
 
-cc.Node.prototype._setNormalizedPosition = cc.Node.prototype.setNormalizedPosition;
-cc.Node.prototype.setNormalizedPosition = function (posOrX, y) {
-    if (y === undefined) {
-        this._setNormalizedPosition(posOrX);
-    }
-    else {
-        this._setNormalizedPosition(cc.p(posOrX, y));
-    }
-};
-
-
 //
 // cc.Layer bake/unbake/isBaked
 //
@@ -2770,6 +2759,10 @@ cc.Texture2D.prototype.setTexParameters = function (texParams, magFilter, wrapS,
     else minFilter = texParams;
 
     this._setTexParameters(minFilter, magFilter, wrapS, wrapT);
+};
+
+cc.Texture2D.prototype.handleLoadedTexture = function (premultipled) {
+
 };
 
 
