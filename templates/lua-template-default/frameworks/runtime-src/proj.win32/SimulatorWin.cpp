@@ -70,9 +70,9 @@ INT_PTR CALLBACK AboutDialogCallback(HWND hDlg, UINT message, WPARAM wParam, LPA
 void onHelpAbout()
 {
     DialogBox(GetModuleHandle(NULL),
-              MAKEINTRESOURCE(IDD_DIALOG_ABOUT),
-              Director::getInstance()->getOpenGLView()->getWin32Window(),
-              AboutDialogCallback);
+        MAKEINTRESOURCE(IDD_DIALOG_ABOUT),
+        Director::getInstance()->getOpenGLView()->getWin32Window(),
+        AboutDialogCallback);
 }
 
 void shutDownApp()

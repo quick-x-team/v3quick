@@ -135,15 +135,6 @@
                     "proj.win32/Debug",
                     "proj.win32/Release"
                 ]
-            },
-            {
-                "from": "tools/simulator/frameworks/runtime-src/Classes/ide-support",
-                "to": "frameworks/runtime-src/Classes/ide-support",
-                "exclude": [
-                    "CodeIDESupport.h",
-                    "lang",
-                    "RuntimeJsImpl.*"
-                ]
             }
         ],
         "project_rename": {
