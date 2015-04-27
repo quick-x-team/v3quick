@@ -1385,7 +1385,7 @@ getAnchorPoint : function (
 
 /**
  * @method getNumberOfRunningActions
- * @return {int}
+ * @return {long}
  */
 getNumberOfRunningActions : function (
 )
@@ -1413,7 +1413,7 @@ isVisible : function (
 
 /**
  * @method getChildrenCount
- * @return {int}
+ * @return {long}
  */
 getChildrenCount : function (
 )
@@ -6756,7 +6756,7 @@ node
 /**
  * @method getNumberOfRunningActionsInTarget
  * @param {cc.Node} arg0
- * @return {int}
+ * @return {long}
  */
 getNumberOfRunningActionsInTarget : function (
 node 
@@ -10195,7 +10195,7 @@ mat4
 
 /**
  * @method getUniformCount
- * @return {int}
+ * @return {long}
  */
 getUniformCount : function (
 )
@@ -10249,7 +10249,7 @@ int
 
 /**
  * @method getVertexAttribCount
- * @return {int}
+ * @return {long}
  */
 getVertexAttribCount : function (
 )
@@ -10442,7 +10442,7 @@ getBlendFunc : function (
 
 /**
  * @method getQuadsToDraw
- * @return {int}
+ * @return {long}
  */
 getQuadsToDraw : function (
 )
@@ -10480,10 +10480,10 @@ int
 
 /**
  * @method setQuadsToDraw
- * @param {int} arg0
+ * @param {long} arg0
  */
 setQuadsToDraw : function (
-int 
+long 
 )
 {
 },
@@ -11319,12 +11319,12 @@ bool
 /**
  * @method initWithTexture
  * @param {cc.Texture2D} arg0
- * @param {int} arg1
+ * @param {long} arg1
  * @return {bool}
  */
 initWithTexture : function (
 texture2d, 
-int 
+long 
 )
 {
     return false;
@@ -11343,7 +11343,7 @@ getBlendFunc : function (
 /**
  * @method lowestAtlasIndexInChild
  * @param {cc.Sprite} arg0
- * @return {int}
+ * @return {long}
  */
 lowestAtlasIndexInChild : function (
 sprite 
@@ -11356,7 +11356,7 @@ sprite
  * @method atlasIndexForChild
  * @param {cc.Sprite} arg0
  * @param {int} arg1
- * @return {int}
+ * @return {long}
  */
 atlasIndexForChild : function (
 sprite, 
@@ -11379,12 +11379,12 @@ textureatlas
 /**
  * @method initWithFile
  * @param {String} arg0
- * @param {int} arg1
+ * @param {long} arg1
  * @return {bool}
  */
 initWithFile : function (
 str, 
-int 
+long 
 )
 {
     return false;
@@ -11421,11 +11421,11 @@ getTextureAtlas : function (
 /**
  * @method insertQuadFromSprite
  * @param {cc.Sprite} arg0
- * @param {int} arg1
+ * @param {long} arg1
  */
 insertQuadFromSprite : function (
 sprite, 
-int 
+long 
 )
 {
 },
@@ -11443,12 +11443,12 @@ texture2d
 /**
  * @method rebuildIndexInOrder
  * @param {cc.Sprite} arg0
- * @param {int} arg1
- * @return {int}
+ * @param {long} arg1
+ * @return {long}
  */
 rebuildIndexInOrder : function (
 sprite, 
-int 
+long 
 )
 {
     return 0;
@@ -11457,7 +11457,7 @@ int
 /**
  * @method highestAtlasIndexInChild
  * @param {cc.Sprite} arg0
- * @return {int}
+ * @return {long}
  */
 highestAtlasIndexInChild : function (
 sprite 
@@ -11468,11 +11468,11 @@ sprite
 
 /**
  * @method removeChildAtIndex
- * @param {int} arg0
+ * @param {long} arg0
  * @param {bool} arg1
  */
 removeChildAtIndex : function (
-int, 
+long, 
 bool 
 )
 {
@@ -11501,12 +11501,12 @@ blendfunc
 /**
  * @method create
  * @param {String} arg0
- * @param {int} arg1
+ * @param {long} arg1
  * @return {cc.SpriteBatchNode}
  */
 create : function (
 str, 
-int 
+long 
 )
 {
     return cc.SpriteBatchNode;
@@ -11515,12 +11515,12 @@ int
 /**
  * @method createWithTexture
  * @param {cc.Texture2D} arg0
- * @param {int} arg1
+ * @param {long} arg1
  * @return {cc.SpriteBatchNode}
  */
 createWithTexture : function (
 texture2d, 
-int 
+long 
 )
 {
     return cc.SpriteBatchNode;
@@ -15205,7 +15205,7 @@ spriteframe
 
 /**
  * @method getAtlasIndex
- * @return {int}
+ * @return {long}
  */
 getAtlasIndex : function (
 )
@@ -15236,11 +15236,11 @@ getBlendFunc : function (
 /**
  * @method setDisplayFrameWithAnimationName
  * @param {String} arg0
- * @param {int} arg1
+ * @param {long} arg1
  */
 setDisplayFrameWithAnimationName : function (
 str, 
-int 
+long 
 )
 {
 },
@@ -15277,10 +15277,10 @@ isDirty : function (
 
 /**
  * @method setAtlasIndex
- * @param {int} arg0
+ * @param {long} arg0
  */
 setAtlasIndex : function (
-int 
+long 
 )
 {
 },
@@ -15473,7 +15473,7 @@ hasPremultipliedAlpha : function (
 
 /**
  * @method getDataLen
- * @return {int}
+ * @return {long}
  */
 getDataLen : function (
 )
@@ -15610,7 +15610,7 @@ getMipmaps : function (
 /**
  * @method initWithRawData
  * @param {unsigned char} arg0
- * @param {int} arg1
+ * @param {long} arg1
  * @param {int} arg2
  * @param {int} arg3
  * @param {int} arg4
@@ -15619,7 +15619,7 @@ getMipmaps : function (
  */
 initWithRawData : function (
 char, 
-int, 
+long, 
 int, 
 int, 
 int, 
