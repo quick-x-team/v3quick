@@ -401,6 +401,28 @@ void js_register_cocos2dx_3d_extension_ParticleSystem3D(JSContext *cx, JS::Handl
 JSClass  *jsb_cocos2d_PUParticleSystem3D_class;
 JSObject *jsb_cocos2d_PUParticleSystem3D_prototype;
 
+bool js_cocos2dx_3d_extension_PUParticleSystem3D_initWithFilePath(JSContext *cx, uint32_t argc, jsval *vp)
+{
+    JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
+    bool ok = true;
+    JS::RootedObject obj(cx, args.thisv().toObjectOrNull());
+    js_proxy_t *proxy = jsb_get_js_proxy(obj);
+    cocos2d::PUParticleSystem3D* cobj = (cocos2d::PUParticleSystem3D *)(proxy ? proxy->ptr : NULL);
+    JSB_PRECONDITION2( cobj, cx, false, "js_cocos2dx_3d_extension_PUParticleSystem3D_initWithFilePath : Invalid Native Object");
+    if (argc == 1) {
+        std::string arg0;
+        ok &= jsval_to_std_string(cx, args.get(0), &arg0);
+        JSB_PRECONDITION2(ok, cx, false, "js_cocos2dx_3d_extension_PUParticleSystem3D_initWithFilePath : Error processing arguments");
+        bool ret = cobj->initWithFilePath(arg0);
+        jsval jsret = JSVAL_NULL;
+        jsret = BOOLEAN_TO_JSVAL(ret);
+        args.rval().set(jsret);
+        return true;
+    }
+
+    JS_ReportError(cx, "js_cocos2dx_3d_extension_PUParticleSystem3D_initWithFilePath : wrong number of arguments: %d, was expecting %d", argc, 1);
+    return false;
+}
 bool js_cocos2dx_3d_extension_PUParticleSystem3D_getParticleSystemScaleVelocity(JSContext *cx, uint32_t argc, jsval *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
@@ -473,6 +495,30 @@ bool js_cocos2dx_3d_extension_PUParticleSystem3D_getEmittedSystemQuota(JSContext
     }
 
     JS_ReportError(cx, "js_cocos2dx_3d_extension_PUParticleSystem3D_getEmittedSystemQuota : wrong number of arguments: %d, was expecting %d", argc, 0);
+    return false;
+}
+bool js_cocos2dx_3d_extension_PUParticleSystem3D_initWithFilePathAndMaterialPath(JSContext *cx, uint32_t argc, jsval *vp)
+{
+    JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
+    bool ok = true;
+    JS::RootedObject obj(cx, args.thisv().toObjectOrNull());
+    js_proxy_t *proxy = jsb_get_js_proxy(obj);
+    cocos2d::PUParticleSystem3D* cobj = (cocos2d::PUParticleSystem3D *)(proxy ? proxy->ptr : NULL);
+    JSB_PRECONDITION2( cobj, cx, false, "js_cocos2dx_3d_extension_PUParticleSystem3D_initWithFilePathAndMaterialPath : Invalid Native Object");
+    if (argc == 2) {
+        std::string arg0;
+        std::string arg1;
+        ok &= jsval_to_std_string(cx, args.get(0), &arg0);
+        ok &= jsval_to_std_string(cx, args.get(1), &arg1);
+        JSB_PRECONDITION2(ok, cx, false, "js_cocos2dx_3d_extension_PUParticleSystem3D_initWithFilePathAndMaterialPath : Error processing arguments");
+        bool ret = cobj->initWithFilePathAndMaterialPath(arg0, arg1);
+        jsval jsret = JSVAL_NULL;
+        jsret = BOOLEAN_TO_JSVAL(ret);
+        args.rval().set(jsret);
+        return true;
+    }
+
+    JS_ReportError(cx, "js_cocos2dx_3d_extension_PUParticleSystem3D_initWithFilePathAndMaterialPath : wrong number of arguments: %d, was expecting %d", argc, 2);
     return false;
 }
 bool js_cocos2dx_3d_extension_PUParticleSystem3D_clearAllParticles(JSContext *cx, uint32_t argc, jsval *vp)
@@ -976,28 +1022,6 @@ bool js_cocos2dx_3d_extension_PUParticleSystem3D_removeAllListener(JSContext *cx
     JS_ReportError(cx, "js_cocos2dx_3d_extension_PUParticleSystem3D_removeAllListener : wrong number of arguments: %d, was expecting %d", argc, 0);
     return false;
 }
-bool js_cocos2dx_3d_extension_PUParticleSystem3D_initSystem(JSContext *cx, uint32_t argc, jsval *vp)
-{
-    JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
-    bool ok = true;
-    JS::RootedObject obj(cx, args.thisv().toObjectOrNull());
-    js_proxy_t *proxy = jsb_get_js_proxy(obj);
-    cocos2d::PUParticleSystem3D* cobj = (cocos2d::PUParticleSystem3D *)(proxy ? proxy->ptr : NULL);
-    JSB_PRECONDITION2( cobj, cx, false, "js_cocos2dx_3d_extension_PUParticleSystem3D_initSystem : Invalid Native Object");
-    if (argc == 1) {
-        std::string arg0;
-        ok &= jsval_to_std_string(cx, args.get(0), &arg0);
-        JSB_PRECONDITION2(ok, cx, false, "js_cocos2dx_3d_extension_PUParticleSystem3D_initSystem : Error processing arguments");
-        bool ret = cobj->initSystem(arg0);
-        jsval jsret = JSVAL_NULL;
-        jsret = BOOLEAN_TO_JSVAL(ret);
-        args.rval().set(jsret);
-        return true;
-    }
-
-    JS_ReportError(cx, "js_cocos2dx_3d_extension_PUParticleSystem3D_initSystem : wrong number of arguments: %d, was expecting %d", argc, 1);
-    return false;
-}
 bool js_cocos2dx_3d_extension_PUParticleSystem3D_setDefaultDepth(JSContext *cx, uint32_t argc, jsval *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
@@ -1140,10 +1164,12 @@ void js_register_cocos2dx_3d_extension_PUParticleSystem3D(JSContext *cx, JS::Han
     };
 
     static JSFunctionSpec funcs[] = {
+        JS_FN("initWithFilePath", js_cocos2dx_3d_extension_PUParticleSystem3D_initWithFilePath, 1, JSPROP_PERMANENT | JSPROP_ENUMERATE),
         JS_FN("getParticleSystemScaleVelocity", js_cocos2dx_3d_extension_PUParticleSystem3D_getParticleSystemScaleVelocity, 0, JSPROP_PERMANENT | JSPROP_ENUMERATE),
         JS_FN("setEmittedSystemQuota", js_cocos2dx_3d_extension_PUParticleSystem3D_setEmittedSystemQuota, 1, JSPROP_PERMANENT | JSPROP_ENUMERATE),
         JS_FN("getDefaultDepth", js_cocos2dx_3d_extension_PUParticleSystem3D_getDefaultDepth, 0, JSPROP_PERMANENT | JSPROP_ENUMERATE),
         JS_FN("getEmittedSystemQuota", js_cocos2dx_3d_extension_PUParticleSystem3D_getEmittedSystemQuota, 0, JSPROP_PERMANENT | JSPROP_ENUMERATE),
+        JS_FN("initWithFilePathAndMaterialPath", js_cocos2dx_3d_extension_PUParticleSystem3D_initWithFilePathAndMaterialPath, 2, JSPROP_PERMANENT | JSPROP_ENUMERATE),
         JS_FN("clearAllParticles", js_cocos2dx_3d_extension_PUParticleSystem3D_clearAllParticles, 0, JSPROP_PERMANENT | JSPROP_ENUMERATE),
         JS_FN("getMaterialName", js_cocos2dx_3d_extension_PUParticleSystem3D_getMaterialName, 0, JSPROP_PERMANENT | JSPROP_ENUMERATE),
         JS_FN("calulateRotationOffset", js_cocos2dx_3d_extension_PUParticleSystem3D_calulateRotationOffset, 0, JSPROP_PERMANENT | JSPROP_ENUMERATE),
@@ -1170,7 +1196,6 @@ void js_register_cocos2dx_3d_extension_PUParticleSystem3D(JSContext *cx, JS::Han
         JS_FN("getDerivedScale", js_cocos2dx_3d_extension_PUParticleSystem3D_getDerivedScale, 0, JSPROP_PERMANENT | JSPROP_ENUMERATE),
         JS_FN("setDefaultHeight", js_cocos2dx_3d_extension_PUParticleSystem3D_setDefaultHeight, 1, JSPROP_PERMANENT | JSPROP_ENUMERATE),
         JS_FN("removeAllListener", js_cocos2dx_3d_extension_PUParticleSystem3D_removeAllListener, 0, JSPROP_PERMANENT | JSPROP_ENUMERATE),
-        JS_FN("initSystem", js_cocos2dx_3d_extension_PUParticleSystem3D_initSystem, 1, JSPROP_PERMANENT | JSPROP_ENUMERATE),
         JS_FN("setDefaultDepth", js_cocos2dx_3d_extension_PUParticleSystem3D_setDefaultDepth, 1, JSPROP_PERMANENT | JSPROP_ENUMERATE),
         JS_FS_END
     };
