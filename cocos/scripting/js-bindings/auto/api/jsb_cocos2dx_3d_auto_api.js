@@ -72,7 +72,7 @@ int
 
 /**
  * @method getRootCount
- * @return {int}
+ * @return {long}
  */
 getRootCount : function (
 )
@@ -94,7 +94,7 @@ bone3d
 
 /**
  * @method getBoneCount
- * @return {int}
+ * @return {long}
  */
 getBoneCount : function (
 )
@@ -242,7 +242,7 @@ materialdatas
 
 /**
  * @method getMeshCount
- * @return {int}
+ * @return {long}
  */
 getMeshCount : function (
 )
@@ -657,7 +657,7 @@ isVisible : function (
 
 /**
  * @method getIndexCount
- * @return {int}
+ * @return {long}
  */
 getIndexCount : function (
 )
@@ -685,7 +685,7 @@ meshindexdata
 
 /**
  * @method getMeshVertexAttribCount
- * @return {int}
+ * @return {long}
  */
 getMeshVertexAttribCount : function (
 )
