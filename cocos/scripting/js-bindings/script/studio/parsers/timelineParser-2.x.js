@@ -643,10 +643,10 @@
             widget.setUnifySizeEnabled(false);
             widget.ignoreContentAdaptWithSize(false);
             var capInsets = cc.rect(
-                json["Scale9OriginX"] || 0,
-                json["Scale9OriginY"] || 0,
-                json["Scale9Width"] || 0,
-                json["Scale9Height"] || 0
+                    json["Scale9OriginX"] || 0,
+                    json["Scale9OriginY"] || 0,
+                    json["Scale9Width"] || 0,
+                    json["Scale9Height"] || 0
             );
             widget.setCapInsets(capInsets);
 
