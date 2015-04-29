@@ -201,7 +201,7 @@
                 "exclude": []
             },
             {
-                "from": "tools/simulator/frameworks/runtime-src/proj.win32/game.rc",
+                "from": "templates/lua-template-default/frameworks/runtime-src/proj.win32/game.rc",
                 "to": "frameworks/runtime-src/proj.win32/",
                 "exclude": []
             },
