@@ -49,10 +49,12 @@
 		5200BECA1A53D9A500AC45E4 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5200BEC91A53D9A500AC45E4 /* Security.framework */; };
 		521A8E7019F0C3D200D177D7 /* Default-667h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 521A8E6E19F0C3D200D177D7 /* Default-667h@2x.png */; };
 		521A8E7119F0C3D200D177D7 /* Default-736h@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 521A8E6F19F0C3D200D177D7 /* Default-736h@3x.png */; };
+		871D36221AF0AF6F00EC122C /* RuntimeLuaImpl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9FB6C06B1A69863D00945236 /* RuntimeLuaImpl.cpp */; };
+		871D36231AF0AF7F00EC122C /* lua_debugger.c in Sources */ = {isa = PBXBuildFile; fileRef = 9FB6C0691A69863D00945236 /* lua_debugger.c */; };
 		87EB60251A7271B60085F57C /* ConsoleWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 87EB60271A7271B60085F57C /* ConsoleWindow.xib */; };
-		9FB6C06D1A69863D00945236 /* lua_debugger.h in Sources */ = {isa = PBXBuildFile; fileRef = 9FB6C06A1A69863D00945236 /* lua_debugger.c */; };
+		9FB6C06D1A69863D00945236 /* lua_debugger.h in Sources */ = {isa = PBXBuildFile; fileRef = 9FB6C06A1A69863D00945236 /* lua_debugger.h */; };
 		9FB6C06E1A69863D00945236 /* lua_debugger.c in Sources */ = {isa = PBXBuildFile; fileRef = 9FB6C0691A69863D00945236 /* lua_debugger.c */; };
-		9FB6C06F1A69863D00945236 /* RuntimeLuaImpl.h in Sources */ = {isa = PBXBuildFile; fileRef = 9FB6C06C1A69863D00945236 /* RuntimeLuaImpl.cpp */; };
+		9FB6C06F1A69863D00945236 /* RuntimeLuaImpl.h in Sources */ = {isa = PBXBuildFile; fileRef = 9FB6C06C1A69863D00945236 /* RuntimeLuaImpl.h */; };
 		9FB6C0701A69863D00945236 /* RuntimeLuaImpl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9FB6C06B1A69863D00945236 /* RuntimeLuaImpl.cpp */; };
 		9FC760431A67791200D1E6E7 /* lang in Resources */ = {isa = PBXBuildFile; fileRef = 9FC760401A67791200D1E6E7 /* lang */; };
 		9FC760451A677A4A00D1E6E7 /* SimpleConfigParser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9FC760411A67791200D1E6E7 /* SimpleConfigParser.cpp */; };
@@ -683,12 +685,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				871D36231AF0AF7F00EC122C /* lua_debugger.c in Sources */,
 				9FC760451A677A4A00D1E6E7 /* SimpleConfigParser.cpp in Sources */,
 				5023812517EBBCAC00990C9B /* RootViewController.mm in Sources */,
 				F293BB9C15EB831F00256477 /* AppDelegate.cpp in Sources */,
-				9FB6C06D1A69863D00945236 /* lua_debugger.c in Sources */,
+				871D36221AF0AF6F00EC122C /* RuntimeLuaImpl.cpp in Sources */,
+				9FB6C06D1A69863D00945236 /* lua_debugger.h in Sources */,
 				5023812417EBBCAC00990C9B /* main.m in Sources */,
-				9FB6C06F1A69863D00945236 /* RuntimeLuaImpl.cpp in Sources */,
+				9FB6C06F1A69863D00945236 /* RuntimeLuaImpl.h in Sources */,
 				5023811817EBBCAC00990C9B /* AppController.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
